@@ -47,6 +47,13 @@ class QuestionBank {
     'App Deployment': ['App Deployment'],
     'Data Modeling and Management': ['Data Modeling and Management']
 };
+    const agentforce_units_keywords = {
+    'Prompt Engineering': ['Prompt Engineering'],
+    'Agentforce Concepts': ['Agentforce Concepts'],
+    'Agentforce and Data Cloud': ['Agentforce and Data Cloud'],
+    'Agentforce and Service Cloud': ['Agentforce and Service Cloud'],
+    'Agentforce and Sales Cloud': ['Agentforce and Sales Cloud']
+};
 function assignUnitToQuestions(questions) {
   questions.forEach(q => {
     if (appbuilder_units_keywords[q.module]) {
@@ -74,7 +81,7 @@ function showMainMenu() {
   appDiv.innerHTML = '';
 
   const title = document.createElement('h1');
-  title.textContent = 'Práctica Salesforce App Builder';
+  title.textContent = 'Práctica Salesforce Agentforce';
   appDiv.appendChild(title);
 
   // Botón 1: UNITS
