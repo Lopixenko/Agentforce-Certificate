@@ -56,7 +56,7 @@ class QuestionBank {
 };
 function assignUnitToQuestions(questions) {
   questions.forEach(q => {
-    if (appbuilder_units_keywords[q.module]) {
+    if (agentforce_units_keywords[q.module]) {
       q.unit = q.module; // La unidad ahora es el mismo nombre del módulo
     } else {
       q.unit = 'Miscellaneous'; // Por si alguna pregunta queda sin categoría válida
