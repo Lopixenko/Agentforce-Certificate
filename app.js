@@ -495,7 +495,7 @@ function showExamResults(title) {
   });
 
   const score = Math.round((correct / userAnswers.length) * 100) || 0;
-  const passed = score >= 65; // Criterio Salesforce estándar
+  const passed = score >= 73; // Criterio Salesforce estándar
 
   const h2 = document.createElement('h2');
   h2.textContent = 'Resultados del Examen';
