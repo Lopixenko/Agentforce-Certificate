@@ -49,10 +49,10 @@ class QuestionBank {
 };
     const agentforce_units_keywords = {
     'Prompt Engineering': ['Prompt Engineering'],
-    'Agentforce Concepts': ['Agentforce Concepts'],
-    'Agentforce and Data Cloud': ['Agentforce and Data Cloud'],
-    'Agentforce and Service Cloud': ['Agentforce and Service Cloud'],
-    'Agentforce and Sales Cloud': ['Agentforce and Sales Cloud']
+    'AI Agents': ['AI Agents'],
+    'Data Cloud for Agentforce': ['Data Cloud for Agentforce'],
+    'Deployment Lifecycle': ['Deployment Lifecycle'],
+    'Multi-Agent Interoperability': ['Multi-Agent Interoperability']
 };
 function assignUnitToQuestions(questions) {
   questions.forEach(q => {
@@ -126,7 +126,7 @@ function showOfficialExamsMenu() {
   appDiv.appendChild(grid);
 
   // Generar botones del 1 al 11
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= 5; i++) {
     const btn = document.createElement('button');
     btn.textContent = `Examen ${i}`;
     btn.onclick = () => selectOfficialModeType(i);
