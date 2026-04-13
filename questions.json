@@ -107,7 +107,7 @@
       "Empty data, such as fields without values or sections without limits, is filtered out."
     ],
     "correctAnswers": [
-      2
+      0
     ],
     "explanation": "Record Snapshots filtra datos vacíos y solo incluye campos con valores. Esto asegura que el grounding sea relevante y sin ruido para el modelo generativo."
   },
@@ -177,7 +177,7 @@
       "Agentforce Testing Center can only be used in a production environment."
     ],
     "correctAnswers": [
-      0
+      1
     ],
     "explanation": "El Testing Center puede modificar datos si se prueban en producción, lo que implica un riesgo real. Por eso, use sandbox o datos de prueba para pruebas de agente."
   },
@@ -289,7 +289,7 @@
       "Sales rep users are missing the Use SDR Agent permission set."
     ],
     "correctAnswers": [
-      2
+      0
     ],
     "explanation": "La causa habitual es no asignar el permission set Use SDR Agent. Sin ese permiso, los reps no pueden ver o usar el agente."
   },
@@ -303,7 +303,7 @@
       "Action Input"
     ],
     "correctAnswers": [
-      0
+      2
     ],
     "explanation": "Action Instructions son la configuración clave para iterar y validar el comportamiento de una acción. Ajustarlas permite mejorar la precisión del flow y los outcomes."
   },
@@ -1281,8 +1281,10 @@
       "Allowing AI to perform tasks without user interaction",
       "Streamlining workflows and automating repetitive tasks"
     ],
-    "correctAnswers": [],
-    "explanation": "Para pruebas repetibles a gran escala, crear un CSV con casos de prueba en Agentforce Testing Center es el método más eficiente y recomendado. Esto permite automatizar la validación de utterances sin necesidad de probar manualmente en sandbox o en la interfaz del LLM."
+    "correctAnswers": [
+      1
+    ],
+    "explanation": "La razón principal para implementar Einstein Agentforce es agilizar los flujos de trabajo y automatizar tareas repetitivas, mejorando la eficiencia operativa. Agentforce no está diseñado para actuar completamente sin interacción del usuario ni para mejorar la entrada de datos; su valor principal es asistir a los usuarios con capacidades conversacionales e inteligencia artificial."
   },
   {
     "id": 93,
@@ -1632,7 +1634,7 @@
     "correctAnswers": [
       0
     ],
-    "explanation": "Para que el agente pueda ejecutar el flujo del nuevo proceso de reemplazo de producto, el permission set group del usuario del agente debe incluir acceso al flujo de Product Replacement. Sin este acceso, la acción del agente no puede invocar el flujo correctamente."
+    "explanation": "Data Cloud Admin permite ver y gestionar modelos en Einstein Studio, mientras que Prompt Template Manager permite crear y administrar prompt templates en Prompt Builder. Estos dos permission sets juntos cubren ambos requisitos del data scientist."
   },
   {
     "id": 118,
@@ -1916,48 +1918,6 @@
   },
   {
     "module": "Data Cloud for Agentforce",
-    "question": "Universal Containers (UC) configured a new PDF file ingestion in Data Cloud with all the required fields, and also created the mapping and the search index. UC is now setting up the retriever and notices a required field is missing. How should UC resolve this?",
-    "options": [
-      "Update the search index to include the desired field.",
-      "Modify the retriever's configuration to include the desired field.",
-      "Create a new custom Data Cloud object that includes the desired field."
-    ],
-    "correctAnswers": [
-      1
-    ],
-    "explanation": "Para agregar un campo faltante al retriever, se debe modificar la configuracion del retriever para incluir el campo deseado. El retriever necesita que el campo este referenciado directamente en su configuracion para poder usarlo en las busquedas.",
-    "id": 138
-  },
-  {
-    "module": "Deployment Lifecycle",
-    "question": "An Agentforce Specialist is setting up a new org and needs to ensure that users can create and execute prompt templates. The specialist is unsure which roles are necessary. Which permission sets should be assigned?",
-    "options": [
-      "Prompt Template Manager for creating templates and Prompt Template User for executing templates.",
-      "Prompt Template Manager for creating templates and Data Cloud Admin for executing templates.",
-      "Data Cloud Admin for creating templates and Prompt Template User for executing templates."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "Prompt Template Manager es el permission set para crear y administrar templates; Prompt Template User permite ejecutarlos. Asignar ambos garantiza que los usuarios puedan tanto crear como ejecutar prompt templates segun sus roles.",
-    "id": 139
-  },
-  {
-    "module": "AI Agents",
-    "question": "An Agentforce Specialist is tasked to optimize a business process flow by assigning actions to agents within the Salesforce Agentforce Platform. What is the correct method for the Agentforce Specialist to assign actions to an Agent?",
-    "options": [
-      "Assign the action to a Topic first on Action Builder.",
-      "Assign the action to a Topic first in Agent Builder.",
-      "Assign the action to a Topic first on the Agent Actions detail page."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "El metodo correcto es asignar la accion a un Topic primero en Action Builder, donde se gestionan las asociaciones entre acciones y topics del agente.",
-    "id": 140
-  },
-  {
-    "module": "Data Cloud for Agentforce",
     "question": "Universal Containers (UC) uses a file upload-based data library and custom prompt to support AI-driven training content. However, users report that the AI frequently returns outdated documents. How should UC ensure only recent documents are retrieved?",
     "options": [
       "Delete outdated documents manually from the data library each week.",
@@ -2195,20 +2155,6 @@
     "id": 157
   },
   {
-    "module": "Deployment Lifecycle",
-    "question": "A data scientist needs to view and manage models in Einstein Studio. The data scientist also needs to create prompt templates in Prompt Builder. Which permission sets should be assigned?",
-    "options": [
-      "Einstein Analytics Admin and Prompt Template User.",
-      "Data Cloud Admin and Prompt Template Manager.",
-      "Model Builder Admin and Prompt Template User."
-    ],
-    "correctAnswers": [
-      1
-    ],
-    "explanation": "Data Cloud Admin permite ver y gestionar modelos en Einstein Studio, mientras que Prompt Template Manager permite crear y administrar prompt templates en Prompt Builder. Estos dos permission sets juntos cubren ambos requisitos del data scientist.",
-    "id": 158
-  },
-  {
     "module": "AI Agents",
     "question": "Universal Containers (UC) would like to implement Sales Development Representative (SDR) Agent. Which channel consideration should UC be aware of while implementing it?",
     "options": [
@@ -2433,20 +2379,6 @@
     "id": 174
   },
   {
-    "module": "AI Agents",
-    "question": "Universal Containers (UC) wants to ensure the effectiveness, reliability, and trust of its agents prior to deploying them in production. UC would like to efficiently test a large and repeatable number of utterances. What should the Agentforce Specialist recommend?",
-    "options": [
-      "Deploy the agent in a QA sandbox environment and review the Utterance Analysis reports.",
-      "Create a CSV file with UC's test cases in Agentforce Testing Center using the testing template.",
-      "Leverage the Agent Large Language Model (LLM) UI and test with different utterances."
-    ],
-    "correctAnswers": [
-      1
-    ],
-    "explanation": "Crear un archivo CSV con casos de prueba en Agentforce Testing Center usando la plantilla de testing es el metodo mas eficiente para pruebas repetibles a gran escala. Permite automatizar la validacion de multiples utterances sin consumir Einstein Requests.",
-    "id": 175
-  },
-  {
     "module": "Prompt Engineering",
     "question": "Universal Containers (UC) is creating a new custom prompt template to populate a field with generated output. UC enabled the Einstein Trust Layer to ensure AI Audit data is captured and monitored for adoption and possible enhancements. Which prompt template type should UC use, and what additional configuration is required?",
     "options": [
@@ -2473,20 +2405,6 @@
     ],
     "explanation": "Pedir al LLM que adopte el rol de un personaje especifico (role-play) en el prompt template es una tecnica efectiva para obtener respuestas mas contextuales y relevantes. Esta tecnica de prompt engineering ayuda al modelo a generar respuestas mas alineadas con el caso de uso especifico.",
     "id": 177
-  },
-  {
-    "module": "Prompt Engineering",
-    "question": "Universal Containers (UC) wants to enable its sales team to get insights into product and competitor names mentioned during calls. How should UC meet this requirement?",
-    "options": [
-      "Enable Einstein Conversation Insights, assign permission sets, define recording managers, and customize insights with up to 50 competitor names.",
-      "Enable Einstein Conversation Insights, connect a recording provider, assign permission sets, and customize insights with up to 25 products.",
-      "Enable Einstein Conversation Insights, enable sales recording, assign permission sets, and customize insights with up to 50 products."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "Para habilitar Einstein Conversation Insights con analisis de competidores y productos, se deben seguir estos pasos: habilitar la feature, asignar permission sets, definir recording managers y personalizar los insights con hasta 50 nombres de competidores. El limite de competidores es 50, no de productos.",
-    "id": 178
   },
   {
     "question": "Universal Containers (UC) plans to answer questions based on similar cases that have been successfully resolved in the past. What should UC consider when implementing this approach?",
