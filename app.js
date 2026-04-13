@@ -656,7 +656,7 @@ function showExamResults(title) {
 
   const total = userAnswers.length;
   const score = Math.round((correct / total) * 100) || 0;
-  const passed = score >= 70;
+  const passed = score >= 73;
 
   const h2 = document.createElement('h2');
   h2.textContent = 'Resultados del Examen';
@@ -669,7 +669,7 @@ function showExamResults(title) {
     <div class="score-percent">${score}%</div>
     <div class="score-detail">${correct} / ${total} correctas</div>
     <div class="score-status">${passed ? ' ¡APROBADO!' : '❌ SUSPENSO'}</div>
-    <div class="score-threshold">Umbral de aprobado: 70%</div>
+    <div class="score-threshold">Umbral de aprobado: 73%</div>
   `;
   appDiv.appendChild(scoreDiv);
 
