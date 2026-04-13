@@ -167,9 +167,9 @@ function showMainMenu() {
 
   appDiv.appendChild(timeToggleDiv);
 
-  createButton(appDiv, '📚 UNITS (por módulo)', () => showUnitsMenu());
-  createButton(appDiv, '🎯 MODO EXAMEN (Aleatorio)', () => startGeneralExamMode());
-  createButton(appDiv, '📋 EXÁMENES OFICIALES', () => showOfficialExamsMenu());
+  createButton(appDiv, ' UNITS (por módulo)', () => showUnitsMenu());
+  createButton(appDiv, ' MODO EXAMEN (Aleatorio)', () => startGeneralExamMode());
+  createButton(appDiv, ' EXÁMENES OFICIALES', () => showOfficialExamsMenu());
 }
 
 // --- MENÚ UNITS ---
@@ -228,7 +228,7 @@ function selectOfficialModeType(examIdentifier) {
 
   const loadQuestions = async () => await app.loadOfficialExam(examIdentifier);
 
-  createButton(appDiv, '🎯 Modo Examen (Nota al final + Temporizador)', async () => {
+  createButton(appDiv, ' Modo Examen (Nota al final + Temporizador)', async () => {
     let questions = await loadQuestions();
     if (questions) {
       questions = mezclarArray(questions);
@@ -236,7 +236,7 @@ function selectOfficialModeType(examIdentifier) {
     }
   });
 
-  createButton(appDiv, '📖 Modo Estudio (Corregir al momento)', async () => {
+  createButton(appDiv, ' Modo Estudio (Corregir al momento)', async () => {
     let questions = await loadQuestions();
     if (questions) {
       questions = mezclarArray(questions);
@@ -617,7 +617,7 @@ function validateAnswer(question, selected) {
 function showFeedbackMessage(parent, isCorrect, explanation) {
   const div = document.createElement('div');
   div.className = isCorrect ? 'feedback-msg feedback-correct' : 'feedback-msg feedback-incorrect';
-  div.innerHTML = `<strong>${isCorrect ? '✅ ¡Correcto!' : '❌ Incorrecto'}</strong><br/>${explanation}`;
+  div.innerHTML = `<strong>${isCorrect ? ' ¡Correcto!' : '❌ Incorrecto'}</strong><br/>${explanation}`;
   parent.appendChild(div);
 }
 
@@ -638,10 +638,10 @@ function showEndScreen(title, showScore) {
   appDiv.innerHTML = '';
 
   const h2 = document.createElement('h2');
-  h2.textContent = `✅ ${title} — ¡Completado!`;
+  h2.textContent = ` ${title} — ¡Completado!`;
   appDiv.appendChild(h2);
 
-  createButton(appDiv, '🏠 Volver al Menú Principal', showMainMenu);
+  createButton(appDiv, ' Volver al Menú Principal', showMainMenu);
 }
 
 function showExamResults(title) {
@@ -656,7 +656,7 @@ function showExamResults(title) {
 
   const total = userAnswers.length;
   const score = Math.round((correct / total) * 100) || 0;
-  const passed = score >= 73;
+  const passed = score >= 70;
 
   const h2 = document.createElement('h2');
   h2.textContent = 'Resultados del Examen';
@@ -668,7 +668,7 @@ function showExamResults(title) {
   scoreDiv.innerHTML = `
     <div class="score-percent">${score}%</div>
     <div class="score-detail">${correct} / ${total} correctas</div>
-    <div class="score-status">${passed ? '🎉 ¡APROBADO!' : '❌ SUSPENSO'}</div>
+    <div class="score-status">${passed ? ' ¡APROBADO!' : '❌ SUSPENSO'}</div>
     <div class="score-threshold">Umbral de aprobado: 73%</div>
   `;
   appDiv.appendChild(scoreDiv);
@@ -686,7 +686,7 @@ function showExamResults(title) {
   statsDiv.className = 'module-stats';
 
   const statsTitle = document.createElement('h3');
-  statsTitle.textContent = '📊 Resultado por módulo';
+  statsTitle.textContent = ' Resultado por módulo';
   statsDiv.appendChild(statsTitle);
 
   Object.entries(moduleStats).forEach(([mod, stats]) => {
@@ -709,7 +709,7 @@ function showExamResults(title) {
   const failed = userAnswers.filter(ans => !validateAnswer(ans.question, ans.selected));
   if (failed.length > 0) {
     const h3 = document.createElement('h3');
-    h3.textContent = `🔍 Revisión de Fallos (${failed.length})`;
+    h3.textContent = `Revisión de Fallos (${failed.length})`;
     h3.style.marginTop = '30px';
     appDiv.appendChild(h3);
 
@@ -727,5 +727,5 @@ function showExamResults(title) {
     });
   }
 
-  createButton(appDiv, '🏠 Volver al Menú Principal', showMainMenu);
+  createButton(appDiv, 'Volver al Menú Principal', showMainMenu);
 }
