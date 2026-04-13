@@ -669,7 +669,7 @@ function showExamResults(title) {
     <div class="score-percent">${score}%</div>
     <div class="score-detail">${correct} / ${total} correctas</div>
     <div class="score-status">${passed ? ' ¡APROBADO!' : '❌ SUSPENSO'}</div>
-    <div class="score-threshold">Umbral de aprobado: 73%</div>
+    <div class="score-threshold">Umbral de aprobado: 70%</div>
   `;
   appDiv.appendChild(scoreDiv);
 
