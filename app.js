@@ -102,16 +102,9 @@ function renderTimerDisplay() {
 }
 
 function forceFinishExam() {
-  // Guardar la pregunta actual como "sin responder" si no respondió
+  // Guardar la pregunta actual si no respondió
   if (currentIndex < currentQuestions.length) {
-    const selected = getSelectedOptions();
-    userAnswers.push({ question: currentQuestions[currentIndex], selected });
-    currentIndex++;
-  }
-  // Rellenar el resto sin respuesta
-  while (currentIndex < currentQuestions.length) {
-    userAnswers.push({ question: currentQuestions[currentIndex], selected: [] });
-    currentIndex++;
+    userAnswers[currentIndex].selected = getSelectedOptions();
   }
   showExamResults('Examen (Tiempo agotado)');
 }
@@ -263,7 +256,7 @@ function startGeneralExamMode() {
   const valid = shuffled.filter(q => q.correctAnswers && q.correctAnswers.length > 0);
   currentQuestions = valid.slice(0, 60);
   currentIndex = 0;
-  userAnswers = [];
+  userAnswers = currentQuestions.map(q => ({ question: q, selected: [], marked: false }));
   startTimer(getTotalExamSeconds());
   renderClassicExamQuestion(currentQuestions[currentIndex], 'Examen Aleatorio');
 }
@@ -273,7 +266,7 @@ function startClassicExam(questions, title) {
   // Filtrar preguntas sin respuesta válida
   currentQuestions = questions.filter(q => q.correctAnswers && q.correctAnswers.length > 0);
   currentIndex = 0;
-  userAnswers = [];
+  userAnswers = currentQuestions.map(q => ({ question: q, selected: [], marked: false }));
   startTimer(getTotalExamSeconds());
   renderClassicExamQuestion(currentQuestions[currentIndex], title);
 }
@@ -413,40 +406,99 @@ function renderClassicExamQuestion(question, titleContext) {
   const progressBar = createProgressBar(currentIndex + 1, currentQuestions.length);
   appDiv.appendChild(progressBar);
 
+  // Grid de navegación rápida
+  const gridContainer = document.createElement('div');
+  gridContainer.className = 'exam-nav-grid';
+  currentQuestions.forEach((_, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'exam-nav-btn';
+    btn.textContent = idx + 1;
+    if (idx === currentIndex) btn.classList.add('current');
+    else if (userAnswers[idx].marked) btn.classList.add('marked');
+    else if (userAnswers[idx].selected.length > 0) btn.classList.add('answered');
+    
+    btn.onclick = () => {
+      userAnswers[currentIndex].selected = getSelectedOptions();
+      currentIndex = idx;
+      renderClassicExamQuestion(currentQuestions[currentIndex], titleContext);
+    };
+    gridContainer.appendChild(btn);
+  });
+  appDiv.appendChild(gridContainer);
+
+  // Checkbox para marcar para revisar
+  const markLabel = document.createElement('label');
+  markLabel.className = 'mark-review-label';
+  const markCheckbox = document.createElement('input');
+  markCheckbox.type = 'checkbox';
+  markCheckbox.checked = userAnswers[currentIndex].marked;
+  markCheckbox.onchange = (e) => {
+    userAnswers[currentIndex].marked = e.target.checked;
+    const currentBtn = gridContainer.children[currentIndex];
+    if (e.target.checked) currentBtn.classList.add('marked');
+    else currentBtn.classList.remove('marked');
+  };
+  markLabel.appendChild(markCheckbox);
+  markLabel.appendChild(document.createTextNode(' Marcar para revisar más tarde'));
+  appDiv.appendChild(markLabel);
+
   renderQuestionTextAndOptions(appDiv, question);
 
-  // Aviso si no hay respuesta seleccionada
-  const warningDiv = document.createElement('div');
-  warningDiv.id = 'no-answer-warning';
-  warningDiv.style.color = '#e53e3e';
-  warningDiv.style.display = 'none';
-  warningDiv.textContent = '⚠ Selecciona al menos una respuesta antes de continuar.';
-  appDiv.appendChild(warningDiv);
-
-  const nextBtn = document.createElement('button');
-  nextBtn.textContent = (currentIndex < currentQuestions.length - 1) ? 'Siguiente →' : 'Finalizar Examen';
-  nextBtn.className = 'next-btn';
-  nextBtn.onclick = () => {
-    const selected = getSelectedOptions();
-
-    // ✅ NUEVO: avisar si no seleccionó nada
-    if (selected.length === 0) {
-      warningDiv.style.display = 'block';
-      return;
+  // Restaurar selecciones previas
+  const inputs = document.querySelectorAll('input[name="option"]');
+  inputs.forEach(input => {
+    if (userAnswers[currentIndex].selected.includes(parseInt(input.value))) {
+      input.checked = true;
     }
-    warningDiv.style.display = 'none';
+  });
 
-    userAnswers.push({ question, selected });
-    currentIndex++;
+  const navDiv = document.createElement('div');
+  navDiv.className = 'question-nav-buttons';
 
-    if (currentIndex < currentQuestions.length) {
+  if (currentIndex > 0) {
+    const prevBtn = document.createElement('button');
+    prevBtn.innerHTML = '&#8592; Anterior';
+    prevBtn.className = 'nav-arrow-btn';
+    prevBtn.onclick = () => {
+      userAnswers[currentIndex].selected = getSelectedOptions();
+      currentIndex--;
       renderClassicExamQuestion(currentQuestions[currentIndex], titleContext);
-    } else {
+    };
+    navDiv.appendChild(prevBtn);
+  }
+
+  if (currentIndex < currentQuestions.length - 1) {
+    const nextBtn = document.createElement('button');
+    nextBtn.innerHTML = 'Siguiente &#8594;';
+    nextBtn.className = 'nav-arrow-btn';
+    nextBtn.onclick = () => {
+      userAnswers[currentIndex].selected = getSelectedOptions();
+      currentIndex++;
+      renderClassicExamQuestion(currentQuestions[currentIndex], titleContext);
+    };
+    navDiv.appendChild(nextBtn);
+  }
+
+  const finishBtn = document.createElement('button');
+  finishBtn.textContent = 'Finalizar Examen';
+  finishBtn.className = 'finish-exam-btn';
+  finishBtn.style.marginLeft = 'auto';
+  finishBtn.onclick = () => {
+    userAnswers[currentIndex].selected = getSelectedOptions();
+    const unanswered = userAnswers.filter(a => a.selected.length === 0).length;
+    const marked = userAnswers.filter(a => a.marked).length;
+    let msg = '¿Estás seguro de que deseas finalizar el examen?';
+    if (unanswered > 0 || marked > 0) {
+      msg = `Tienes ${unanswered} preguntas sin responder y ${marked} preguntas marcadas para revisar.\n\n` + msg;
+    }
+    if (confirm(msg)) {
       stopTimer();
       showExamResults(titleContext);
     }
   };
-  appDiv.appendChild(nextBtn);
+  navDiv.appendChild(finishBtn);
+
+  appDiv.appendChild(navDiv);
 }
 
 // Renderizador C: Modo estudio bloqueante
