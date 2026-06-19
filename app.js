@@ -204,7 +204,7 @@ function showOfficialExamsMenu() {
   grid.className = 'exam-grid';
   appDiv.appendChild(grid);
 
-  for (let i = 1; i <= 5; i++) {
+  for (let i = 1; i <= 9; i++) {
     const btn = document.createElement('button');
     btn.textContent = `Examen ${i}`;
     btn.onclick = () => selectOfficialModeType(i);
