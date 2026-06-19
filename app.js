@@ -221,22 +221,34 @@ function showMainMenu() {
   createButton(appDiv, ' UNITS (por módulo)', () => showUnitsMenu());
   createButton(appDiv, ' MODO EXAMEN (Aleatorio)', () => startGeneralExamMode());
   createButton(appDiv, ' EXÁMENES OFICIALES', () => showOfficialExamsMenu());
-  createButton(appDiv, ' 📊 MI PROGRESO Y ESTADÍSTICAS', () => showStatsPanel());
-  createButton(appDiv, ' ❌ REPASAR MIS ERRORES', () => startErrorReviewMode());
+  createButton(appDiv, ' MI PROGRESO Y ESTADÍSTICAS', () => showStatsPanel());
+  createButton(appDiv, ' REPASAR MIS ERRORES', () => startErrorReviewMode());
 }
 
 function showStatsPanel() {
   const appDiv = document.getElementById('app');
-  appDiv.innerHTML = '<h2>Panel de Estadísticas</h2>';
+  appDiv.innerHTML = '';
   createBackButton(appDiv, showMainMenu);
   
+  const title = document.createElement('h2');
+  title.textContent = 'Panel de Estadísticas';
+  appDiv.appendChild(title);
+  
   if (examHistory.length === 0) {
-    appDiv.innerHTML += '<p style="text-align:center;">Aún no has completado ningún examen.</p>';
+    const p = document.createElement('p');
+    p.style.textAlign = 'center';
+    p.textContent = 'Aún no has completado ningún examen.';
+    appDiv.appendChild(p);
     return;
   }
+  
   const avg = Math.round(examHistory.reduce((acc, curr) => acc + curr.score, 0) / examHistory.length);
-  appDiv.innerHTML += `<div class="score-display score-passed"><div class="score-percent">${avg}%</div><div class="score-detail">Nota Media Histórica</div></div>`;
-  appDiv.innerHTML += `<h3>Últimos exámenes:</h3><ul style="text-align:left; line-height:1.8;">` + examHistory.slice(-10).map(e => `<li>${e.date}: <strong>${e.score}%</strong> (${e.title})</li>`).join('') + `</ul>`;
+  
+  const statsContent = document.createElement('div');
+  statsContent.innerHTML = `<div class="score-display score-passed"><div class="score-percent">${avg}%</div><div class="score-detail">Nota Media Histórica</div></div>` + 
+    `<h3>Últimos exámenes:</h3><ul style="text-align:left; line-height:1.8;">` + examHistory.slice(-10).map(e => `<li>${e.date}: <strong>${e.score}%</strong> (${e.title})</li>`).join('') + `</ul>`;
+  
+  appDiv.appendChild(statsContent);
 }
 
 function startErrorReviewMode() {
@@ -492,26 +504,6 @@ function renderClassicExamQuestion(question, titleContext) {
   const progressBar = createProgressBar(currentIndex + 1, currentQuestions.length);
   appDiv.appendChild(progressBar);
 
-  // Grid de navegación rápida
-  const gridContainer = document.createElement('div');
-  gridContainer.className = 'exam-nav-grid';
-  currentQuestions.forEach((_, idx) => {
-    const btn = document.createElement('button');
-    btn.className = 'exam-nav-btn';
-    btn.textContent = idx + 1;
-    if (idx === currentIndex) btn.classList.add('current');
-    else if (userAnswers[idx].marked) btn.classList.add('marked');
-    else if (userAnswers[idx].selected.length > 0) btn.classList.add('answered');
-    
-    btn.onclick = () => {
-      userAnswers[currentIndex].selected = getSelectedOptions();
-      currentIndex = idx;
-      renderClassicExamQuestion(currentQuestions[currentIndex], titleContext);
-    };
-    gridContainer.appendChild(btn);
-  });
-  appDiv.appendChild(gridContainer);
-
   // Checkbox para marcar para revisar
   const markLabel = document.createElement('label');
   markLabel.className = 'mark-review-label';
@@ -520,9 +512,6 @@ function renderClassicExamQuestion(question, titleContext) {
   markCheckbox.checked = userAnswers[currentIndex].marked;
   markCheckbox.onchange = (e) => {
     userAnswers[currentIndex].marked = e.target.checked;
-    const currentBtn = gridContainer.children[currentIndex];
-    if (e.target.checked) currentBtn.classList.add('marked');
-    else currentBtn.classList.remove('marked');
   };
   markLabel.appendChild(markCheckbox);
   markLabel.appendChild(document.createTextNode(' Marcar para revisar más tarde'));
@@ -543,7 +532,7 @@ function renderClassicExamQuestion(question, titleContext) {
 
   if (currentIndex > 0) {
     const prevBtn = document.createElement('button');
-    prevBtn.innerHTML = '&#8592; Anterior';
+    prevBtn.innerHTML = '&#8592;';
     prevBtn.className = 'nav-arrow-btn';
     prevBtn.onclick = () => {
       userAnswers[currentIndex].selected = getSelectedOptions();
@@ -555,7 +544,7 @@ function renderClassicExamQuestion(question, titleContext) {
 
   if (currentIndex < currentQuestions.length - 1) {
     const nextBtn = document.createElement('button');
-    nextBtn.innerHTML = 'Siguiente &#8594;';
+    nextBtn.innerHTML = '&#8594;';
     nextBtn.className = 'nav-arrow-btn';
     nextBtn.onclick = () => {
       userAnswers[currentIndex].selected = getSelectedOptions();
@@ -566,25 +555,61 @@ function renderClassicExamQuestion(question, titleContext) {
   }
 
   const finishBtn = document.createElement('button');
-  finishBtn.textContent = 'Finalizar Examen';
+  finishBtn.textContent = 'Revisar y Entregar';
   finishBtn.className = 'finish-exam-btn';
   finishBtn.style.marginLeft = 'auto';
   finishBtn.onclick = () => {
     userAnswers[currentIndex].selected = getSelectedOptions();
+    showReviewScreen(titleContext);
+  };
+  navDiv.appendChild(finishBtn);
+
+  appDiv.appendChild(navDiv);
+}
+
+function showReviewScreen(titleContext) {
+  const appDiv = document.getElementById('app');
+  appDiv.innerHTML = '<h2>Revisión del Examen</h2><p style="text-align:center; margin-bottom: 20px;">Haz clic en cualquier pregunta para volver a ella, o finaliza el examen definitivamente.</p>';
+  
+  const gridContainer = document.createElement('div');
+  gridContainer.className = 'exam-nav-grid';
+  currentQuestions.forEach((_, idx) => {
+    const btn = document.createElement('button');
+    btn.className = 'exam-nav-btn';
+    btn.textContent = idx + 1;
+    if (userAnswers[idx].marked) btn.classList.add('marked');
+    else if (userAnswers[idx].selected.length > 0) btn.classList.add('answered');
+    
+    btn.onclick = () => {
+      currentIndex = idx;
+      renderClassicExamQuestion(currentQuestions[currentIndex], titleContext);
+    };
+    gridContainer.appendChild(btn);
+  });
+  appDiv.appendChild(gridContainer);
+  
+  const submitBtn = document.createElement('button');
+  submitBtn.textContent = 'ENTREGAR EXAMEN DEFINITIVO';
+  submitBtn.className = 'finish-exam-btn';
+  submitBtn.style.display = 'block';
+  submitBtn.style.marginTop = '20px';
+  submitBtn.style.width = '100%';
+  submitBtn.onclick = () => {
     const unanswered = userAnswers.filter(a => a.selected.length === 0).length;
-    const marked = userAnswers.filter(a => a.marked).length;
-    let msg = '¿Estás seguro de que deseas finalizar el examen?';
-    if (unanswered > 0 || marked > 0) {
-      msg = `Tienes ${unanswered} preguntas sin responder y ${marked} preguntas marcadas para revisar.\n\n` + msg;
+    let msg = '¿Estás seguro de que deseas entregar el examen ahora?';
+    if (unanswered > 0) {
+      msg = `Tienes ${unanswered} preguntas sin responder.\n\n` + msg;
     }
     if (confirm(msg)) {
       stopTimer();
       showExamResults(titleContext);
     }
   };
-  navDiv.appendChild(finishBtn);
+  appDiv.appendChild(submitBtn);
 
-  appDiv.appendChild(navDiv);
+  createBackButton(appDiv, () => {
+    renderClassicExamQuestion(currentQuestions[currentIndex], titleContext);
+  });
 }
 
 // Renderizador C: Modo estudio bloqueante
