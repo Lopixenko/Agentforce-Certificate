@@ -617,7 +617,13 @@ function renderBlockingQuestion(question, titleContext, examId) {
   const appDiv = document.getElementById('app');
   appDiv.innerHTML = '';
 
-  createBackButton(appDiv, () => selectOfficialModeType(examId));
+  createBackButton(appDiv, () => {
+    if (examId !== null) {
+      selectOfficialModeType(examId);
+    } else {
+      showMainMenu();
+    }
+  });
 
   const info = document.createElement('p');
   info.className = 'question-info';
