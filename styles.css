@@ -604,3 +604,51 @@ input[type="checkbox"] {
 .finish-exam-btn:hover {
   background-color: #c53030;
 }
+
+/* --- PREMIUM & DARK MODE --- */
+:root {
+  --bg-grad-1: #032D60;
+  --bg-grad-2: #0176D3;
+  --app-bg: rgba(255, 255, 255, 0.95);
+  --text-main: #333;
+  --text-muted: #718096;
+  --border-color: #e2e8f0;
+  --glass-border: rgba(255, 255, 255, 0.4);
+}
+body.dark-mode {
+  --bg-grad-1: #0f172a;
+  --bg-grad-2: #1e293b;
+  --app-bg: rgba(30, 41, 59, 0.85);
+  --text-main: #f8fafc;
+  --text-muted: #cbd5e1;
+  --border-color: #334155;
+  --glass-border: rgba(255, 255, 255, 0.05);
+}
+body {
+  font-family: 'Inter', sans-serif;
+}
+#background {
+  background: linear-gradient(120deg, var(--bg-grad-1) 0%, var(--bg-grad-2) 80%);
+  transition: background 0.5s ease;
+}
+#app {
+  background: var(--app-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
+  transition: background 0.3s, color 0.3s;
+}
+h1, h2, h3 { color: var(--text-main); }
+.question-info, .time-info, .score-threshold, .score-detail, .review-explanation { color: var(--text-muted); }
+.theme-toggle {
+  position: absolute; top: 15px; right: 20px; z-index: 100;
+  background: transparent; border: none; font-size: 1.8rem; cursor: pointer;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+  transition: transform 0.2s;
+}
+.theme-toggle:hover { transform: scale(1.1); }
+.option-label { border-color: var(--border-color); color: var(--text-main); }
+.option-label:hover { background: rgba(66, 153, 225, 0.1); }
+.exam-nav-grid, .module-stats, .time-toggle-container { background: var(--app-bg); border-color: var(--border-color); }
+.incorrect-review-block { background: var(--app-bg); border-color: var(--border-color); }

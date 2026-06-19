@@ -52,6 +52,46 @@ const app = new QuestionBank();
 let currentQuestions = [];
 let currentIndex = 0;
 let userAnswers = [];
+let examHistory = JSON.parse(localStorage.getItem('examHistory')) || [];
+let failedQuestionsMap = JSON.parse(localStorage.getItem('failedQuestionsMap')) || {};
+
+function saveActiveExam(titleContext) {
+  if (currentQuestions.length === 0) return;
+  const state = { currentQuestions, currentIndex, userAnswers, timerSeconds, titleContext };
+  localStorage.setItem('activeExamState', JSON.stringify(state));
+}
+function clearActiveExam() {
+  localStorage.removeItem('activeExamState');
+}
+
+// Dark mode y Atajos de teclado
+window.addEventListener('DOMContentLoaded', () => {
+  const toggle = document.getElementById('theme-toggle');
+  if(toggle) {
+    toggle.onclick = () => {
+      document.body.classList.toggle('dark-mode');
+      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    };
+    if(localStorage.getItem('darkMode') === 'true') document.body.classList.add('dark-mode');
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if(e.target.tagName === 'INPUT' || document.getElementById('app').innerHTML === '') return;
+    const num = parseInt(e.key);
+    if (!isNaN(num) && num > 0) {
+      const inputs = document.querySelectorAll('input[name="option"]');
+      if (inputs[num - 1]) inputs[num - 1].click();
+    }
+    if (e.key === 'ArrowRight') {
+      const btn = document.querySelector('.next-btn') || Array.from(document.querySelectorAll('.nav-arrow-btn')).find(b => b.textContent && b.textContent.includes('Siguiente'));
+      if (btn) btn.click();
+    }
+    if (e.key === 'ArrowLeft') {
+      const btn = Array.from(document.querySelectorAll('.nav-arrow-btn')).find(b => b.textContent && b.textContent.includes('Anterior'));
+      if (btn) btn.click();
+    }
+  });
+});
 
 // --- TEMPORIZADOR ---
 let timerInterval = null;
@@ -98,6 +138,12 @@ function renderTimerDisplay() {
     el.style.color = timerSeconds <= 300 ? '#e53e3e' : '#dd6b20';
   } else {
     el.style.color = '#38a169';
+  }
+
+  // Autosave
+  if (document.querySelector('.finish-exam-btn')) {
+    userAnswers[currentIndex].selected = getSelectedOptions();
+    saveActiveExam(document.querySelector('.question-info')?.textContent.split(':')[0] || 'Examen');
   }
 }
 
@@ -160,9 +206,49 @@ function showMainMenu() {
 
   appDiv.appendChild(timeToggleDiv);
 
+  const activeState = JSON.parse(localStorage.getItem('activeExamState'));
+  if (activeState && activeState.currentQuestions && activeState.currentQuestions.length > 0) {
+    const resumeBtn = createButton(appDiv, ' ⏳ CONTINUAR EXAMEN EN CURSO', () => {
+      currentQuestions = activeState.currentQuestions;
+      currentIndex = activeState.currentIndex;
+      userAnswers = activeState.userAnswers;
+      startTimer(activeState.timerSeconds);
+      renderClassicExamQuestion(currentQuestions[currentIndex], activeState.titleContext);
+    });
+    resumeBtn.style.background = 'linear-gradient(92deg, #d69e2e 0%, #b7791f 100%)';
+  }
+
   createButton(appDiv, ' UNITS (por módulo)', () => showUnitsMenu());
   createButton(appDiv, ' MODO EXAMEN (Aleatorio)', () => startGeneralExamMode());
   createButton(appDiv, ' EXÁMENES OFICIALES', () => showOfficialExamsMenu());
+  createButton(appDiv, ' 📊 MI PROGRESO Y ESTADÍSTICAS', () => showStatsPanel());
+  createButton(appDiv, ' ❌ REPASAR MIS ERRORES', () => startErrorReviewMode());
+}
+
+function showStatsPanel() {
+  const appDiv = document.getElementById('app');
+  appDiv.innerHTML = '<h2>Panel de Estadísticas</h2>';
+  createBackButton(appDiv, showMainMenu);
+  
+  if (examHistory.length === 0) {
+    appDiv.innerHTML += '<p style="text-align:center;">Aún no has completado ningún examen.</p>';
+    return;
+  }
+  const avg = Math.round(examHistory.reduce((acc, curr) => acc + curr.score, 0) / examHistory.length);
+  appDiv.innerHTML += `<div class="score-display score-passed"><div class="score-percent">${avg}%</div><div class="score-detail">Nota Media Histórica</div></div>`;
+  appDiv.innerHTML += `<h3>Últimos exámenes:</h3><ul style="text-align:left; line-height:1.8;">` + examHistory.slice(-10).map(e => `<li>${e.date}: <strong>${e.score}%</strong> (${e.title})</li>`).join('') + `</ul>`;
+}
+
+function startErrorReviewMode() {
+  const failedIds = Object.keys(failedQuestionsMap);
+  if (failedIds.length === 0) {
+    alert('¡Genial! No tienes errores registrados.');
+    return;
+  }
+  const questionsToReview = app.questions.filter(q => failedIds.includes(q.id.toString()));
+  if (questionsToReview.length > 0) {
+    startBlockingStudyMode(mezclarArray(questionsToReview), 'Repaso de Errores', null);
+  }
 }
 
 // --- MENÚ UNITS ---
@@ -709,6 +795,20 @@ function showExamResults(title) {
   const total = userAnswers.length;
   const score = Math.round((correct / total) * 100) || 0;
   const passed = score >= 73;
+
+  // Persistir resultados
+  examHistory.push({ date: new Date().toLocaleDateString(), score, title });
+  localStorage.setItem('examHistory', JSON.stringify(examHistory));
+  clearActiveExam();
+
+  userAnswers.forEach(ans => {
+    if (!validateAnswer(ans.question, ans.selected)) {
+      failedQuestionsMap[ans.question.id] = (failedQuestionsMap[ans.question.id] || 0) + 1;
+    } else {
+      delete failedQuestionsMap[ans.question.id];
+    }
+  });
+  localStorage.setItem('failedQuestionsMap', JSON.stringify(failedQuestionsMap));
 
   const h2 = document.createElement('h2');
   h2.textContent = 'Resultados del Examen';
