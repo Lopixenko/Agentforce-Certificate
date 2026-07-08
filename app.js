@@ -32,9 +32,10 @@ class QuestionBank {
 const agentforce_units_keywords = {
   'Prompt Engineering': ['Prompt Engineering'],
   'AI Agents': ['AI Agents'],
-  'Data Cloud for Agentforce': ['Data Cloud for Agentforce'],
-  'Deployment Lifecycle': ['Deployment Lifecycle'],
-  'Multi-Agent Interoperability': ['Multi-Agent Interoperability']
+  'Data 360 Fundamentals': ['Data 360 Fundamentals'],
+  'Testing, Deployment, & Maintenance': ['Testing, Deployment, & Maintenance'],
+  'Governance & Observability': ['Governance & Observability'],
+  'Multi-Agent Orchestration': ['Multi-Agent Orchestration']
 };
 
 function assignUnitToQuestions(questions) {
