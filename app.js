@@ -55,6 +55,7 @@ let currentIndex = 0;
 let userAnswers = [];
 let examHistory = JSON.parse(localStorage.getItem('examHistory')) || [];
 let failedQuestionsMap = JSON.parse(localStorage.getItem('failedQuestionsMap')) || {};
+let currentStreak = 0;
 
 function saveActiveExam(titleContext) {
   if (currentQuestions.length === 0) return;
@@ -383,6 +384,7 @@ function startBlockingStudyMode(questions, title, examId) {
 function renderQuestionWithFeedback(question, titleContext) {
   const appDiv = document.getElementById('app');
   appDiv.innerHTML = '';
+  appDiv.classList.remove('fade-in'); void appDiv.offsetWidth; appDiv.classList.add('fade-in');
   createBackButton(appDiv, showUnitsMenu);
 
   const info = document.createElement('p');
@@ -406,6 +408,13 @@ function renderQuestionWithFeedback(question, titleContext) {
     disableOptions();
 
     const isCorrect = validateAnswer(question, selected);
+
+    if (isCorrect) {
+      currentStreak++;
+      if (currentStreak % 3 === 0) triggerConfetti();
+    } else {
+      currentStreak = 0;
+    }
 
     // Marcar opciones en verde/rojo
     markOptions(question, selected);
@@ -461,6 +470,7 @@ function renderQuestionWithFeedback(question, titleContext) {
 function renderClassicExamQuestion(question, titleContext) {
   const appDiv = document.getElementById('app');
   appDiv.innerHTML = '';
+  appDiv.classList.remove('fade-in'); void appDiv.offsetWidth; appDiv.classList.add('fade-in');
 
   // Barra superior con salir y temporizador
   const topBar = document.createElement('div');
@@ -531,6 +541,20 @@ function renderClassicExamQuestion(question, titleContext) {
   const navDiv = document.createElement('div');
   navDiv.className = 'question-nav-buttons';
 
+  const finishBtn = document.createElement('button');
+  finishBtn.textContent = 'Revisar y Entregar';
+  finishBtn.className = 'finish-exam-btn';
+  finishBtn.onclick = () => {
+    userAnswers[currentIndex].selected = getSelectedOptions();
+    showReviewScreen(titleContext);
+  };
+  navDiv.appendChild(finishBtn);
+
+  const arrowsDiv = document.createElement('div');
+  arrowsDiv.style.display = 'flex';
+  arrowsDiv.style.gap = '16px';
+  arrowsDiv.style.marginLeft = 'auto';
+
   if (currentIndex > 0) {
     const prevBtn = document.createElement('button');
     prevBtn.innerHTML = '&#8592;';
@@ -540,7 +564,7 @@ function renderClassicExamQuestion(question, titleContext) {
       currentIndex--;
       renderClassicExamQuestion(currentQuestions[currentIndex], titleContext);
     };
-    navDiv.appendChild(prevBtn);
+    arrowsDiv.appendChild(prevBtn);
   }
 
   if (currentIndex < currentQuestions.length - 1) {
@@ -552,19 +576,10 @@ function renderClassicExamQuestion(question, titleContext) {
       currentIndex++;
       renderClassicExamQuestion(currentQuestions[currentIndex], titleContext);
     };
-    navDiv.appendChild(nextBtn);
+    arrowsDiv.appendChild(nextBtn);
   }
 
-  const finishBtn = document.createElement('button');
-  finishBtn.textContent = 'Revisar y Entregar';
-  finishBtn.className = 'finish-exam-btn';
-  finishBtn.style.marginLeft = 'auto';
-  finishBtn.onclick = () => {
-    userAnswers[currentIndex].selected = getSelectedOptions();
-    showReviewScreen(titleContext);
-  };
-  navDiv.appendChild(finishBtn);
-
+  navDiv.appendChild(arrowsDiv);
   appDiv.appendChild(navDiv);
 }
 
@@ -617,6 +632,7 @@ function showReviewScreen(titleContext) {
 function renderBlockingQuestion(question, titleContext, examId) {
   const appDiv = document.getElementById('app');
   appDiv.innerHTML = '';
+  appDiv.classList.remove('fade-in'); void appDiv.offsetWidth; appDiv.classList.add('fade-in');
 
   createBackButton(appDiv, () => {
     if (examId !== null) {
@@ -662,16 +678,58 @@ function renderBlockingQuestion(question, titleContext, examId) {
     const isCorrect = validateAnswer(question, selected);
 
     if (isCorrect) {
+      currentStreak++;
+      if (currentStreak % 3 === 0) triggerConfetti();
       disableOptions();
       markOptions(question, selected);
       feedbackDiv.className = 'feedback-msg feedback-correct';
       feedbackDiv.innerHTML = `<strong>✅ ¡Correcto!</strong><br/>${question.explanation || ''}`;
       actionBtn.textContent = 'Siguiente →';
     } else {
+      currentStreak = 0;
       feedbackDiv.className = 'feedback-msg feedback-incorrect';
       feedbackDiv.textContent = '❌ Incorrecto. Inténtalo de nuevo.';
     }
   };
+}
+
+// --- GAMIFICACIÓN E INTERACTIVIDAD ---
+function triggerConfetti() {
+  if (typeof confetti !== 'undefined') {
+    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+  }
+}
+function createInteractiveTools(parent, question) {
+  const toolsContainer = document.createElement('div');
+  toolsContainer.className = 'interactive-tools';
+  
+  if (currentStreak >= 3) {
+    const streakBadge = document.createElement('div');
+    streakBadge.className = 'streak-container';
+    streakBadge.innerHTML = `🔥 Racha: ${currentStreak}`;
+    toolsContainer.appendChild(streakBadge);
+  }
+
+  const hintBtn = document.createElement('button');
+  hintBtn.className = 'action-icon-btn';
+  hintBtn.title = 'Pedir Pista (Descarta una opción incorrecta)';
+  hintBtn.innerHTML = '💡';
+  hintBtn.onclick = () => {
+    const labels = document.querySelectorAll('.option-label:not(.disabled-hint)');
+    const incorrectLabels = Array.from(labels).filter(label => {
+      return !question.correctAnswers.includes(parseInt(label.dataset.idx));
+    });
+    if (incorrectLabels.length > 0) {
+      const targetLabel = incorrectLabels[Math.floor(Math.random() * incorrectLabels.length)];
+      targetLabel.classList.add('disabled-hint');
+      const input = targetLabel.querySelector('input');
+      if (input) { input.checked = false; input.disabled = true; }
+      if (incorrectLabels.length <= 1) hintBtn.disabled = true;
+    } else { hintBtn.disabled = true; }
+  };
+  toolsContainer.appendChild(hintBtn);
+
+  parent.appendChild(toolsContainer);
 }
 
 // --- FUNCIONES AUXILIARES ---
@@ -718,6 +776,8 @@ function createProgressBar(current, total) {
 }
 
 function renderQuestionTextAndOptions(parent, question) {
+  createInteractiveTools(parent, question);
+
   const qTitle = document.createElement('h2');
   qTitle.className = 'question-title';
   qTitle.textContent = question.question;
