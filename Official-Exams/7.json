@@ -198,20 +198,6 @@
     "explanation": "La UC ha puesto a tierra una plantilla de mensajes con una lista relacionada, pero las respuestas son incorrectas durante la UAT. La conexión a tierra con listas relacionadas en Agentforce permite a la IA acceder a datos de registros secundarios vinculados a un objeto principal. Analicemos las opciones. Opción A: la lista relacionada es de solo lectura. El estado de solo lectura (por ejemplo, a través de seguridad a nivel de campo o reglas de uso compartido) puede limitar las ediciones del usuario, pero no impide inherentemente que la IA acceda a datos de listas relacionadas para conexión a tierra, siempre que el usuario que ejecuta (o el contexto del sistema) tenga acceso de lectura. Es poco probable que esto provoque respuestas incorrectas y no es una consideración principal, lo que lo hace incorrecto. Opción B: la opción de plantilla de solicitud de lista relacionada no está habilitada. No hay una opción específica de \"opción de plantilla de solicitud de lista relacionada\" en el Generador de solicitudes. Cuando se conecta a tierra con una plantilla Record Snapshot o Flex, se incluyen listas relacionadas si se configuran correctamente (por ejemplo, a través de relaciones de objetos). Esta opción parece estar mal redactada y no se alinea con la configuración documentada, lo que la hace incorrecta. Opción C: la lista relacionada no está en el diseño de página del objeto principal. En Agentforce, la conexión a tierra con listas relacionadas depende de que la lista relacionada esté definida y accesible en los metadatos del objeto principal, a menudo vinculada a su presencia en el diseño de la página. Si la lista relacionada no está en el diseño, es posible que la IA no reconozca o recupere sus datos correctamente, lo que generará respuestas incompletas o incorrectas. La documentación de Salesforce señala que la disponibilidad de datos de listas relacionadas puede depender de la configuración del diseño, lo que lo convierte en un problema plausible y común durante la UAT y, por lo tanto, en la respuesta correcta. Por qué la opción C es correcta: la ausencia de la lista relacionada en el diseño de página del objeto principal puede interrumpir la recuperación de datos para la conexión a tierra, lo que lleva a respuestas incorrectas de la IA. Esta es una consideración de configuración conocida en la instalación y prueba de Agentforce, según la guía oficial."
   },
   {
-    "id": 429,
-    "module": "Prompt Engineering",
-    "question": "An Agentforce configured Data Masking within the Einstein Trust Layer. How should the Agentforce Specialist begin validating that the correct fields are being masked?",
-    "options": [
-      "Use a Flow-based resource in Prompt Builder to debug the fields’ merge values using Flow Debugger.",
-      "Request the Einstein Generative AI Audit Data from the Security section of the Setup menu.",
-      "Enable the collection and storage of Einstein Generative AI Audit Data on the Einstein Feedback setup page."
-    ],
-    "correctAnswers": [
-      1
-    ],
-    "explanation": "Para comenzar a validar que se estén enmascarando los campos correctos en Einstein Trust Layer, el especialista de Agentforce debe solicitar los datos de auditoría de AI generativa de Einstein desde la sección Seguridad del menú Configuración de Salesforce. Estos datos de auditoría permiten al especialista de Agentforce ver cómo se procesan los datos, incluidos qué campos se están enmascarando, lo que brinda transparencia y validación de que la configuración funciona como se esperaba. La opción B es correcta porque permite la recuperación de datos de auditoría que pueden usarse para validar el enmascaramiento de datos. La opción A (depurador de flujo) y la opción C (comentarios de Einstein) no se relacionan con la validación del enmascaramiento de campos en el contexto de la capa de confianza de Einstein."
-  },
-  {
     "id": 112,
     "module": "Prompt Engineering",
     "question": "Universal Containers (UC) wants to create a new Sales Email prompt template in Prompt Builder using the \"Save As\" function. However, UC notices that the new template produces different results compared to the standard Sales Email prompt due to missing hyperparameters.\nWhat should UC do to ensure the new prompt template produces results comparable to the standard Sales Email prompts?",
@@ -425,20 +411,6 @@
     "explanation": "Event Logs es la herramienta correcta para revisar detalles de ejecucion del agente y hacer troubleshooting de su rendimiento. Proporciona informacion detallada sobre las interacciones, errores y el comportamiento del agente durante la ejecucion."
   },
   {
-    "id": 89,
-    "module": "AI Agents",
-    "question": "Universal Containers (UC) is implementing Einstein Generative AI to improve customer insights and interactions. UC needs audit and feedback data to be accessible for reporting purposes.\nWhat is a consideration for this requirement?",
-    "options": [
-      "Storing this data requires Data Cloud to be provisioned.",
-      "Storing this data requires a custom object for data to be configured.",
-      "Storing this data requires Salesforce big objects."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "Para almacenar los datos de auditoría y de feedback generados por la Einstein Trust Layer (Audit Trail), es un requisito necesario que Data Cloud esté aprovisionado en la organización."
-  },
-  {
     "question": "An Agentforce Specialist created a Field Generation prompt template. What should the Agentforce Specialist do to expose the template to the user?",
     "options": [
       "Use a screen flow to associate the Field Generation prompt template.",
@@ -536,21 +508,6 @@
       1
     ],
     "explanation": "Para abordar la ineficacia de una plantilla de aviso informada por un cliente, el especialista de Salesforce Agentforce debe utilizar el cuadro de mando del Generador de avisos (opción B). Esta herramienta está diseñada explícitamente para evaluar y monitorear plantillas de mensajes según criterios clave como relevancia, precisión, seguridad y conexión a tierra. Al aprovechar el cuadro de mando, el especialista puede identificar sistemáticamente las debilidades en la plantilla y realizar mejoras basadas en datos. Si bien monitorear y refinar en función de los comentarios de los usuarios (Opción A) es una mejor práctica general, Prompt Builder Scorecard es la herramienta recomendada por Salesforce para la evaluación estructurada, alineándose con procesos documentados para mantener la efectividad inmediata. Cambiar el objeto de conexión a tierra (Opción C) sin una evaluación adecuada es reactivo y no aborda la causa raíz."
-  },
-  {
-    "id": 466,
-    "module": "Governance & Observability",
-    "question": "A sales director needs to project the upcoming quarter’s sales performance based on the current pipeline, historical trends, and real-time data. The director wants to use AI to predict future revenue and identify potential risks in achieving sales targets. Which Einstein feature should the director use?",
-    "options": [
-      "Einstein Lead Scoring",
-      "Einstein Generative AI for Sales Predictions",
-      "Einstein Opportunity Insights",
-      "Einstein Forecasting"
-    ],
-    "correctAnswers": [
-      3
-    ],
-    "explanation": "Respuesta correcta: D. Einstein Forecasting Einstein Forecasting es la función correcta porque utiliza IA para predecir el rendimiento de ventas futuro mediante el análisis de tendencias históricas, datos de canalización e información en tiempo real, lo que ayuda al director de ventas a tomar decisiones informadas y gestionar los riesgos de forma eficaz. La opción A es incorrecta. Einstein Lead Scoring se centra en evaluar la probabilidad de que los clientes potenciales se conviertan, no en pronosticar el rendimiento general de las ventas. La opción B es incorrecta. Einstein Generative AI para predicciones de ventas no es una característica existente; en cambio, Einstein Forecasting es la herramienta adecuada para esta tarea. La opción C es incorrecta. Einstein Opportunity Insights proporciona información sobre oportunidades específicas pero no pronostica el rendimiento de ventas futuro."
   },
   {
     "module": "Prompt Engineering",

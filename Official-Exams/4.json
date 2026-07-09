@@ -84,20 +84,6 @@
     "explanation": "La capacidad de Agentforce/Agentforce para asistir a los representantes incluye ejecutar tareas de forma autónoma (como cancelar vuelos) basándose en las acciones disponibles y responder preguntas extrayendo información de los artículos de Knowledge accesibles mediante Generación Aumentada por Recuperación (RAG). Esto empodera al agente humano para resolver el caso de manera integral."
   },
   {
-    "question": "Universal Containers has a strict change management process that requires all possible configuration to be completed in a sandbox which will be deployed to production. The Agentforce Specialist is tasked with setting up Work Summaries for Enhanced Messaging. Einstein Generative AI is already enabled in production. Which configuration steps should the Agentforce Specialist take in the sandbox that can be deployed to production?",
-    "options": [
-      "Create custom fields to store Issue, Resolution, and Summary; create a Quick Action that updates these fields; add the Wrap Up component to the Messaging Session record page layout; and create Permission Set Assignments for the intended Agents.",
-      "From the Einstein setup menu, select Turn on Einstein; create custom fields to store Issue, Resolution, and Summary; create a Quick Action that updates these fields; and add the wrap up component to the Messaging session record page layout.",
-      "Create custom fields to store Issue, Resolution, and Summary; create a Quick Action that updates these fields; and add the Wrap Up component to the Messaging session record page layout."
-    ],
-    "correctAnswers": [
-      2
-    ],
-    "module": "Testing, Deployment, & Maintenance",
-    "explanation": "Los pasos configurables en sandbox para Work Summaries son: crear campos personalizados para Issue, Resolution y Summary; crear una Quick Action que actualice esos campos; y agregar el componente Wrap Up al page layout de Messaging Session. Permission Set Assignments y la activacion de Einstein no se pueden desplegar via change set.",
-    "id": 224
-  },
-  {
     "id": 66,
     "module": "Testing, Deployment, & Maintenance",
     "question": "Universal Containers (UC) wants to assess Salesforce's generative Al features but has concerns over its company data being exposed to third party large language models (LLMs). Specifically, UC wants the following capabilities to be part of Einstein's generative AI service.\n- No data is used for LLM training or product improvements by third-party LLMs.\n- No data is retained outside of UC's Salesforce org.\n- The data sent cannot be accessed by the LLM provider.\nWhich property of the Einstein Trust Layer should the AI Specialist highlight to UC that addresses these requirements?",
@@ -124,21 +110,6 @@
       1
     ],
     "explanation": "Salesforce Agentforce aprovecha Prompt Builder, una poderosa herramienta que permite a los administradores crear y administrar plantillas de mensajes, que son marcos reutilizables para generar respuestas impulsadas por IA. Los usuarios pueden invocar estas plantillas para realizar tareas específicas, como generar correos electrónicos de ventas o resumir registros, basándose en instrucciones predefinidas y datos fundamentados. En este escenario, Universal Containers quiere que sus representantes de ventas tengan la capacidad de ejecutar únicamente estas plantillas de avisos, lo que significa que deberían poder ejecutarlas pero no crearlas, editarlas ni administrarlas. Analicemos las opciones y analicemos por qué B. Conjunto de permisos de usuario de plantilla de solicitud es la respuesta correcta: Opción A: Conjunto de permisos de plantilla de ejecución de solicitud Esta opción suena plausible a primera vista porque incluye la frase \"Ejecutar plantilla\", que se alinea con el requisito. Sin embargo, no existe un conjunto de permisos específico llamado \"Plantilla de ejecución de solicitud\" en la documentación oficial de Salesforce para Prompt Builder o Agentforce. Salesforce normalmente utiliza convenciones de nomenclatura más estandarizadas para los conjuntos de permisos, y esto parece ser una opción de distracción que no corresponde a una característica real. Los permisos en Salesforce son granulares, pero se agrupan lógicamente en conjuntos de permisos más amplios en lugar de hiperespecíficos como este. Opción B: Conjunto de permisos de usuario de plantilla de solicitud Esta es la respuesta correcta. En Salesforce, la función Prompt Builder, que es parte integral de Agentforce, incluye conjuntos de permisos diseñados para controlar el acceso a las plantillas de mensajes. El conjunto de permisos \"Usuario de plantilla de solicitud\" es un conjunto de permisos oficial de Salesforce que otorga a los usuarios la capacidad de ejecutar (o invocar) plantillas de solicitud sin darles la capacidad de crearlas o modificarlas. Esto se alinea perfectamente con el requisito de que los representantes de ventas solo deben ejecutar plantillas de mensajes, no administrarlas. El conjunto de permisos de Usuario de plantilla de solicitud normalmente incluye permisos como \"Ejecutar plantillas de solicitud\", que permite a los usuarios activar plantillas desde interfaces como flujos o páginas de registros Lightning, al tiempo que restringe el acceso al área de configuración del Generador de solicitudes donde se diseñan las plantillas. Opción C: Conjunto de permisos del Administrador de plantillas de mensajes Esta opción es incorrecta porque el conjunto de permisos \"Administrador de plantillas de mensajes\" está diseñado para usuarios que necesitan control administrativo total sobre las plantillas de mensajes. Esto incluye crear, editar y eliminar plantillas en Prompt Builder, además de ejecutarlas. Dado que Universal Containers solo quiere que los representantes de ventas ejecuten plantillas y no las administren, este conjunto de permisos proporciona más acceso del necesario, violando el principio de privilegio mínimo, una de las mejores prácticas de seguridad clave en Salesforce. Cómo funciona en Salesforce Para implementar esto, un administrador debería: Navegar a Configuración > Conjuntos de permisos. Localice o cree el conjunto de permisos \"Usuario de plantilla de solicitud\" (este es un conjunto de permisos estándar disponible con organizaciones habilitadas para Prompt Builder). Asigne este conjunto de permisos a los perfiles de los representantes de ventas o registros de usuarios individuales. Asegúrese de que las plantillas de mensajes estén configuradas y expuestas (por ejemplo, a través de componentes Lightning como el componente Resumen de Einstein) en páginas relevantes, como páginas de registro de cuenta o de oportunidad, donde los representantes de ventas puedan invocarlas. Por qué esto es importante Al asignar el conjunto de permisos Usuario de plantilla de aviso, Universal Containers garantiza que los representantes de ventas puedan aprovechar las plantillas de aviso impulsadas por IA para mejorar la productividad (por ejemplo, redactar correos electrónicos personalizados o generar argumentos de venta) mientras mantienen el control sobre quién puede modificar las plantillas. Esta separación de funciones es fundamental en un entorno seguro de Salesforce. Referencia a documentos oficiales de Salesforce Agentforce Specialist Ayuda de Salesforce: Permisos de Prompt Builder La documentación oficial de Salesforce describe los conjuntos de permisos para Prompt Builder, incluido \"Usuario de plantilla de solicitud\" para acceso solo de ejecución y \"Administrador de plantilla de solicitud\" para control total. Trailhead: Configurar Agentforce para el servicio Este módulo analiza cómo se asignan los permisos para controlar las funciones de Agentforce, incluidas las capacidades relacionadas con las solicitudes. Salesforce Ben: Por qué Prompt Builder es vital en un mundo de Agentforce (25 de noviembre de 2024) Este recurso explica cómo Prompt Builder se integra con Agentforce y destaca el uso de conjuntos de permisos como Prompt Template User para habilitar la funcionalidad del usuario final."
-  },
-  {
-    "id": 466,
-    "module": "Governance & Observability",
-    "question": "A sales director needs to project the upcoming quarter’s sales performance based on the current pipeline, historical trends, and real-time data. The director wants to use AI to predict future revenue and identify potential risks in achieving sales targets. Which Einstein feature should the director use?",
-    "options": [
-      "Einstein Lead Scoring",
-      "Einstein Generative AI for Sales Predictions",
-      "Einstein Opportunity Insights",
-      "Einstein Forecasting"
-    ],
-    "correctAnswers": [
-      3
-    ],
-    "explanation": "Respuesta correcta: D. Einstein Forecasting Einstein Forecasting es la función correcta porque utiliza IA para predecir el rendimiento de ventas futuro mediante el análisis de tendencias históricas, datos de canalización e información en tiempo real, lo que ayuda al director de ventas a tomar decisiones informadas y gestionar los riesgos de forma eficaz. La opción A es incorrecta. Einstein Lead Scoring se centra en evaluar la probabilidad de que los clientes potenciales se conviertan, no en pronosticar el rendimiento general de las ventas. La opción B es incorrecta. Einstein Generative AI para predicciones de ventas no es una característica existente; en cambio, Einstein Forecasting es la herramienta adecuada para esta tarea. La opción C es incorrecta. Einstein Opportunity Insights proporciona información sobre oportunidades específicas pero no pronostica el rendimiento de ventas futuro."
   },
   {
     "module": "Data 360 Fundamentals",
@@ -439,20 +410,6 @@
     "explanation": "Un modelo generativo personalizado es ideal cuando los modelos estándar no pueden abordar los requisitos específicos de una industria o escenarios comerciales únicos. Los modelos personalizados brindan soluciones personalizadas que se adaptan mejor a las necesidades especializadas."
   },
   {
-    "id": 127,
-    "module": "Prompt Engineering",
-    "question": "An AI Specialist turned on Einstein Generative AI in Setup. Now, the AI Specialist would like to create custom prompt templates in Prompt Builder. However, they cannot access Prompt Builder in the Setup menu.\nWhat is causing the problem?",
-    "options": [
-      "The Prompt Template User permission set was not assigned correctly.",
-      "The Prompt Template Manager permission set was not assigned correctly.",
-      "The large language model (LLM) was not configured correctly in Data Cloud."
-    ],
-    "correctAnswers": [
-      1
-    ],
-    "explanation": "Para poder acceder y crear plantillas de prompts personalizadas en Prompt Builder desde el menú de Setup, el usuario debe tener asignado el conjunto de permisos 'Prompt Template Manager' (Gestor de plantillas de prompt)."
-  },
-  {
     "id": 467,
     "module": "Governance & Observability",
     "question": "A sales manager wants to ensure that all client interactions, such as emails and meetings, are automatically logged into the CRM without the need for manual input. This will help maintain accurate records and improve team efficiency. Which Einstein feature should the sales manager implement?",
@@ -582,20 +539,6 @@
     "explanation": "Prompt Builder te permite crear una plantilla de prompt de Generación de Campos (Field Generation) que puede ejecutarse directamente desde un campo en la página del registro del Contacto (usando Dynamic Forms) para mostrar el resumen del invitado."
   },
   {
-    "id": 374,
-    "module": "AI Agents",
-    "question": "An Agentforce created a custom Agent action, but it is not being picked up by the planner service in the correct order. Which adjustment should the Al Specialist make in the custom Agent action instructions for the planner service to work as expected?",
-    "options": [
-      "Specify the dependent actions with the reference to the action API name.",
-      "Specify the profiles or custom permissions allowed to invoke the action.",
-      "Specify the LLM model provider and version to be used to invoke the action."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "Cuando el servicio de planificación no prioriza correctamente una acción personalizada del Agente, la causa raíz a menudo falta o las dependencias de acción están mal definidas. El servicio de planificación determina el orden de ejecución de las acciones en función de las dependencias definidas en las instrucciones de acción. Para resolver esto, el especialista de Agentforce debe especificar explícitamente acciones dependientes utilizando sus nombres de API en la configuración de la acción personalizada. Esto garantiza que el planificador comprenda la secuencia en la que se deben ejecutar las acciones para cumplir con los requisitos de la lógica empresarial. La documentación de Salesforce destaca que las dependencias son fundamentales para orquestar flujos de trabajo en Einstein Bots y Agentforce. Por ejemplo, si la Acción B requiere datos de la Acción A, el nombre de la API de la Acción A debe aparecer como una dependencia en las instrucciones de la Acción B. La Guía para desarrolladores de Einstein Bot establece que no definir dependencias puede generar condiciones de carrera u orden de ejecución incorrecto. Por el contrario: los perfiles o permisos personalizados (B) controlan el acceso a la acción pero no influyen en el orden de ejecución. El proveedor y la versión (C) del modelo LLM determinan el modelo de IA utilizado para el procesamiento, pero no están relacionados con la lógica de secuenciación del planificador."
-  },
-  {
     "id": 31,
     "module": "Data 360 Fundamentals",
     "question": "Universal Containers (UC) wants to use Flow to bring data from unified Data Cloud objects to prompt templates. Which type of flow should UC use?",
@@ -695,21 +638,6 @@
       2
     ],
     "explanation": "El enfoque principal debe ser alinear los objetivos del modelo con el problema comercial específico para garantizar que proporcione información relevante y procesable."
-  },
-  {
-    "id": 464,
-    "module": "AI Agents",
-    "question": "A customer service center wants to provide customers with immediate answers to common questions, such as business hours or return policies, even outside of normal working hours. The team needs a feature that can automate these interactions without requiring agent involvement. Which Einstein for Service feature should they implement?",
-    "options": [
-      "Einstein Case Classification",
-      "Einstein Bot",
-      "Einstein Article Recommendations",
-      "Einstein Next Best Action"
-    ],
-    "correctAnswers": [
-      1
-    ],
-    "explanation": "Respuesta correcta: B. Einstein Bot Einstein Bot es la característica correcta para este escenario. Permite que el centro de servicio automatice las interacciones con los clientes, brindando respuestas instantáneas a preguntas comunes y manejando tareas simples sin necesidad de un agente, lo que lo hace ideal para soporte fuera de horario. La opción A es incorrecta. La Clasificación de casos de Einstein sirve para categorizar casos y no maneja interacciones directas con los clientes ni automatiza respuestas. La opción C es incorrecta. Recomendaciones de artículos de Einstein sugiere artículos de conocimiento relevantes pero no automatiza las interacciones con los clientes. La opción D es incorrecta. Einstein Next Best Action proporciona recomendaciones de acciones, pero no está diseñado para automatizar las interacciones con los clientes."
   },
   {
     "id": 326,
