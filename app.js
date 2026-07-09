@@ -776,12 +776,21 @@ function createProgressBar(current, total) {
 }
 
 function renderQuestionTextAndOptions(parent, question) {
-  createInteractiveTools(parent, question);
+  const headerContainer = document.createElement('div');
+  headerContainer.style.display = 'flex';
+  headerContainer.style.justifyContent = 'space-between';
+  headerContainer.style.alignItems = 'flex-start';
+  headerContainer.style.gap = '16px';
+  headerContainer.style.marginBottom = '12px';
 
   const qTitle = document.createElement('h2');
   qTitle.className = 'question-title';
   qTitle.textContent = question.question;
-  parent.appendChild(qTitle);
+  qTitle.style.margin = '0';
+  headerContainer.appendChild(qTitle);
+
+  createInteractiveTools(headerContainer, question);
+  parent.appendChild(headerContainer);
 
   const isMultiple = question.correctAnswers && question.correctAnswers.length > 1;
 
