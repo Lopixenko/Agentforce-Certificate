@@ -11,10 +11,10 @@
     ],
     "module": "Prompt Engineering",
     "explanation": "Una limitacion importante de Prompt Builder es que las creaciones y actualizaciones de prompt templates no se registran en el Setup Audit Trail de Salesforce. Esto es relevante para organizaciones con requisitos estrictos de auditoria de cambios de configuracion.",
-    "id": 206
+    "id": 193
   },
   {
-    "id": 366,
+    "id": 343,
     "module": "AI Agents",
     "question": "Universal Containers (UC) uses a file upload-based data library and custom prompt to support AIdriven training content. However, users report that the AI frequently returns outdated documents. Which corrective action should UC implement to improve content relevancy?",
     "options": [
@@ -28,7 +28,7 @@
     "explanation": "El problema de la UC es que su biblioteca de datos basada en la carga de archivos (donde los archivos PDF o documentos se cargan e indexan en la base de datos vectorial de Data Cloud) está devolviendo contenido de capacitación obsoleto en las respuestas de IA. Para mejorar la relevancia garantizando que solo se recuperen los documentos actuales, la solución más eficaz es configurar un recuperador personalizado con un filtro (Opción B). En Agentforce, un recuperador personalizado permite a UC definir condiciones específicas, como un filtro en una \"Fecha de última modificación\" o un campo de marca de tiempo similar, para limitar la recuperación a documentos actualizados dentro de un período reciente (por ejemplo, los últimos 6 meses). Esto garantiza que la IA base sus respuestas en el contenido más actual, abordando directamente el problema de los documentos obsoletos sin requerir una revisión completa de la fuente de datos. Opción A: Cambiar a una biblioteca de datos basada en Knowledge (usando artículos de Salesforce Knowledge) podría funcionar, ya que los artículos de Knowledge tienen funciones de control de versiones y caducidad para gestionar la actualidad. Sin embargo, esto supone que el contenido de capacitación de la UC ya está en artículos de Knowledge (no en PDF) y requiere migrar todos los archivos cargados, lo cual es un cambio significativo que no se justifica por el contexto de la pregunta. Las bibliotecas basadas en archivos siguen siendo viables con un filtrado adecuado. Opción B: Esta es la mejor acción correctiva. Un recuperador personalizado con un filtro de fecha aprovecha la biblioteca basada en archivos existente, refinando la recuperación sin cambiar la fuente de datos, haciéndola práctica y específica. Opción C: Depender de recargas periódicas con el recuperador predeterminado es pasivo e ineficiente. No garantiza la actualidad (los archivos antiguos permanecen indexados hasta que se eliminan manualmente) y requiere un esfuerzo manual continuo, por lo que no resuelve el problema de forma proactiva. La opción B proporciona una solución precisa y escalable para garantizar la relevancia del contenido en el sistema de capacitación impulsado por IA de la UC."
   },
   {
-    "id": 328,
+    "id": 312,
     "module": "Data 360 Fundamentals",
     "question": "Coral Cloud Resorts needs to ensure its booking agent executes actions in a specific sequence: first retrieve available sessions, then verify customer eligibility, and finally create the booking. The current implementation allows the large language model (LLM) to execute these actions in any order, causing booking failures. Which approach should an AgentForce Specialist implement?",
     "options": [
@@ -42,7 +42,7 @@
     "explanation": "Explicación completa y detallada del extracto exacto de los documentos de AgentForce: De acuerdo con las pautas de secuenciación de acciones y orquestación de AgentForce en la documentación oficial, el orden de ejecución determinista se logra mejor mediante el uso de variables de estado personalizadas y lógica condicional en lugar de depender únicamente del razonamiento de LLM o de instrucciones temáticas. El marco de orquestación de AgentForce permite a los desarrolladores definir variables que representan la finalización exitosa de acciones específicas (por ejemplo, \"sesiones recuperadas\", \"elegibilidad verificada\", etc.). Las acciones posteriores pueden incluir filtros condicionales que solo permiten la ejecución si se han completado los pasos anteriores. Este enfoque garantiza que las acciones se ejecuten en una secuencia lógica estricta, evitando que el LLM reordene los pasos arbitrariamente. La opción A (que se basa en las instrucciones del tema) proporciona orientación al LLM pero no aplica el orden de ejecución mediante programación, lo que significa que aún pueden ocurrir errores si el motor de razonamiento interpreta los pasos de manera diferente. La opción C (indicadores de prioridad y secuencia) ayuda en la selección contextual pero no crea un control basado en dependencia entre acciones. Por lo tanto, según las mejores prácticas de AgentForce, el enfoque correcto es la opción B: utilizar variables personalizadas con filtros condicionales. Esto garantiza una secuencia determinista del flujo de trabajo, evita la ejecución prematura de acciones y se alinea con el \"Modelo de ejecución condicional y dependencia de acciones\" descrito en la Guía de implementación de AgentForce. Referencia: Marco de orquestación de AgentForce: \"Garantizar secuencias de acción deterministas con variables y lógica condicional\"."
   },
   {
-    "id": 279,
+    "id": 265,
     "module": "AI Agents",
     "question": "Coral Cloud Resorts (CCR) uses Agentforce to assist customers with booking and service issues. CCR wants to implement a triage process so that: • High severity requests must be escalated to a human service rep. • Lower severity requests should result in creating a support case for the guest. • The requirement is to achieve the highest reliability and determinism in the response from the agent. Which approach should an Agentforce Specialist recommend?",
     "options": [
@@ -67,7 +67,7 @@
     ],
     "module": "Multi-Agent Orchestration",
     "explanation": "Model Context Protocol (MCP) es la capacidad de Agentforce que permite al agente descubrir y consumir dinamicamente herramientas y APIs externas, como un modelo predictivo de recomendaciones de productos. MCP facilita la integracion con herramientas externas de forma estandarizada sin necesidad de codificacion custom.",
-    "id": 231
+    "id": 217
   },
   {
     "question": "Universal Containers wants to use an AI agent to answer questions about warranties. Warranty information has already been uploaded as unstructured data in Data Cloud. When answering user questions, the results must be filterable by product line and ranked by recent updates. Which approach should the Agentforce Specialist implement?",
@@ -81,10 +81,10 @@
     ],
     "module": "Data 360 Fundamentals",
     "explanation": "Para filtrar por linea de producto y ordenar por actualizaciones recientes, se debe construir un retriever personalizado en Einstein Studio configurando esos filtros y el ranking de recencia especificamente. El retriever por defecto no ofrece ese nivel de configuracion personalizada.",
-    "id": 221
+    "id": 208
   },
   {
-    "id": 123,
+    "id": 117,
     "module": "Prompt Engineering",
     "question": "When configuring a prompt template, an AI Specialist previews the results of the prompt template they've written. They see two distinct text outputs: Resolution and Response.\nWhich information does the Resolution text provide?",
     "options": [
@@ -98,7 +98,7 @@
     "explanation": "The new answer is correct because the 'Resolution' text in Prompt Builder shows the fully resolved prompt text (including merged data) that is sent to the LLM via the Trust Layer. The original answer was incorrect because the 'Response' section, not the 'Resolution', shows the LLM's generated response."
   },
   {
-    "id": 87,
+    "id": 85,
     "module": "Testing, Deployment, & Maintenance",
     "question": "How should an organization use the Einstein Trust layer to audit, track, and view masked data?",
     "options": [
@@ -112,7 +112,7 @@
     "explanation": "La Einstein Trust Layer registra de forma segura los datos de auditoría, incluyendo los prompts enviados (con los datos enmascarados) y las respuestas, almacenándolos en el Audit Trail que está respaldado por Data Cloud."
   },
   {
-    "id": 340,
+    "id": 322,
     "module": "AI Agents",
     "question": "Choose 1 option. A developer is using the Salesforce CLI to deploy agent components from a sandbox to production. They recently made a change to several topics, instructions, and actions. Which metadata component should the developer include in their package.xml file that contains all of the topics and actions an agent will interact with?",
     "options": [
@@ -126,7 +126,7 @@
     "explanation": "Explicación completa y detallada del extracto exacto de los documentos de AgentForce: El componente de metadatos que contiene la configuración completa de un Agente de Agentforce, incluidas referencias a todos sus temas y acciones, es GenAiPlannerBundle (A). En el desarrollo de Salesforce utilizando la API de metadatos o la CLI de Salesforce, un agente de Agentforce está representado por un tipo de metadatos de planificador. En las versiones recientes de la API de Salesforce (v64 y superiores, según esta base de conocimientos), el componente principal del agente es GenAiPlannerBundle. Esto actúa como contenedor o planificador que define el motor de razonamiento del agente y agrupa todas las referencias necesarias a los Temas (representados por el tipo de metadatos GenAiPlugin) y las Acciones (representadas por el tipo de metadatos GenAiFunction) que el agente puede ejecutar. La implementación de GenAiPlannerBundle es esencial para implementar una configuración completa y actualizada del agente Agentforce. Antes de la versión 64, el componente se llamaba GenAiPlanner y cumple la misma función conceptual. Dado que los canales de DevOps modernos se esfuerzan por lograr las últimas capacidades, GenAiPlannerBundle es la respuesta más actual y precisa para una implementación completa de agentes. Las opciones B y C son incorrectas porque no son los nombres correctos de la API de metadatos: EinsteinAiPlannerBundle no es un tipo de metadatos estándar y BotBundle no es el nombre correcto y específico para el componente del planificador de Agentforce AI. Extracto exacto simulado de documentos de AgentForce (referencia conceptual): \"El tipo de metadatos GenAiPlannerBundle representa toda la configuración del planificador del agente AI. Es el único contenedor de metadatos que un agente de Agentforce utiliza para organizar su lógica operativa, incluidas las referencias a todos los temas del agente (GenAiPlugin) y acciones del agente (GenAiFunction) asociados. Al implementar un agente de Agentforce y sus acciones o temas actualizados a través de la CLI de Salesforce, el componente GenAiPlannerBundle debe incluirse en el archivo package.xml para garantizar que Agentforce Reasoning Engine haga referencia correctamente a los nuevos componentes en el entorno de destino\". Referencia simulada: Guía para desarrolladores de AgentForce, Capítulo 4: Metadatos para la implementación, Sección 4.2: GenAiPlannerBundle, p. 75."
   },
   {
-    "id": 403,
+    "id": 377,
     "module": "AI Agents",
     "question": "Choose 1 option. Coral Cloud Resorts (CCR) sees the agent forgot the dietary/activity preferences gathered earlier. They need those preferences to persist throughout the session. What should CCR implement?",
     "options": [
@@ -151,10 +151,10 @@
     ],
     "module": "Prompt Engineering",
     "explanation": "Para encontrar la causa raiz de alucinaciones de weblinks, se deben examinar las instrucciones del prompt y el contenido de los chunks mostrados en el output del prompt resuelto. Los chunks revelan que datos exactos se estan usando para grounding, lo que permite identificar si el contenido fuente contiene links incorrectos o si el LLM los esta inventando.",
-    "id": 249
+    "id": 235
   },
   {
-    "id": 462,
+    "id": 433,
     "module": "Data 360 Fundamentals",
     "question": "A tech startup is building a chatbot to assist users with complex troubleshooting tasks. The team is debating between using a standard Salesforce LLM, customizing their own model, or bringing in an external LLM that was trained on a vast amount of technical documentation. Under which condition would it be most appropriate to configure a custom generative model?",
     "options": [
@@ -180,7 +180,7 @@
       0
     ],
     "explanation": "Al crear un retriever personalizado en Einstein Studio, los pasos esenciales incluyen configurar el search index, elegir el tipo de busqueda (vector o hibrida), seleccionar los campos de filtrado, el data space, el modelo y definir el metodo de ranking.",
-    "id": 139
+    "id": 130
   },
   {
     "id": 19,
@@ -197,7 +197,7 @@
     "explanation": "Einstein Sales Assistant ofrece capacidades de outreach a escala con mensajes personalizados y recomendaciones para leads. Es la solución adecuada para el caso de uso de contactación masiva."
   },
   {
-    "id": 502,
+    "id": 466,
     "module": "Governance & Observability",
     "question": "Which business scenario is most appropriate for using a custom generative model in Salesforce?",
     "options": [
@@ -222,10 +222,10 @@
     ],
     "module": "Testing, Deployment, & Maintenance",
     "explanation": "Para que se respeten los permisos, FLS y sharing rules del usuario en ejecucion, el flow invocado debe estar configurado para ejecutarse con 'With Sharing' (User Context). La opcion marcada previamente es incorrecta porque los agentes no ejecutan siempre los flows en system mode; el contexto de ejecucion depende de la configuracion del propio flow.",
-    "id": 219
+    "id": 206
   },
   {
-    "id": 454,
+    "id": 425,
     "module": "AI Agents",
     "question": "Where should the Agentforce Specialist go to add/update actions assigned to a agent?",
     "options": [
@@ -239,7 +239,7 @@
     "explanation": "Para agregar o actualizar acciones asignadas a un agente, Agentforce puede administrarlo a través de varias áreas: Página de acciones del agente: esta es la ubicación central donde se administran y configuran las acciones del agente. Página de registro para la acción del agente: desde la página de registro, las acciones individuales del agente se pueden actualizar o modificar. Pestaña Biblioteca de acciones del agente: esta pestaña sirve como repositorio donde se puede acceder y modificar acciones predefinidas o personalizadas para Agentforce. Estas áreas brindan flexibilidad en la gestión y actualización de las acciones asignadas a Agentforce, asegurando que el asistente de IA permanezca alineado con los requisitos y procesos del negocio. Las otras opciones son incorrectas: B pierde la Biblioteca de acciones del agente, que es crucial para administrar acciones. C incluye la página Detalles del agente, que no es el lugar principal para la gestión de acciones."
   },
   {
-    "id": 496,
+    "id": 460,
     "module": "Data 360 Fundamentals",
     "question": "Which role is primarily responsible for defining the training data and parameters for a custom model in Model Builder?",
     "options": [
@@ -254,7 +254,7 @@
     "explanation": "Los científicos de datos son los principales responsables de definir los datos y parámetros de entrenamiento para modelos personalizados, ya que tienen la experiencia necesaria para configurar y optimizar modelos de aprendizaje automático."
   },
   {
-    "id": 467,
+    "id": 436,
     "module": "Governance & Observability",
     "question": "A sales manager wants to ensure that all client interactions, such as emails and meetings, are automatically logged into the CRM without the need for manual input. This will help maintain accurate records and improve team efficiency. Which Einstein feature should the sales manager implement?",
     "options": [
@@ -297,7 +297,7 @@
     "explanation": "Query Records es la acción que el planner selecciona para solicitudes de listado como 'Show me all customers'. Asegura recuperación de registros relevantes."
   },
   {
-    "id": 271,
+    "id": 257,
     "module": "Testing, Deployment, & Maintenance",
     "question": "Universal Containers' administrator has developed a new agent in a sandbox environment and now wants to deploy it to production. What should the administrator do to deploy an agent?",
     "options": [
@@ -311,7 +311,7 @@
     "explanation": "Los agentes, sus temas (topics) y las acciones asociadas son tipos de metadatos nativos dentro de la plataforma de Salesforce. Por lo tanto, el procedimiento oficial y recomendado para migrar esta configuración de un entorno de desarrollo a producción es crear un conjunto de cambios saliente (outbound change set) que incluya todos los componentes del agente para su despliegue."
   },
   {
-    "id": 287,
+    "id": 273,
     "module": "Multi-Agent Orchestration",
     "question": "What is a key benefit of the Agent-to-Agent (A2A) protocol?",
     "options": [
@@ -325,7 +325,7 @@
     "explanation": "El protocolo Agent-to-Agent (A2A) tiene como beneficio clave proporcionar un marco estandarizado que permite a los agentes de diferentes proveedores descubrirse y comunicarse entre sí de forma segura, facilitando la interoperabilidad entre distintos ecosistemas de IA."
   },
   {
-    "id": 302,
+    "id": 288,
     "module": "Data 360 Fundamentals",
     "question": "Universal Containers needs to bring individual customer warranties from an external system into Data Cloud. They want Agentforce to return warranty-related responses only for accounts whose warranty status is active. Which search approach should the Agentforce Specialist configure to ensure warranty-related information is retrieved correctly?",
     "options": [
@@ -339,7 +339,7 @@
     "explanation": "Para garantizar que el modelo de lenguaje solo utilice registros válidos y activos, la mejor práctica es aplicar pre-filtrado directamente en el proceso de recuperación de datos mediante un 'Custom Retriever' en Einstein Studio, aplicando filtros sobre campos de metadatos (como WarrantyStatus = Active) antes de la búsqueda vectorial."
   },
   {
-    "id": 480,
+    "id": 449,
     "module": "AI Agents",
     "question": "In a scenario where customer service agents need AI-generated summaries of case details after resolving an issue, which Einstein for Service feature should be used?",
     "options": [
@@ -354,7 +354,7 @@
     "explanation": "Respuesta correcta: B. Resumen del caso de Einstein El resumen del caso de Einstein ayuda a los agentes generando automáticamente resúmenes de los detalles del caso después de la resolución, lo que facilita la documentación del resultado y el cierre del caso. La opción A es incorrecta. Recomendaciones de respuestas de Einstein genera respuestas sugeridas pero no resume los casos. La opción C es incorrecta. La Clasificación de casos de Einstein categoriza automáticamente los casos pero no genera resúmenes. La opción D es incorrecta. Einstein Next Best Action proporciona recomendaciones para acciones posteriores pero no genera resúmenes."
   },
   {
-    "id": 363,
+    "id": 340,
     "module": "AI Agents",
     "question": "Choose 1 option. Universal Containers deploys a new Agentforce Service Agent into the company's website but is getting feedback that the Service Agent is not providing answers to customer questions that are found in the company’s Salesforce Knowledge articles. What is the likely issue?",
     "options": [
@@ -368,7 +368,7 @@
     "explanation": "Según la Guía de configuración de acceso e integración de AgentForce Knowledge, un agente de servicio recupera y fundamenta sus respuestas utilizando datos de Salesforce Knowledge cuando se asignan los permisos correctos. Si los clientes informan que el agente no puede acceder a los artículos de conocimiento ni proporcionar respuestas a ellos, la causa principal más común es que el usuario del agente de servicio de AgentForce carece del permiso \"Permitir ver conocimiento\". Este permiso permite al agente recuperar y leer artículos publicados de Salesforce Knowledge para obtener respuestas fundamentadas. Sin él, el agente no puede acceder al repositorio de contenido, lo que genera respuestas incompletas o genéricas. La opción B es incorrecta porque un problema de licencia impediría que el agente se ejecute en absoluto, no bloquearía selectivamente el acceso a datos específicos. La opción C también es incorrecta ya que el perfil de conocimiento por sí solo no controla la visibilidad del artículo; los conjuntos de permisos sí lo hacen. Por lo tanto, la respuesta correcta es la Opción A: al usuario del agente de servicio de AgentForce no se le otorgó el conjunto de permisos Permitir ver conocimiento, que otorga el acceso necesario para respuestas basadas en artículos. Referencia: Guía de integración de conocimientos de AgentForce: “Habilitación del acceso al conocimiento para agentes de servicio”."
   },
   {
-    "id": 444,
+    "id": 416,
     "module": "Prompt Engineering",
     "question": "Which configuration must An Agentforce complete for users to access generative Al-enabled fields in the Salesforce mobile app?",
     "options": [
@@ -393,10 +393,10 @@
       2
     ],
     "explanation": "Asignar Data Categories a los articulos de Knowledge y definir filtros de Data Category en la Agentforce Data Library es el metodo correcto para limitar el acceso del agente a articulos especificos, garantizando que solo se recuperen articulos relevantes y autorizados.",
-    "id": 150
+    "id": 141
   },
   {
-    "id": 497,
+    "id": 461,
     "module": "AI Agents",
     "question": "Which Einstein for Sales feature helps identify the best times to contact leads based on historical engagement data?",
     "options": [
@@ -422,10 +422,10 @@
     ],
     "module": "Data 360 Fundamentals",
     "explanation": "Para mantener la precision del retrieval cuando la documentacion cambia frecuentemente, se debe reconstruir el search index. Esto regenera los embeddings vectoriales con el contenido actualizado, asegurando que las busquedas semanticas reflejen la informacion mas reciente.",
-    "id": 197
+    "id": 184
   },
   {
-    "id": 92,
+    "id": 88,
     "module": "AI Agents",
     "question": "Universal Containers (UC) is looking to enhance its operational efficiency. UC has recently adopted Salesforce and is considering implementing Agentforce  to improve its processes. \nWhat is a key reason for implementing Agentforce ?",
     "options": [
@@ -449,10 +449,10 @@
     ],
     "module": "Prompt Engineering",
     "explanation": "En un template-triggered prompt flow, para que los datos obtenidos (por ejemplo, de un External Service) se pasen al prompt template y se usen en la resolucion, se debe usar el elemento 'Add Prompt Instructions' en el flow. No existen los 'External Service Record merge fields'.",
-    "id": 188
+    "id": 175
   },
   {
-    "id": 467,
+    "id": 436,
     "module": "Governance & Observability",
     "question": "A sales manager wants to ensure that all client interactions, such as emails and meetings, are automatically logged into the CRM without the need for manual input. This will help maintain accurate records and improve team efficiency. Which Einstein feature should the sales manager implement?",
     "options": [
@@ -467,7 +467,7 @@
     "explanation": "Respuesta correcta: B. Captura de actividad de Einstein Captura de actividad de Einstein es la función correcta porque registra automáticamente las interacciones del cliente, como correos electrónicos y reuniones, en CRM, lo que reduce la necesidad de entrada manual y garantiza registros precisos y actualizados. La opción A es incorrecta. La puntuación de oportunidades de Einstein ayuda a priorizar las oportunidades en función de su probabilidad de cerrarse, pero no registra las actividades. La opción C es incorrecta. Einstein Next Best Action recomienda acciones basadas en conocimientos de datos, pero no captura ni registra actividades automáticamente. La opción D es incorrecta. Einstein Email Insights analiza y prioriza los correos electrónicos, pero no los registra automáticamente en CRM."
   },
   {
-    "id": 265,
+    "id": 251,
     "module": "Data 360 Fundamentals",
     "question": "Which statement explains why a company might prefer a hybrid search index in Data Cloud for Agentforce?",
     "options": [
@@ -481,7 +481,7 @@
     "explanation": "La búsqueda híbrida se prefiere porque combina la recuperación semántica (basada en el significado e intención a través de vectores) con la búsqueda exacta por palabras clave. Esto asegura excelentes resultados en casos donde la consulta del usuario incluye tanto lenguaje conversacional como números de serie, identificadores, o términos muy específicos que requieren coincidencia literal."
   },
   {
-    "id": 413,
+    "id": 387,
     "module": "AI Agents",
     "question": "Choose 1 option. Coral Cloud Resorts is about to start testing its concierge agent with guests. Which metrics should be captured to monitor the performance, correctness, and user experience?",
     "options": [
@@ -495,7 +495,7 @@
     "explanation": "Según el Marco de Monitoreo y Evaluación de AgentForce, las tres dimensiones clave para medir la calidad de los agentes de IA son el rendimiento, la corrección y la satisfacción del usuario. Para monitorearlos con precisión, las organizaciones deben realizar un seguimiento de: los tiempos de respuesta (para evaluar la latencia del sistema y del modelo), la precisión y relevancia de las respuestas (para medir la calidad de la base y el razonamiento) y el éxito de la resolución (para confirmar la finalización de la tarea o la eficacia de la resolución de problemas). Estas métricas proporcionan una evaluación equilibrada tanto de la eficiencia técnica como de la experiencia del usuario. La opción A se centra en métricas de uso del sistema, como tokens y duración, que son operativas pero no evalúan la corrección o el éxito. La opción B incluye tono y CSAT, que son útiles pero incompletos, ya que no miden la precisión de los hechos ni la resolución de la tarea. Por lo tanto, la respuesta correcta es la Opción C: tiempos de respuesta, precisión y relevancia de las respuestas y éxito de la resolución, en consonancia con las prácticas de evaluación estándar de AgentForce. Referencia: Guía de monitoreo de AgentForce: “Medición de métricas de calidad y rendimiento del agente”."
   },
   {
-    "id": 287,
+    "id": 273,
     "module": "Multi-Agent Orchestration",
     "question": "What is a key benefit of the Agent-to-Agent (A2A) protocol?",
     "options": [
@@ -509,7 +509,7 @@
     "explanation": "El protocolo Agent-to-Agent (A2A) tiene como beneficio clave proporcionar un marco estandarizado que permite a los agentes de diferentes proveedores descubrirse y comunicarse entre sí de forma segura, facilitando la interoperabilidad entre distintos ecosistemas de IA."
   },
   {
-    "id": 494,
+    "id": 458,
     "module": "Governance & Observability",
     "question": "What should be the primary focus when configuring a custom model to ensure it effectively addresses a business problem?",
     "options": [
@@ -524,7 +524,7 @@
     "explanation": "El enfoque principal debe ser alinear los objetivos del modelo con el problema comercial específico para garantizar que proporcione información relevante y procesable."
   },
   {
-    "id": 369,
+    "id": 346,
     "module": "Data 360 Fundamentals",
     "question": "Choose 1 option. Coral Cloud Resorts is implementing Agentforce retrieval. Customers sometimes type ambiguous terms (for example, “package” could mean vacation package or baggage). Which retrieval strategy best balances precision and contextual disambiguation?",
     "options": [
@@ -549,10 +549,10 @@
     ],
     "module": "Prompt Engineering",
     "explanation": "El paso inicial correcto es recopilar y analizar los datos de navegacion, ya que estos son la fuente de grounding que permitira al prompt template generar recomendaciones personalizadas. Sin datos de navegacion disponibles y analizados, el template no tiene contexto para personalizar las recomendaciones.",
-    "id": 246
+    "id": 232
   },
   {
-    "id": 451,
+    "id": 422,
     "module": "Prompt Engineering",
     "question": "Choose 1 option. What does it mean when a prompt template version is described as immutable?",
     "options": [
@@ -566,7 +566,7 @@
     "explanation": "Según la Guía de control de versiones de la plantilla de solicitud de AgentForce, cuando una versión de la plantilla de solicitud está marcada como inmutable, significa que no se pueden realizar ediciones ni modificaciones en esa versión después de que se haya activado. Esto garantiza que la lógica, la redacción y los parámetros de conexión a tierra vinculados a esa versión permanezcan bloqueados y coherentes para fines de auditoría, reproducibilidad y cumplimiento. Si se requieren más cambios, el sistema crea automáticamente una nueva versión borrador de la plantilla. La versión anterior permanece inmutable y se conserva para su trazabilidad. La opción B es incorrecta porque pueden existir varias versiones y las versiones anteriores pueden permanecer activas en escenarios de prueba o reversión específicos. La opción C es parcialmente cierta pero incompleta: la inmutabilidad se refiere a la naturaleza congelada de una versión activa, no solo a la creación de la versión. Por lo tanto, la explicación correcta es la Opción A: una vez que se activa una versión de plantilla de solicitud, se vuelve inmutable y no se puede cambiar. Referencia: Documentación de gestión de mensajes de AgentForce: “Control de versiones inmutable en plantillas de mensajes”."
   },
   {
-    "id": 301,
+    "id": 287,
     "module": "Data 360 Fundamentals",
     "question": "Universal Containers (UC) configured a new PDF file ingestion in Data Cloud with all the required fields, and also created the mapping and the search index. UC is now setting up the individual retriever and notices a required field is missing. How should UC resolve this?",
     "options": [
@@ -580,7 +580,7 @@
     "explanation": "Para resolver un campo requerido faltante, actualice la search index para incluir el campo. El retriever depende de índices configurados; sin el campo indexado, no puede devolver datos necesarios."
   },
   {
-    "id": 281,
+    "id": 267,
     "module": "Data 360 Fundamentals",
     "question": "Support agents at Universal Containers are using Agentforce to find troubleshooting information. They've reported that the agent frequently provides knowledge articles that are outdated, even when newer versions of the articles are available. The administrator has confirmed that all articles are correctly chunked and indexed. Which configuration change in the Data Cloud hybrid search index best addresses this problem?",
     "options": [
@@ -608,7 +608,7 @@
     "explanation": "Action Instructions son la configuración clave para iterar y validar el comportamiento de una acción. Ajustarlas permite mejorar la precisión del flow y los outcomes."
   },
   {
-    "id": 103,
+    "id": 99,
     "module": "Testing, Deployment, & Maintenance",
     "question": "An administrator is responsible for ensuring the security and reliability of Universal Containers' (UC) CRM data. UC needs enhanced data protection and up-to-date AI capabilities. UC also needs to include relevant information from a Salesforce record to be merged with the prompt. \nWhich feature in the Einstein Trust Layer best supports UC's need?",
     "options": [
@@ -622,7 +622,7 @@
     "explanation": "Dynamic grounding with secure data retrieval en el Einstein Trust Layer permite incluir información de registros de Salesforce en el prompt de forma segura, protegiendo datos sensibles. Data masking oculta datos pero no los incluye dinámicamente; zero-data retention solo controla la retención."
   },
   {
-    "id": 398,
+    "id": 372,
     "module": "AI Agents",
     "question": "Universal Containers (UC) is looking to enhance its operational efficiency. UC has recently adopted Salesforce and is considering implementing Agent to improve its processes. What is a key reason for implementing Agent?",
     "options": [
@@ -647,10 +647,10 @@
     ],
     "module": "Testing, Deployment, & Maintenance",
     "explanation": "Agentforce Session Tracing proporciona una vista completa del comportamiento del agente de principio a fin, incluyendo ejecuciones del reasoning engine, acciones, inputs/outputs del prompt y gateway, mensajes de error y respuestas finales. Es la herramienta mas detallada para analisis de sesiones de agente.",
-    "id": 236
+    "id": 222
   },
   {
-    "id": 71,
+    "id": 70,
     "module": "Prompt Engineering",
     "question": "An AI Specialist wants to ground a new prompt template with the User related list.\nWhat should the AI Specialist consider?",
     "options": [
@@ -678,7 +678,7 @@
     "explanation": "Call Insights provee visibilidad post-llamada sobre menciones de competidores, productos y frases personalizadas para mejorar la captación y seguimiento de oportunidades."
   },
   {
-    "id": 453,
+    "id": 424,
     "module": "AI Agents",
     "question": "Choose 1 option. How does Agentforce select the correct action to resolve a user's request?",
     "options": [
@@ -692,7 +692,7 @@
     "explanation": "En la descripción general de la arquitectura y el motor de razonamiento de AgentForce, Salesforce explica que el modelo de lenguaje grande (LLM) impulsa la selección de temas y acciones. La documentación dice: \"AgentForce utiliza un LLM para interpretar la intención del usuario, asignarla a temas existentes y desencadenar la acción adecuada cuando esté disponible. Si no se encuentra ningún tema o acción coincidente, el LLM intenta generar una respuesta directa utilizando su contexto disponible\". Este diseño garantiza una adaptabilidad dinámica: el agente puede elegir el tema correcto y la acción asociada basándose en la comprensión del lenguaje natural. La opción A es incorrecta porque la asignación de tema a expresión es una ayuda de configuración, no el mecanismo de selección. La opción C es incorrecta porque el motor de razonamiento no selecciona acciones por nombre: interpreta la intención del usuario a través del LLM y ejecuta acciones asignadas si es relevante. Por lo tanto, la Opción B refleja el flujo operativo oficial del proceso de razonamiento basado en LLM de AgentForce. Referencia (Documentos de AgentForce/Guía de estudio): Descripción general del motor de razonamiento de AgentForce Guía del usuario de AgentForce Builder: “Flujo de selección de temas, acciones y LLM” Guía de estudio de AgentForce: “Cómo el LLM elige temas y ejecuta acciones”"
   },
   {
-    "id": 372,
+    "id": 348,
     "module": "AI Agents",
     "question": "Choose 1 option. Cloud Kicks wants to integrate its agent with its custom website. The goal is for customers to interact with the custom agent chat interface. Which approach provides the framework for the custom web application to communicate with the agent?",
     "options": [
@@ -706,7 +706,7 @@
     "explanation": "La Guía de integración de API de AgentForce define la API del agente como el marco que permite que las aplicaciones móviles o web externas se comuniquen directamente con los agentes alojados en Salesforce. Esta API admite el intercambio de mensajes, la gestión de sesiones y la persistencia del contexto, lo que permite a los desarrolladores crear interfaces de chat personalizadas mientras mantienen una conectividad segura en tiempo real con el motor de razonamiento AgentForce. La opción A (A2A) es para la colaboración entre agentes dentro de Salesforce, no para la integración web externa. La opción B (MCP) (Protocolo de contexto del modelo) se utiliza para compartir contexto entre modelos y herramientas, no para la integración front-end. Por lo tanto, el marco correcto para permitir la comunicación entre una interfaz de chat de sitio web personalizada y un agente de AgentForce es la Opción C – API de agente, ya que proporciona la interfaz estructurada para aplicaciones de clientes externos. Referencia: Manual de integración de AgentForce: “Uso de la API del agente para interacciones basadas en aplicaciones y web”."
   },
   {
-    "id": 434,
+    "id": 406,
     "module": "AI Agents",
     "question": "Universal Containers needs to provide insights on the usability of Agents to drive adoption in the organization. What should the Agentforce Specialist recommend?",
     "options": [
@@ -720,7 +720,7 @@
     "explanation": "Para medir la adopción y usabilidad de los agentes en toda la organización, Agentforce Analytics es la herramienta adecuada. Proporciona paneles e informes que rastrean cómo se utilizan los agentes, qué acciones se activan con mayor frecuencia y las tendencias generales de rendimiento. Estos datos ayudan a las organizaciones a impulsar la adopción al identificar brechas, monitorear el uso y demostrar el valor comercial."
   },
   {
-    "id": 488,
+    "id": 454,
     "module": "Prompt Engineering",
     "question": "Which feature of the Einstein Trust Layer is designed to identify and reduce the risk of harmful or toxic outputs from generative AI?",
     "options": [
@@ -734,7 +734,7 @@
     "explanation": "La puntuación de toxicidad está diseñada para identificar y reducir el riesgo de resultados dañinos o tóxicos de la IA generativa, garantizando que el contenido generado sea apropiado y seguro."
   },
   {
-    "id": 84,
+    "id": 82,
     "module": "Prompt Engineering",
     "question": "An AI Specialist at Universal Containers (UC) is tasked with creating a new custom prompt template to populate a field with generated output. UC enabled the Einstein Trust Layer to ensure AI Audit data is captured and monitored for adoption and possible enhancements.\nWhich prompt template type should the AI Specialist use and which consideration should they review?",
     "options": [
@@ -748,7 +748,7 @@
     "explanation": "Para poblar un campo específico con contenido generado por IA en una página de registro, se debe usar una plantilla de 'Field Generation'. Además, es requisito indispensable que la página de registro esté configurada usando Dynamic Forms."
   },
   {
-    "id": 467,
+    "id": 436,
     "module": "Governance & Observability",
     "question": "A sales manager wants to ensure that all client interactions, such as emails and meetings, are automatically logged into the CRM without the need for manual input. This will help maintain accurate records and improve team efficiency. Which Einstein feature should the sales manager implement?",
     "options": [
@@ -763,7 +763,7 @@
     "explanation": "Respuesta correcta: B. Captura de actividad de Einstein Captura de actividad de Einstein es la función correcta porque registra automáticamente las interacciones del cliente, como correos electrónicos y reuniones, en CRM, lo que reduce la necesidad de entrada manual y garantiza registros precisos y actualizados. La opción A es incorrecta. La puntuación de oportunidades de Einstein ayuda a priorizar las oportunidades en función de su probabilidad de cerrarse, pero no registra las actividades. La opción C es incorrecta. Einstein Next Best Action recomienda acciones basadas en conocimientos de datos, pero no captura ni registra actividades automáticamente. La opción D es incorrecta. Einstein Email Insights analiza y prioriza los correos electrónicos, pero no los registra automáticamente en CRM."
   },
   {
-    "id": 409,
+    "id": 383,
     "module": "AI Agents",
     "question": "Choose 1 option. Universal Containers (UC) plans to answer questions based on similar cases that have been successfully resolved in the past. What should UC consider when implementing this approach?",
     "options": [
@@ -777,7 +777,7 @@
     "explanation": "Según la Guía de configuración y recuperación de datos de AgentForce, cuando una organización como Universal Containers desea permitir que su agente de IA responda preguntas utilizando datos históricos de casos, la implementación correcta es crear un objeto de modelo de datos no estructurados (UDMO) basado en el objeto Caso y luego indexar esos datos para su recuperación. La documentación explica claramente: \"Cuando utilice registros de casos anteriores para potenciar las preguntas y respuestas basadas en IA o la recuperación basada en similitudes, cree un UDMO asignado al objeto Caso. Los UDMO permiten que el sistema procese e indexe semánticamente campos de texto no estructurados, como descripción, resolución y comentarios del caso, lo que permite al LLM mostrar casos resueltos contextualmente similares\". Esto permite que el motor de recuperación de AgentForce realice búsquedas semánticas en datos de soporte históricos, devolviendo casos que sean más contextualmente relevantes para la consulta del usuario. La opción A es incorrecta porque los casos anteriores no se pueden utilizar automáticamente sin indexarlos. La opción B es incorrecta porque una DMO es para datos estructurados (tablas, campos numéricos) y no admite la recuperación de texto semántico. Por lo tanto, la opción C es correcta y se alinea completamente con las mejores prácticas documentadas de Salesforce. Referencia (Documentos de AgentForce/Guía de estudio): Guía de configuración de datos de AgentForce: “Uso de UDMO para razonamiento basado en casos” Manual de implementación de AgentForce: “Indexación de registros de casos históricos para búsqueda semántica” Guía de estudio de AgentForce: “Creación de objetos de modelo de datos no estructurados a partir de objetos de casos”"
   },
   {
-    "id": 83,
+    "id": 81,
     "module": "Testing, Deployment, & Maintenance",
     "question": "Universal Containers plans to implement prompt templates that utilize the standard foundation models.\nWhat should the AI Specialist consider when building prompt templates in Prompt Builder?",
     "options": [
@@ -802,6 +802,6 @@
     ],
     "module": "AI Agents",
     "explanation": "Einstein Work Summaries utiliza exclusivamente el contexto de la conversación (como las transcripciones de chat, voz o mensajería) para generar resúmenes precisos sobre el problema y la resolución ocurrida durante la interacción. No se basa en artículos de Knowledge ni en otros casos, ya que su objetivo es documentar lo que realmente sucedió en la conversación actual, y usar conocimientos externos podría provocar alucinaciones en el resumen.",
-    "id": 256
+    "id": 242
   }
 ]
