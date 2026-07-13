@@ -196,20 +196,6 @@
     "explanation": "La Einstein Trust Layer registra de forma segura los datos de auditoría, incluyendo los prompts enviados (con los datos enmascarados) y las respuestas, almacenándolos en el Audit Trail que está respaldado por Data Cloud."
   },
   {
-    "id": 298,
-    "module": "AI Agents",
-    "question": "Universal Containers (UC) is rolling out an AI-powered support assistant to help customer service agents quickly retrieve relevant troubleshooting steps and policy guidelines. The assistant relies on a search index in Data Cloud that contains product manuals, policy documents, and past case resolutions. During testing, UC notices that agents are receiving too many irrelevant results from older product versions that no longer apply. How should UC address this issue?",
-    "options": [
-      "Modify the search index to only store documents from the last year and remove older records.",
-      "Create a custom retriever in Einstein Studio, and apply filters for publication date and product line.",
-      "Use the default retriever, as it already searches the entire search index and provides broad coverage."
-    ],
-    "correctAnswers": [
-      2
-    ],
-    "explanation": "El asistente de soporte de UC utiliza un índice de búsqueda de Data Cloud como base, pero los resultados irrelevantes de versiones obsoletas de productos son un problema. Evaluemos las opciones. Opción A: Modifique el índice de búsqueda para almacenar solo documentos del último año y eliminar registros más antiguos. Si bien limitar el índice a documentos recientes podría reducir los resultados irrelevantes, esto requiere un mantenimiento continuo (por ejemplo, eliminar datos más antiguos) y corre el riesgo de perder un valioso contexto histórico de resoluciones pasadas. Es un enfoque directo que no aprovecha las capacidades de filtrado de Data Cloud, lo que lo hace menos óptimo e incorrecto. Opción B: crear un recuperador personalizado en Einstein Studio y aplicar filtros para la fecha de publicación y la línea de productos. No existe \"Einstein Studio\" en Salesforce; posiblemente sea un error tipográfico para Agentforce Studio o Data Cloud. Se pueden crear recuperadores personalizados en Data Cloud, pero esto requiere una configuración avanzada (por ejemplo, código personalizado o API de Data Cloud) más allá de la configuración estándar de Agentforce. Esto es demasiado complicado en comparación con las opciones nativas, lo que lo hace incorrecto. Opción C: utilice el recuperador predeterminado, ya que busca en todo el índice de búsqueda y proporciona una amplia cobertura. Esta opción parece desalineada a primera vista, ya que la amplia cobertura del recuperador predeterminado está causando el problema. Sin embargo, la intención (basada en patrones de preguntas típicos de Salesforce) probablemente implique el uso del recuperador predeterminado con configuración adicional. En Data Cloud, el recuperador predeterminado busca en el índice, pero puede aplicar filtros (por ejemplo, fecha de publicación, relevancia) a través de la biblioteca de datos o solicitar configuraciones de conexión a tierra para priorizar los documentos actuales. Dado que la pregunta carece de una opción de filtrado explícita, esto se interpreta como la opción correcta más cercana con refinamiento asumido, convirtiéndola en la respuesta por eliminación y contexto. Por qué la opción C es correcta (con advertencia): el recuperador predeterminado, cuando se combina con filtros (supuesta intención), permite a la UC refinar los resultados sin un desarrollo personalizado. La documentación de Salesforce enfatiza refinar el alcance del recuperador sobre reconstruir índices, aunque la redacción de la pregunta no es óptima. La opción C se selecciona como la menos incorrecta, suponiendo que se aplique un filtro."
-  },
-  {
     "id": 119,
     "module": "AI Agents",
     "question": "What is the primary function of the planner service in the Agentforce  system?",
@@ -841,5 +827,19 @@
       0
     ],
     "explanation": "Data Cloud Admin permite ver y gestionar modelos en Einstein Studio, mientras que Prompt Template Manager permite crear y administrar prompt templates en Prompt Builder. Estos dos permission sets juntos cubren ambos requisitos del data scientist."
+  },
+  {
+    "id": 1,
+    "module": "Prompt Engineering",
+    "question": "What is the correct process to leverage Prompt Builder in a Salesforce org?",
+    "options": [
+      "Select the appropriate prompt template type to use, select one of Salesforce’s standard prompts, determine the object to associate the prompt, select a record to validate against, and associate the prompt to an action.",
+      "Select the appropriate prompt template type to use, develop the prompt within the prompt workspace, select resources to dynamically insert CRM-derived grounding data, pick the model to use, and test and validate the generated responses.",
+      "Enable the target object for generative prompting, develop the prompt within the prompt workspace, select records to fine-tune and ground the response, enable the Trust Layer, and associate the prompt to an action."
+    ],
+    "correctAnswers": [
+      1
+    ],
+    "explanation": "Prompt Builder requiere desarrollar en el prompt workspace, usar recursos de grounding, seleccionar el modelo y validar los resultados, no solo crear una plantilla. Debe configurarse correctamente para respuestas confiables."
   }
 ]

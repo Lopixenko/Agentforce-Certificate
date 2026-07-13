@@ -2869,19 +2869,6 @@
     "id": 205
   },
   {
-    "question": "Universal Containers has a custom Agent action calling a flow to retrieve the real-time status of an order from the order fulfillment system. What should the Agentforce Specialist consider about the running user's data access?",
-    "options": [
-      "The flow must have the 'with sharing' permission selected in the advanced settings for the permissions, field-level security, and sharing settings to be respected.",
-      "The custom action adheres to the permissions, field-level security, and sharing settings configured in the flow. The Agent will always run flows in system mode so the running user's data access will not affect the data returned."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "module": "Testing, Deployment, & Maintenance",
-    "explanation": "Para que se respeten los permisos, FLS y sharing rules del usuario en ejecucion, el flow invocado debe estar configurado para ejecutarse con 'With Sharing' (User Context). La opcion marcada previamente es incorrecta porque los agentes no ejecutan siempre los flows en system mode; el contexto de ejecucion depende de la configuracion del propio flow.",
-    "id": 206
-  },
-  {
     "question": "Universal Containers aims to streamline the sales team's daily tasks by using AI. When considering these new workflows, which improvement requires the use of Prompt Builder?",
     "options": [
       "Populate an AI-generated time-to-close estimation to opportunities",
@@ -4154,20 +4141,6 @@
       0
     ],
     "explanation": "Según la Guía de implementación e integración de flujos de AgentForce, al implementar flujos a través de conjuntos de cambios, los flujos llegan a la organización de producción en estado \"inactivo\" de forma predeterminada. El administrador debe activar manualmente el flujo posterior a la implementación antes de que los agentes o usuarios puedan ejecutarlo. Esto explica por qué el agente encuentra un error al intentar ejecutar el flujo: el sistema reconoce el flujo pero no puede invocarlo porque permanece inactivo. La opción B es incorrecta ya que los errores de permisos mostrarían un mensaje de \"privilegios insuficientes\", no un error de tiempo de ejecución. La opción C es poco probable porque las clases de Apex dependientes se manejarían automáticamente si se incluyeran correctamente en la implementación. Por lo tanto, la causa más probable es la Opción A: el flujo no se activó manualmente en producción después de la implementación. Referencia: Guía de implementación de AgentForce: “Requisitos de activación del flujo posterior a la implementación”."
-  },
-  {
-    "id": 298,
-    "module": "AI Agents",
-    "question": "Universal Containers (UC) is rolling out an AI-powered support assistant to help customer service agents quickly retrieve relevant troubleshooting steps and policy guidelines. The assistant relies on a search index in Data Cloud that contains product manuals, policy documents, and past case resolutions. During testing, UC notices that agents are receiving too many irrelevant results from older product versions that no longer apply. How should UC address this issue?",
-    "options": [
-      "Modify the search index to only store documents from the last year and remove older records.",
-      "Create a custom retriever in Einstein Studio, and apply filters for publication date and product line.",
-      "Use the default retriever, as it already searches the entire search index and provides broad coverage."
-    ],
-    "correctAnswers": [
-      2
-    ],
-    "explanation": "El asistente de soporte de UC utiliza un índice de búsqueda de Data Cloud como base, pero los resultados irrelevantes de versiones obsoletas de productos son un problema. Evaluemos las opciones. Opción A: Modifique el índice de búsqueda para almacenar solo documentos del último año y eliminar registros más antiguos. Si bien limitar el índice a documentos recientes podría reducir los resultados irrelevantes, esto requiere un mantenimiento continuo (por ejemplo, eliminar datos más antiguos) y corre el riesgo de perder un valioso contexto histórico de resoluciones pasadas. Es un enfoque directo que no aprovecha las capacidades de filtrado de Data Cloud, lo que lo hace menos óptimo e incorrecto. Opción B: crear un recuperador personalizado en Einstein Studio y aplicar filtros para la fecha de publicación y la línea de productos. No existe \"Einstein Studio\" en Salesforce; posiblemente sea un error tipográfico para Agentforce Studio o Data Cloud. Se pueden crear recuperadores personalizados en Data Cloud, pero esto requiere una configuración avanzada (por ejemplo, código personalizado o API de Data Cloud) más allá de la configuración estándar de Agentforce. Esto es demasiado complicado en comparación con las opciones nativas, lo que lo hace incorrecto. Opción C: utilice el recuperador predeterminado, ya que busca en todo el índice de búsqueda y proporciona una amplia cobertura. Esta opción parece desalineada a primera vista, ya que la amplia cobertura del recuperador predeterminado está causando el problema. Sin embargo, la intención (basada en patrones de preguntas típicos de Salesforce) probablemente implique el uso del recuperador predeterminado con configuración adicional. En Data Cloud, el recuperador predeterminado busca en el índice, pero puede aplicar filtros (por ejemplo, fecha de publicación, relevancia) a través de la biblioteca de datos o solicitar configuraciones de conexión a tierra para priorizar los documentos actuales. Dado que la pregunta carece de una opción de filtrado explícita, esto se interpreta como la opción correcta más cercana con refinamiento asumido, convirtiéndola en la respuesta por eliminación y contexto. Por qué la opción C es correcta (con advertencia): el recuperador predeterminado, cuando se combina con filtros (supuesta intención), permite a la UC refinar los resultados sin un desarrollo personalizado. La documentación de Salesforce enfatiza refinar el alcance del recuperador sobre reconstruir índices, aunque la redacción de la pregunta no es óptima. La opción C se selecciona como la menos incorrecta, suponiendo que se aplique un filtro."
   },
   {
     "id": 299,
@@ -5680,20 +5653,6 @@
       1
     ],
     "explanation": "Para medir la adopción y usabilidad de los agentes en toda la organización, Agentforce Analytics es la herramienta adecuada. Proporciona paneles e informes que rastrean cómo se utilizan los agentes, qué acciones se activan con mayor frecuencia y las tendencias generales de rendimiento. Estos datos ayudan a las organizaciones a impulsar la adopción al identificar brechas, monitorear el uso y demostrar el valor comercial."
-  },
-  {
-    "id": 407,
-    "module": "Prompt Engineering",
-    "question": "Universal Containers has a new AI project. What should An Agentforce consider when adding a related list on the Account object to be used in the prompt template?",
-    "options": [
-      "After selecting a related list from the Account, use the field picker to choose merge fields in Prompt Builder.",
-      "Prompt Builder must be used to assign the fields from the related list as a JSON format.",
-      "The fields for the related list are based on the default page layout of the Account for the current user."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "Contexto de la pregunta Universal Containers (UC) desea incluir detalles de una lista relacionada en el objeto Cuenta en una plantilla de solicitud. Normalmente, esto se hace a través de Prompt Builder en la configuración de IA generativa de Salesforce. Comportamiento del Generador de mensajes Seleccionar una lista relacionada: Dentro del Generador de mensajes, puede navegar hasta el objeto (Cuenta) y elegir a qué lista relacionada (por ejemplo, Contactos, Oportunidades) desea hacer referencia. Selector de campos: una vez que se elige una lista relacionada, Prompt Builder proporciona una interfaz de selección de campos que le permite seleccionar campos específicos de esa lista relacionada. Estos campos luego estarán disponibles para fusionar campos o inserción dinámica dentro de su mensaje. Por qué la opción A es una alineación directa correcta con el proceso estándar: el enfoque recomendado en la documentación de Salesforce es seleccionar una lista relacionada y luego usar el selector de campos para agregar los campos necesarios en su mensaje de IA. Esto garantiza que el mensaje tenga exactamente los datos que necesita de esa lista relacionada. ¿Por qué no la opción B (formato JSON)? No hay requisitos JSON obligatorios: aunque puede estructurar los datos como JSON si desea un formato avanzado, Prompt Builder no requiere que asigne manualmente los campos de la lista relacionada en JSON. La plataforma maneja automáticamente cómo se transmiten los datos en segundo plano. ¿Por qué no? Opción C (diseño de página predeterminado) Independiente del diseño de página: Prompt Builder no se basa estrictamente en el diseño de página predeterminado para los campos. Puede configurar los campos que desee de la lista relacionada, independientemente de cómo esté configurado el diseño de página del usuario en la interfaz de usuario. Conclusión Dado que el enfoque oficial de Salesforce implica seleccionar una lista relacionada y luego usar el selector de campos para insertar campos combinados, la opción A es la respuesta correcta y verificada. Referencia y documentos de Salesforce Agentforce Specialist Documentación oficial de Salesforce: Conceptos básicos del generador de mensajes Explica cómo hacer referencia a objetos y listas relacionadas al crear mensajes de IA. Salesforce Trailhead: Introducción a Prompt Builder Proporciona ejercicios prácticos que demuestran cómo seleccionar campos de objetos o listas relacionados. La guía de estudio para especialistas de Salesforce Agentforce describe las mejores prácticas para hacer referencia a registros y campos relacionados en indicaciones generativas de IA."
   },
   {
     "id": 408,
