@@ -35,7 +35,8 @@ const agentforce_units_keywords = {
   'Data 360 Fundamentals': ['Data 360 Fundamentals'],
   'Testing, Deployment, & Maintenance': ['Testing, Deployment, & Maintenance'],
   'Governance & Observability': ['Governance & Observability'],
-  'Multi-Agent Orchestration': ['Multi-Agent Orchestration']
+  'Multi-Agent Orchestration': ['Multi-Agent Orchestration'],
+  'Agentforce exam' : ['Agentforce exam']
 };
 
 function assignUnitToQuestions(questions) {
@@ -297,7 +298,7 @@ function showOfficialExamsMenu() {
   grid.className = 'exam-grid';
   appDiv.appendChild(grid);
 
-  for (let i = 1; i <= 14; i++) {
+  for (let i = 1; i <= 15; i++) {
     const btn = document.createElement('button');
     btn.textContent = `Examen ${i}`;
     btn.onclick = () => selectOfficialModeType(i);
@@ -776,20 +777,6 @@ function createProgressBar(current, total) {
 }
 
 function renderQuestionTextAndOptions(parent, question) {
-  if (question.module) {
-    const modTag = document.createElement('div');
-    modTag.className = 'question-module-tag';
-    modTag.textContent = question.module;
-    modTag.style.display = 'inline-block';
-    modTag.style.backgroundColor = '#e0f2fe';
-    modTag.style.color = '#0284c7';
-    modTag.style.padding = '4px 10px';
-    modTag.style.borderRadius = '12px';
-    modTag.style.fontSize = '12px';
-    modTag.style.fontWeight = 'bold';
-    modTag.style.marginBottom = '8px';
-    parent.appendChild(modTag);
-  }
 
   const headerContainer = document.createElement('div');
   headerContainer.style.display = 'flex';
