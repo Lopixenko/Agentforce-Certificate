@@ -776,6 +776,21 @@ function createProgressBar(current, total) {
 }
 
 function renderQuestionTextAndOptions(parent, question) {
+  if (question.module) {
+    const modTag = document.createElement('div');
+    modTag.className = 'question-module-tag';
+    modTag.textContent = question.module;
+    modTag.style.display = 'inline-block';
+    modTag.style.backgroundColor = '#e0f2fe';
+    modTag.style.color = '#0284c7';
+    modTag.style.padding = '4px 10px';
+    modTag.style.borderRadius = '12px';
+    modTag.style.fontSize = '12px';
+    modTag.style.fontWeight = 'bold';
+    modTag.style.marginBottom = '8px';
+    parent.appendChild(modTag);
+  }
+
   const headerContainer = document.createElement('div');
   headerContainer.style.display = 'flex';
   headerContainer.style.justifyContent = 'space-between';
