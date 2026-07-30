@@ -350,12 +350,27 @@ function startUnitQuiz(unit) {
   renderQuestionWithFeedback(currentQuestions[currentIndex], unit);
 }
 
-// MODO EXAMEN GENERAL: 60 preguntas aleatorias con temporizador
+// MODO EXAMEN GENERAL: 60 preguntas aleatorias con temporizador (Smart Random)
 function startGeneralExamMode() {
-  const shuffled = mezclarArray([...app.questions]);
-  // Filtrar preguntas con correctAnswers vacío para evitar bugs
-  const valid = shuffled.filter(q => q.correctAnswers && q.correctAnswers.length > 0);
-  currentQuestions = valid.slice(0, 60);
+  let seenIds = JSON.parse(localStorage.getItem('seenQuestions')) || [];
+  const valid = app.questions.filter(q => q.correctAnswers && q.correctAnswers.length > 0);
+  
+  // Separar preguntas no vistas
+  let unseen = valid.filter(q => !seenIds.includes(q.id));
+  
+  // Si quedan menos de 60 preguntas nuevas, reiniciamos el historial
+  if (unseen.length < 60) {
+    seenIds = [];
+    unseen = valid;
+  }
+  
+  const shuffled = mezclarArray([...unseen]);
+  currentQuestions = shuffled.slice(0, 60);
+  
+  // Guardar las nuevas preguntas como vistas
+  seenIds.push(...currentQuestions.map(q => q.id));
+  localStorage.setItem('seenQuestions', JSON.stringify(seenIds));
+  
   currentIndex = 0;
   userAnswers = currentQuestions.map(q => ({ question: q, selected: [], marked: false }));
   startTimer(getTotalExamSeconds());
