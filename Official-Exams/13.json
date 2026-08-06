@@ -1,35 +1,259 @@
 [
   {
-    "id": 802,
-    "module": "Agentforce exam",
-    "question": "Fashion Forward Retail is creating a virtual styling assistant that needs to generate personalized outfit recommendations using their proprietary style prediction engine, which is accessible via REST APIs. Which Agentforce capability will simplify the integration between the assistant and this external recommendation tool?",
+    "id": 319,
+    "module": "AI Agents",
+    "question": "Choose 1 option. Universal Containers (UC) is preparing to use the Agentforce Testing Center to ensure the reliability of a new agent. UC has a CSV file with test cases and is reviewing the documentation to understand best practices and limitations. Which best practice should the company follow to avoid modifying CRM data while running tests in the Testing Center?",
     "options": [
-      "External Service connectors.",
-      "Model Context Protocol, offering a standardized framework for exposing external services as discoverable tools.",
-      "Custom Apex callouts."
+      "Run tests in the production environment to ensure real-time data accuracy.",
+      "Limit the number of test cases to 50 per test to minimize data changes.",
+      "Use the Testing Center only in the sandbox environment."
+    ],
+    "correctAnswers": [
+      2
+    ],
+    "explanation": "De acuerdo con las pautas de validación y pruebas de AgentForce, todas las ejecuciones de pruebas automatizadas o a gran escala en Testing Center deben ejecutarse en un entorno de pruebas para evitar modificaciones no deseadas en los datos de CRM en vivo. La ejecución de pruebas en producción puede desencadenar actualizaciones de registros, crear casos o invocar acciones que alteren datos en vivo, violando los estándares de mejores prácticas para una validación segura. Las pruebas en un entorno aislado garantizan que el entorno refleje la lógica de producción y al mismo tiempo mantenga el aislamiento de los datos. La opción A contradice esta mejor práctica, ya que las pruebas de producción ponen en riesgo la integridad de los datos. La opción B no evita los cambios de datos: limitar el volumen de pruebas no protege contra modificaciones no deseadas de los registros. Por lo tanto, el enfoque correcto es la Opción C: utilizar el Testing Center solo en el entorno de pruebas para mantener la seguridad y el cumplimiento de los datos. Referencia: Documentación del Testing Center de AgentForce: “Ejecución de pruebas aisladas y seguras en entornos Sandbox”."
+  },
+  {
+    "id": 78,
+    "module": "Prompt Engineering",
+    "question": "What is the main purpose of Prompt Builder?",
+    "options": [
+      "A tool for developers to use in Visual Studio Code that creates prompts for Apex programming, assisting developers in writing code more efficiently.",
+      "A tool that enables companies to create reusable prompts for large language models (LLMs), bringing generative AI responses to their flow of work",
+      "A tool within Salesforce offering real-time Al-powered suggestions and guidance to users, Improving productivity and decision-making."
     ],
     "correctAnswers": [
       1
     ],
-    "explanation": "Duplicado conceptual (pregunta repetida dos veces en tu mensaje, se agregó una sola vez) del hecho de MCP ya verificado en este banco (V2 #77/#169): MCP da un framework estandarizado para exponer servicios externos como herramientas descubribles que el agente puede invocar dinámicamente. External Service connectors (A) son declarativos pero sin el descubrimiento dinámico de MCP. Apex callouts custom (C) requieren desarrollo y mantenimiento extensos. [Consistente con MCP ya verificado en este banco; no requirió verificación adicional.]"
+    "explanation": "El propósito principal de Prompt Builder es permitir a las empresas crear, probar y gestionar plantillas de prompts reutilizables para LLMs, integrando las respuestas de la IA generativa directamente en los flujos de trabajo de Salesforce."
   },
   {
-    "id": 803,
-    "module": "Agentforce exam",
-    "question": "Global Financial Services operates separate assistants in different regional orgs. A verification assistant in the European org must securely pass validated customer identity data to downstream assistants in other regions without exposing the data to AI models or allowing modification. What configuration ensures secure, immutable data transfer between these assistants?",
+    "id": 410,
+    "module": "Prompt Engineering",
+    "question": "Universal Containers (UC) plans to automatically populate the Description field on the Account object. Which type of prompt template should UC use?",
     "options": [
-      "Pass the verified customer ID as a read-only context variable through the Agent API when initiating downstream assistant sessions.",
-      "Store verification status in a shared custom object accessible via cross-org SOQL queries.",
-      "Maintain verification data in conversation variables synchronized via API gateway."
+      "Field Generation prompt template",
+      "Flex Prompt template",
+      "Sales Email prompt template"
     ],
     "correctAnswers": [
       0
     ],
-    "explanation": "Esta pregunta es temáticamente muy cercana a la V2 #51 de este banco (Nexa Motors, manufactura → concesionario, DISPUTADA), donde encontré que Salesforce declara que la negociación A2A cross-org es \"roadmap-only\" (próximos años), sin mecanismo confirmado hoy. Sin embargo, esta pregunta usa un mecanismo distinto: la **Agent API** (confirmada como real en V2 #112/#154) para iniciar sesiones en un asistente destino, pasando un context variable read-only — esto es conceptualmente más plausible que A2A cross-org, porque la Agent API está diseñada justamente para que sistemas externos (incluida otra org de Salesforce actuando como \"cliente\" de la API) inicien sesiones con datos de contexto. No pude confirmar con una fuente oficial específica el patrón exacto \"context variable read-only vía Agent API para transferencia cross-org inmutable\", pero el mecanismo subyacente (Agent API + variables de contexto) sí está bien establecido en este banco. Sharing vía SOQL cross-org (B) añade complejidad/latencia y expone datos a interpretación de IA durante construcción de queries. Variables de conversación sincronizadas por gateway (C) no persisten de forma confiable entre límites de org. [Nota de confianza: mecanismo base (Agent API + context variables) confirmado, pero el patrón específico de \"transferencia inmutable cross-org\" no tiene una fuente oficial dedicada — relacionado con la incertidumbre ya señalada en V2 #51 sobre colaboración cross-org de agentes Salesforce.]"
+    "explanation": "Contexto de la pregunta Universal Containers (UC) quiere completar automáticamente el campo Descripción en el objeto Cuenta. La solución impulsada por IA debe generar datos textuales y escribirlos directamente en un campo. Prompt template de generación de campos Caso de uso principal: una prompt template de generación de campos está diseñada específicamente para crear o completar campos en un registro con texto generado por IA. Autocompletar: al configurar una prompt template de generación de campo, los administradores pueden definir las instrucciones, las entradas de datos y la salida deseada para la IA. El texto resultante luego completa el campo especificado, como la Descripción de la cuenta. ¿Por qué no plantillas flexibles o de mensajes de correo electrónico de ventas? Prompt template flexible: se utiliza para combinar o manipular datos entre objetos, fusiones o referencias de múltiples fuentes en solicitudes más avanzadas y flexibles. Por lo general, no es la opción ideal para la generación de texto sencilla en un solo campo. Prompt template de correo electrónico de ventas: enfocada en redactar o resumir correos electrónicos para representantes de ventas (como la elaboración de mensajes de divulgación o de seguimiento). Esta plantilla no está diseñada específicamente para completar un campo en un registro. Conclusión Para completar automáticamente el campo Descripción con contenido generado por IA, la prompt template de Generación de campo (Opción A) es la opción correcta. Referencia y documentos de Salesforce Agentforce Specialist Documentación de Salesforce: Tipos de prompt templates Explica varios tipos de plantillas (generación de campo, Flex, correo electrónico, etc.) y sus casos de uso típicos. La guía de estudio para especialistas de Salesforce Agentforce destaca las prompt templates de generación de campos para completar o actualizar campos de registros con texto generado por IA."
+  },
+  {
+    "id": 577,
+    "module": "Data 360 Fundamentals",
+    "question": "A medical lab must ensure its support agent always provides the most current version of testing procedure documents. Outdated content could lead to incorrect diagnoses. What should the specialist recommend?",
+    "options": [
+      "Connect a knowledge-based data library to Salesforce Knowledge, which automatically retrieves only the published version of each article using native version control.",
+      "Store all procedure files in a file-based data library and manually delete old versions each time a new one is uploaded.",
+      "Add a \"valid until\" date field to each document and instruct the agent in its system prompt to ignore documents past that date."
+    ],
+    "correctAnswers": [
+      0
+    ],
+    "explanation": "Salesforce Knowledge tiene flujos de trabajo de publicación y control de versiones integrados (borrador/publicado en línea/archivado, como ya se confirmó en otra parte de este banco a través del campo PublishStatus). Una biblioteca de datos basada en conocimiento se conecta directamente a Knowledge y respeta el estado del artículo, por lo que recupera de manera determinista solo la versión publicada actualmente de cada documento de procedimiento: sin mantenimiento manual, sin dependencia de que el LLM interprete nada. Una biblioteca basada en archivos con eliminación manual (B) es propensa a errores y no escala: las bibliotecas basadas en archivos no tienen seguimiento de versiones nativas, por lo que una limpieza manual omitida deja procedimientos obsoletos y potencialmente inseguros recuperables. Un campo \"válido hasta\" aplicado únicamente a través de instrucciones del sistema (C) no es determinista: el LLM aún puede recuperar o hacer referencia a un documento vencido a pesar de la instrucción, lo cual es un riesgo de cumplimiento inaceptable en un contexto médico/de diagnóstico. [Consistente con el mecanismo de Data Library + Salesforce Knowledge + PublishStatus ya verificado en este banco; no requirió verificación adicional.]"
+  },
+  {
+    "id": 648,
+    "module": "Data 360 Fundamentals",
+    "question": "Sunrise Bakery has detailed recipe documents where allergen warnings are often embedded inside larger ingredient sections. The agent must retrieve these allergen notes accurately, but the default chunking method splits them apart. Which chunking adjustment should the administrator make?",
+    "options": [
+      "Decrease chunk size to individual words and use a phrase-matching algorithm at query time.",
+      "Increase chunk size so that entire ingredient sections, including embedded warnings, remain as whole chunks.",
+      "Switch to fixed-size character chunks with no overlap to ensure uniform chunk lengths."
+    ],
+    "correctAnswers": [
+      1
+    ],
+    "explanation": "Consistente con el concepto de chunking ya establecido en este banco (V2 #19): el tamaño del chunk determina cuánto contexto se mantiene junto; aumentar el tamaño ayuda a que secciones completas (incluyendo advertencias de alérgenos embebidas) permanezcan en el mismo chunk, mejorando la precisión de recuperación. Chunks a nivel de palabra (A) destruyen el contexto por completo. Chunks de tamaño fijo sin overlap (C) ignoran límites semánticos y tienden a cortar justo a la mitad de secciones importantes. [Consistente con el concepto de chunking ya verificado en este banco; no requirió verificación adicional.]"
+  },
+  {
+    "id": 39,
+    "module": "Data 360 Fundamentals",
+    "question": "Universal Containers wants its AI agent to answer customer questions with precise and up-to-date information. How does an Agentforce Data Library simplify and enable this?",
+    "options": [
+      "It automates the ingestion and optical character recognition (OCR) processing of any PDF and indexes them to enable SQL query retrieval.",
+      "It automates the ingestion, indexing of data, and creates a default retriever to be used in prompts and agents for grounding with relevant information.",
+      "It automates the ingestion, taxonomical classification and storage of knowledge for keyword search retrieval."
+    ],
+    "correctAnswers": [
+      1
+    ],
+    "explanation": "Data Library automatiza ingestión, indexación y crea retriever para grounding."
+  },
+  {
+    "id": 371,
+    "module": "Prompt Engineering",
+    "question": "An Agentforce Specialist is tasked with analyzing Agent interactions, looking into user inputs, requests, and queries to identify patterns and trends. What functionality allows the Agentforce Specialist to achieve this?",
+    "options": [
+      "Agent Event Logs dashboard.",
+      "AI Audit and Feedback Data dashboard.",
+      "User Utterances dashboard."
+    ],
+    "correctAnswers": [
+      2
+    ],
+    "explanation": "La tarea requiere analizar las entradas, solicitudes y consultas de los usuarios para identificar patrones y tendencias en las interacciones de Agentforce. Evaluemos las opciones según las capacidades analíticas de Agentforce. Opción A: panel de registros de eventos del agente. Los registros de eventos del agente capturan eventos técnicos detallados (por ejemplo, llamadas API, errores o acciones a nivel del sistema) relacionados con las operaciones del agente. Si bien son útiles para solucionar problemas o monitorear el rendimiento del sistema, no están diseñados para analizar las entradas de los usuarios ni las tendencias de las conversaciones. Esta opción no cumple con el requisito y es incorrecta. Opción B: Panel de control de datos de retroalimentación y auditoría de IA. No hay un \"panel de control de datos de retroalimentación y auditoría de IA\" específico en la documentación de Agentforce. Existen mecanismos de retroalimentación (por ejemplo, comentarios de los usuarios sobre las respuestas) y los registros de auditoría pueden rastrear los cambios, pero ningún panel los combina para analizar las consultas y tendencias de los usuarios. Esta opción parece ser un nombre inapropiado y es incorrecto. Opción C: Panel de declaraciones del usuario. El panel de declaraciones de usuarios en Agentforce Analytics está diseñado específicamente para analizar las entradas, solicitudes y consultas de los usuarios. Agrega y visualiza lo que los usuarios le preguntan al agente, identificando patrones (por ejemplo, temas comunes) y tendencias (por ejemplo, tipos de consultas en aumento). Los especialistas pueden utilizar esto para perfeccionar las instrucciones o temas de los agentes, lo que la convierte en la herramienta perfecta para esta tarea. Esta es la respuesta correcta según la documentación de Salesforce. Por qué la opción C es correcta: el panel de declaraciones del usuario está diseñado para el análisis conversacional y ofrece información sobre las interacciones de los usuarios que se alinean con el objetivo del especialista de identificar patrones y tendencias. Es una característica documentada de Agentforce Analytics para la optimización posterior a la implementación."
+  },
+  {
+    "id": 454,
+    "module": "Prompt Engineering",
+    "question": "Which feature of the Einstein Trust Layer is designed to identify and reduce the risk of harmful or toxic outputs from generative AI?",
+    "options": [
+      "Dynamic Grounding with Secure Data Retrieval",
+      "Prompt Defense",
+      "Toxicity Scoring"
+    ],
+    "correctAnswers": [
+      2
+    ],
+    "explanation": "La puntuación de toxicidad está diseñada para identificar y reducir el riesgo de resultados dañinos o tóxicos de la IA generativa, garantizando que el contenido generado sea apropiado y seguro."
+  },
+  {
+    "id": 101,
+    "module": "Prompt Engineering",
+    "question": "Universal Containers’ data science team is hosting a generative large language model (LLM) on Amazon Web Services (AWS). \nWhat should the team use to access externally-hosted models in the Salesforce Platform?",
+    "options": [
+      "Model Builder",
+      "App Builder",
+      "Agentforce  Builder"
+    ],
+    "correctAnswers": [
+      0
+    ],
+    "explanation": "Model Builder es la herramienta de Salesforce para conectar y gestionar modelos LLM externos alojados en plataformas como AWS. App Builder es para interfaces de usuario y Agentforce Builder es para configurar agentes, no para registrar modelos externos en la plataforma."
+  },
+  {
+    "id": 268,
+    "module": "Prompt Engineering",
+    "question": "Universal Containers (UC) has effectively utilized prompt templates to update summary fields on Lightning record pages. Ant admin now wishes to incorporate similar functionality into UC's automation processes using Flow. How should the admin get a response from this prompt template from within a flow to use as part of UC's automation?",
+    "options": [
+      "Invocable Apex",
+      "Einstein for Flow",
+      "Flow action"
+    ],
+    "correctAnswers": [
+      2
+    ],
+    "explanation": "En Salesforce Flow, las plantillas de prompt (Prompt Templates) se integran y consumen utilizando el elemento estándar 'Action' (Acción de flujo). Las plantillas activas de Prompt Builder se exponen automáticamente a la plataforma como acciones invocables, facilitando la inserción de variables de entrada y el guardado del resultado generado en la lógica de las automatizaciones de la empresa de manera declarativa."
+  },
+  {
+    "module": "Data 360 Fundamentals",
+    "question": "Universal Containers (UC) wants to limit an agent's access to Knowledge articles while deploying Answer Questions with Knowledge action. How should UC achieve this?",
+    "options": [
+      "Create separate Data Libraries for each category of Knowledge articles.",
+      "Use profile-based permissions to restrict Knowledge article visibility.",
+      "Assign Data Categories to Knowledge articles and define Data Category filters in the Agentforce Data Library."
+    ],
+    "correctAnswers": [
+      2
+    ],
+    "explanation": "Asignar Data Categories a los articulos de Knowledge y definir filtros de Data Category en la Agentforce Data Library es el metodo correcto para limitar el acceso del agente a articulos especificos, garantizando que solo se recuperen articulos relevantes y autorizados.",
+    "id": 141
+  },
+  {
+    "module": "AI Agents",
+    "question": "Which element in the Omni-Channel flow should be used to connect the flow with the agent?",
+    "options": [
+      "Transfer to Agent element.",
+      "Assign Work element.",
+      "Route Work Action."
+    ],
+    "correctAnswers": [
+      2
+    ],
+    "explanation": "Route Work Action es el elemento correcto en el flujo de Omni-Channel para conectar el flujo con el agente y dirigir el trabajo al agente apropiado segun las reglas de enrutamiento configuradas.",
+    "id": 147
+  },
+  {
+    "id": 654,
+    "module": "AI Agents",
+    "question": "Desert Oasis Landscaping attended a home & garden expo and collected 900 new leads. They need to engage leads 24/7, answer questions about drought-tolerant plants, qualify interest, and automatically schedule design consultations — freeing human staff to focus on large projects. Which Agentforce capability meets these requirements?",
+    "options": [
+      "Lead Nurturing Agent (SDR Agent)",
+      "Service Agent with automated case routing",
+      "Inventory Management Agent"
+    ],
+    "correctAnswers": [
+      0
+    ],
+    "explanation": "Consistente con el hecho sobre tipos de agente ya verificado en este banco (V2 #46): el Lead Nurturing Agent / Agentforce SDR Agent está diseñado específicamente para el engagement de leads a gran volumen 24/7 — responder preguntas, calificar interés y agendar reuniones de forma autónoma. Service Agent (B) es para soporte post-venta (casos), no calificación de leads. \"Inventory Management Agent\" (C) no es un tipo de agente estándar de Agentforce — es un distractor inventado. [Consistente con V2 #46 ya verificado en este banco; no requirió verificación adicional.]"
+  },
+  {
+    "question": "An Agentforce Specialist wants to ensure their custom agent action performs as expected in conversations. What should the Agentforce Specialist focus on when creating action instructions?",
+    "options": [
+      "Write concise agent action instructions and test in Agentforce Builder.",
+      "Ensure the agent action label matches the utterance's intent.",
+      "Include comprehensive detailed descriptions and perform smoke testing."
+    ],
+    "correctAnswers": [
+      0
+    ],
+    "module": "AI Agents",
+    "explanation": "La mejor practica es escribir instrucciones de accion concisas y claras, y probarlas iterativamente en Agentforce Builder. Las instrucciones demasiado largas o detalladas pueden confundir al LLM; la concision y las pruebas iterativas son clave para un comportamiento correcto del agente.",
+    "id": 190
+  },
+  {
+    "id": 96,
+    "module": "Testing, Deployment, and Maintenance",
+    "question": "How does the Einstein Trust Layer ensure that sensitive data is protected while generating useful and meaningful responses?",
+    "options": [
+      "Masked data will be de-masked during response journey.",
+      "Masked data will be de-masked during request journey.",
+      "Responses that do not meet the relevance threshold will be automatically rejected."
+    ],
+    "correctAnswers": [
+      0
+    ],
+    "explanation": "En el Einstein Trust Layer, los datos enmascarados se enmascaran durante el viaje de request (antes de enviar al LLM) y se desenmascaran durante el viaje de response (al devolver la respuesta al usuario). Esto protege los datos sensibles mientras mantiene la utilidad de las respuestas generadas."
+  },
+  {
+    "id": 350,
+    "module": "AI Agents",
+    "question": "Universal Containers, dealing with a high volume of chat inquiries, implements Einstein Work Summaries to boost productivity. After an agent-customer conversation, which additional information does Einstein generate and fill, apart from the \"summary\"'",
+    "options": [
+      "Sentiment Analysis and Emotion Detection",
+      "Draft Survey Request Email",
+      "Issue and Revolution"
+    ],
+    "correctAnswers": [
+      2
+    ],
+    "explanation": "Los resúmenes de trabajo de Einstein generan automáticamente resúmenes concisos de las interacciones con los clientes (por ejemplo, transcripciones de chat). Más allá del campo \"resumen\", extrae y completa el Problema (problema clave discutido) y la Resolución (medida tomada para resolver el problema). Estos campos ayudan a los agentes y supervisores a comprender rápidamente el contexto de la conversación sin revisar la transcripción completa. Análisis de sentimientos y detección de emociones (opción A): si bien Einstein Conversation Insights proporciona puntuaciones de sentimientos y detección de emociones, estos son independientes de los resúmenes de trabajo. Los resúmenes de trabajo se centran en resúmenes fácticos, no en sentimientos. Correo electrónico de solicitud de borrador de encuesta (opción B): no forma parte de los resúmenes de trabajo. Esto requeriría herramientas de automatización como Flow o Email Studio. Problema y resolución (opción C): referencia directa en la documentación de Salesforce como campos completados por Resúmenes de trabajo de Einstein."
+  },
+  {
+    "id": 41,
+    "module": "Testing, Deployment, and Maintenance",
+    "question": "Universal Containers (UC) wants to ensure the effectiveness, reliability, and trust of its agents prior to deploying them in production. UC would like to efficiently test a large and repeatable number of utterances. What should the Agentforce Specialist recommend?",
+    "options": [
+      "Deploy the agent in a QA sandbox environment and review the Utterance Analysis reports.",
+      "Create a CSV file with UC's test cases in Agentforce Testing Center using the testing template.",
+      "Leverage the Agent Large Language Model (LLM) UI and test with different utterances."
+    ],
+    "correctAnswers": [
+      1
+    ],
+    "explanation": "Use CSV de casos de prueba en Agentforce Testing Center para pruebas repetibles."
+  },
+  {
+    "module": "AI Agents",
+    "question": "Universal Containers implements Custom Agent Actions to enhance its customer service operations. The development team needs to understand the core components of a Custom Agent Action to ensure proper configuration and functionality. Which component is essential for defining what the action returns?",
+    "options": [
+      "Action Instructions.",
+      "Output Types.",
+      "Action Name."
+    ],
+    "correctAnswers": [
+      1
+    ],
+    "explanation": "Output Types es el componente esencial que define lo que la accion devuelve al agente. Sin una configuracion correcta de los Output Types, el agente no puede procesar ni utilizar los resultados de la accion personalizada.",
+    "id": 143
   },
   {
     "id": 804,
-    "module": "Agentforce exam",
+    "module": "Data 360 Fundamentals",
     "question": "Global Financial Services wants to restrict which Knowledge articles their AI agent can access when using the Answer Questions with Knowledge action. How should Global Financial Services implement this restriction?",
     "options": [
       "Assign Data Categories to Knowledge articles and configure Data Category filters in the Agent's Data Library.",
@@ -42,373 +266,22 @@
     "explanation": "Consistente con el hecho de Data Categories ya establecido en este banco (V2 #14, filtro por Knowledge Data Categories): es el mecanismo nativo, escalable y de propósito específico para clasificar y restringir acceso a artículos de Knowledge. Filtros de campo custom (B) es más complejo y no aprovecha la feature nativa diseñada para esto. Listar IDs/títulos específicos en instrucciones (C) es impráctico e inmantenible a escala. [Consistente con Data Categories ya verificado en este banco; no requirió verificación adicional.]"
   },
   {
-    "id": 805,
-    "module": "Agentforce exam",
-    "question": "Global Logistics needs their support assistant to answer customer questions by referencing similar shipping issues that were successfully resolved in the past. The team wants the assistant to learn from historical resolution patterns. What data configuration is required to enable this capability?",
+    "id": 695,
+    "module": "Data 360 Fundamentals",
+    "question": "A company has configured a data library and wants to restrict indexing to only publicly available knowledge articles. They also want the agent to display which articles the AI used to generate its response. Which settings should they enable?",
     "options": [
-      "No additional configuration is needed.",
-      "Create an unstructured data model object based on the Case object and establish a search index to enable semantic retrieval of historical resolutions.",
-      "Build a structured data model object for Cases with exact matching on case numbers/status.",
-      "Use the default retriever without any custom UDMO or index configuration."
-    ],
-    "correctAnswers": [
-      1
-    ],
-    "explanation": "Consistente con el patrón de UDMO + search index para grounding semántico ya implícito en este banco (chunking, embeddings, retrievers): un UDMO sobre Case con índice de búsqueda habilita recuperación semántica sobre texto libre (descripciones, resoluciones), encontrando casos conceptualmente similares aunque no coincidan las palabras exactas. Ningún asistente \"aprende automáticamente\" sin indexación explícita (A). Un DMO estructurado con matching exacto (C) no captura similitud semántica de contenido en texto libre. [Consistente con el patrón general de UDMO + search index para RAG ya establecido en este banco; no requirió verificación adicional específica.]"
-  },
-  {
-    "id": 806,
-    "module": "Agentforce exam",
-    "question": "Global Manufacturing Inc. is experimenting with large language models for their operations team. The team frequently needs to ask the AI similar questions to retrieve specific information, but typing out detailed prompts repeatedly is inefficient and leads to inconsistent results across different team members. Which Einstein feature should Global Manufacturing Inc. implement to streamline this process?",
-    "options": [
-      "\"Agentforce Studio and pre-built prompt libraries\".",
-      "Prompt Builder with reusable prompt templates.",
-      "Agent Builder with standard actions."
-    ],
-    "correctAnswers": [
-      1
-    ],
-    "explanation": "Concepto fundacional de Prompt Builder ya establecido extensamente en este banco: crear plantillas de prompt reutilizables estandariza el lenguaje/estructura usado por todo el equipo, eliminando la necesidad de escribir prompts desde cero cada vez y mejorando consistencia. \"Agentforce Studio\" (A) no es el nombre real de una herramienta con \"pre-built prompt libraries\" en este contexto. Agent Builder (C) configura topics/acciones de agente, no resuelve directamente la estandarización de prompts para consultas puntuales de equipo. [Concepto fundacional de Prompt Builder ya bien establecido en este banco; no requirió verificación adicional específica.]"
-  },
-  {
-    "id": 807,
-    "module": "Agentforce exam",
-    "question": "Healthcare Partners Inc. wants to implement an AI-powered patient support agent that can retrieve internal medical protocols stored as PDF documents and ensure all responses are based exclusively on approved organizational guidelines rather than general medical information. What should Healthcare Partners Inc. configure first?",
-    "options": [
-      "Configure an Agentforce Knowledge Library to index and make the protocol documents searchable for AI retrieval.",
-      "Upload the documents to Salesforce Files and enable file search across all objects.",
-      "Expand the agent's data access to include all organizational records and documents."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "Consistente con los hechos de Agentforce Data Library ya verificados repetidamente en este banco (V2 #37/#97/#111/#132/#182/#242): indexar y hacer buscable el contenido es el primer paso esencial para fundamentar respuestas exclusivamente en documentos aprobados. Solo subir a Salesforce Files (B) no da indexación/recuperación estructurada para IA. Expandir acceso a todos los datos organizacionales (C) va en contra del objetivo de fundamentar solo en protocolos aprobados, y expone datos innecesarios/potencialmente sensibles. [Consistente con los hechos de Agentforce Data Library ya verificados en este banco; no requirió verificación adicional.]"
-  },
-  {
-    "id": 808,
-    "module": "Agentforce exam",
-    "question": "HealthCare Solutions wants to leverage AI capabilities to reduce agent handling time by providing suggested replies based on their medical knowledge base articles. Which AI capability should HealthCare Solutions enable for their service agents?",
-    "options": [
-      "\"Reply Suggestions\".",
-      "Service Replies.",
-      "Knowledge Recommendations."
-    ],
-    "correctAnswers": [
-      1
-    ],
-    "explanation": "Verifiqué por búsqueda web: **Einstein Service Replies** es real y confirmado en documentación oficial (help.salesforce.com, múltiples páginas) — genera sugerencias de respuesta grounded en la Knowledge base directamente en la Service Console, para chat y email. \"Reply Suggestions\" (A) no es el nombre oficial. Knowledge Recommendations (C) sugiere artículos relevantes para que el agente los lea, pero no genera el texto de respuesta en sí — distinto de Service Replies. [Verificado con búsqueda web: Einstein Service Replies confirmado en documentación oficial de Salesforce Help.]"
-  },
-  {
-    "id": 809,
-    "module": "Agentforce exam",
-    "question": "In a Knowledge-based data library configuration, what is the fundamental difference between identifying fields and content fields?",
-    "options": [
-      "Identifying fields help locate relevant knowledge articles while content fields provide detailed information for AI responses.",
-      "Identifying fields categorize articles for indexing while content fields provide brief summaries for display.",
-      "Identifying fields highlight key terms for relevance scoring while content fields store the full article text."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "Duplicado conceptual de la distinción Identifying/Content Fields ya verificada repetidamente en este banco (V2 #24/#84): identifying fields (metadata concisa, título/keywords) ayudan a ubicar el artículo correcto; content fields (texto completo) dan el detalle que fundamenta la respuesta de la IA. B y C simplifican o distorsionan ligeramente el rol de cada tipo de campo frente a la distinción ya establecida. [Consistente con la distinción Identifying/Content Fields ya verificada en este banco; no requirió verificación adicional.]"
-  },
-  {
-    "id": 810,
-    "module": "Agentforce exam",
-    "question": "In the context of retrieval systems and search indexes, what best describes the data preparation process in Data Cloud?",
-    "options": [
-      "Loading, chunking, vectorizing, and storing content in an optimized format to enable efficient retrieval from the vector database.",
-      "Aggregating, standardizing, and encoding structured datasets for governance/compliance.",
-      "Real-time ingestion and dynamic indexing without pre-processing requirements."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "Concepto fundacional de RAG ya bien establecido en este banco (chunking V2 #19/#83, embeddings V2 #9/#88): la preparación de datos para retrieval vectorial requiere cargar, trocear (chunk), vectorizar y almacenar en formato optimizado para búsqueda por similitud — pasos que no pueden omitirse ni hacerse completamente \"on-demand\" sin afectar seriamente el rendimiento (descartando C). La opción B describe procesos ETL/gobernanza generales, no la preparación específica para búsqueda semántica vectorial. [Concepto fundacional de preparación de datos para RAG ya bien establecido en este banco; no requirió verificación adicional específica.]"
-  },
-  {
-    "id": 811,
-    "module": "Agentforce exam",
-    "question": "In which scenario would implementing a Data Cloud retriever be appropriate?",
-    "options": [
-      "Synchronizing updated customer records back to the original source system after processing.",
-      "Retrieving semantically relevant information from the vector database to enhance an AI prompt through retrieval-augmented generation.",
-      "Extracting data from external websites in real-time during a conversation."
-    ],
-    "correctAnswers": [
-      1
-    ],
-    "explanation": "Consistente con los hechos de retrievers ya verificados repetidamente en este banco: el retriever es de solo lectura, diseñado específicamente para RAG — buscar el vector database y devolver contenido relevante para fundamentar el prompt. No puede escribir de vuelta a sistemas fuente (A, requeriría write-back/conectores) ni extraer de sitios web externos en tiempo real (C, ya distinguido de web search como fuente separada en V2 #76/#121) — trabaja solo con datos ya ingeridos, procesados y vectorizados dentro de Data Cloud. [Consistente con los hechos de retrievers ya verificados en este banco; no requirió verificación adicional.]"
-  },
-  {
-    "id": 812,
-    "module": "Agentforce exam",
-    "question": "Lakeside Resorts wants to track how many AI credits are consumed during their testing phase. Which feature provides this visibility?",
-    "options": [
-      "Digital Wallet, providing visibility into credit usage during testing and production.",
-      "\"Usage Tracker\".",
-      "\"Resource Monitor\"."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "Verifiqué por búsqueda web: **Digital Wallet** es real y confirmado en múltiples fuentes oficiales de Salesforce (salesforce.com/agentforce/digital-wallet, notas de versión) — da insights granulares y casi en tiempo real del consumo de Flex Credits por agente/acción, con umbrales y notificaciones. \"Usage Tracker\" (B) y \"Resource Monitor\" (C) no son nombres reales de features de Salesforce para esto. [Verificado con búsqueda web: Digital Wallet confirmado en documentación y páginas oficiales de Salesforce.]"
-  },
-  {
-    "id": 813,
-    "module": "Agentforce exam",
-    "question": "Manufacturing Corp recently deployed Einstein AI capabilities and created a custom prompt to generate production summaries from manufacturing records. Users report that the generated summaries are inaccurate and miss critical information. What is the most likely cause of this poor AI performance?",
-    "options": [
-      "The grounding data sources are incomplete or contain inaccurate information.",
-      "The prompt template version is not compatible with the selected language model.",
-      "The Einstein Trust Layer configuration has incorrect security settings."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "Duplicado conceptual del patrón de brecha de grounding ya verificado repetidamente en este banco (V2 #26/#127/#219): datos de grounding incompletos o inexactos son la causa más probable de resúmenes con errores/omisiones — \"garbage in, garbage out\". Incompatibilidad de versión (B) típicamente causa errores/fallos, no contenido plausible-pero-incorrecto. El Trust Layer (C) maneja seguridad/privacidad/filtrado, no precisión del contenido — sus fallos se verían como bloqueos o enmascaramiento excesivo, no como resúmenes incorrectos. [Consistente con el patrón de brecha de grounding ya verificado en este banco; no requirió verificación adicional.]"
-  },
-  {
-    "id": 814,
-    "module": "Agentforce exam",
-    "question": "Medical Devices Inc. configured a new document ingestion process in Data Cloud for PDF files, set up field mappings, and created the search index. When configuring the retriever, the team notices a required field is missing from the available options. How should Medical Devices Inc. resolve this issue?",
-    "options": [
-      "Modify the search index configuration to include the missing field.",
-      "Update the retriever settings to add the missing field directly.",
-      "Create a calculated field in the Data Cloud data model that derives the missing value."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "Duplicado conceptual de V2 #125 de este mismo banco (mismo escenario, misma respuesta): el search index define qué campos están disponibles para el retriever — si falta uno, hay que agregarlo ahí, no en el retriever directamente (B, los retrievers solo seleccionan entre campos ya indexados) ni creando un campo calculado (C, que de todos modos necesitaría pasar por el search index para estar disponible). Nota adicional de esta fuente: algunos tipos de campo (particularmente prefilter fields) no pueden agregarse a índices existentes y podrían requerir crear un índice nuevo desde el inicio. [Consistente con V2 #125 ya verificado en este banco; nota adicional sobre prefilter fields no verificada independientemente pero razonable.]"
-  },
-  {
-    "id": 815,
-    "module": "Agentforce exam",
-    "question": "MediCare Solutions has developed multiple internal APIs for insurance eligibility verification, claims processing, and provider lookup. They want their AI agent to intelligently select and invoke the most appropriate API based on each customer's specific request during a conversation. What approach enables this dynamic API selection?",
-    "options": [
-      "API Gateway integration.",
-      "Model Context Protocol server implementation, providing a standardized way for the agent to discover available tools and select the best match at runtime.",
-      "Custom Apex code with conditional logic based on keywords."
-    ],
-    "correctAnswers": [
-      1
-    ],
-    "explanation": "Duplicado conceptual de MCP ya verificado repetidamente en este banco (V2 #77/#169/#237): permite que el agente descubra dinámicamente herramientas/APIs disponibles y seleccione la más adecuada en tiempo de ejecución según el contexto de la conversación. API Gateway (A) centraliza gestión/seguridad de endpoints pero no da razonamiento dinámico de selección al agente. Apex con lógica condicional por keywords (C) no se adapta a variaciones matizadas de lenguaje natural. [Consistente con MCP ya verificado en este banco; no requirió verificación adicional.]"
-  },
-  {
-    "id": 816,
-    "module": "Agentforce exam",
-    "question": "MedTech Industries is implementing AI for Sales to help representatives identify similar past deals that could provide insights for closing current opportunities. The sales team wants to understand what matching criteria the AI uses when suggesting comparable deals. What is one criterion the AI uses to match similar opportunities?",
-    "options": [
-      "Matched opportunities must be from the same account. *(respuesta dada por la fuente del usuario — ver nota de disputa abajo)*",
-      "Opportunities that closed successfully within the past 18 months.",
-      "Opportunities with matching product categories and deal sizes."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "⚠️ DISPUTA — Esta pregunta contradice directamente a **V2 #190** de este mismo banco (mismo feature, \"Find Similar Opportunities\" de Agentforce for Sales), donde verifiqué con búsqueda web y documentación oficial que el criterio confirmado es **Closed Won, últimos 12 meses**, y que la explicación de esa fuente decía explícitamente que la búsqueda \"no está restringida a la misma cuenta; se consideran oportunidades relevantes entre cuentas distintas\". Ahora esta nueva fuente afirma lo contrario: que el criterio central es \"misma cuenta\". Al volver a buscar esto específicamente, encontré resultados mixtos/contradictorios — un fragmento de búsqueda sí menciona \"same account\" como parte de los criterios junto con Closed Won/12 meses, pero no pude acceder a la página oficial (bloqueada por JS) para confirmar si ambos criterios (cuenta + Closed Won + 12 meses) aplican juntos, o si son descripciones de fuentes distintas con distinta precisión. B (18 meses) contradice el \"12 meses\" ya confirmado en V2 #190. Mantengo la respuesta de esta fuente (A) por continuidad, pero con confianza baja dado el conflicto directo con V2 #190. [Nota de disputa: contradice V2 #190 sobre si el matching de \"Find Similar Opportunities\" está restringido a la misma cuenta o no — verificar en una org real antes del examen, y revisar ambas entradas (V2 #190 y esta) en conjunto.]"
-  },
-  {
-    "id": 817,
-    "module": "Agentforce exam",
-    "question": "Midwest Insurance needs to automatically populate the Description field on Policy records based on policy type, coverage details, and customer information. Which type of prompt template should they use?",
-    "options": [
-      "\"Text Completion\" templates.",
-      "Field Generation templates, designed to populate Salesforce record fields using record context and related data.",
-      "\"Record Summary\" templates — described here as not a standard type, which is incorrect (ver nota)."
-    ],
-    "correctAnswers": [
-      1
-    ],
-    "explanation": "Duplicado conceptual de Field Generation ya verificado repetidamente en este banco (V2 #25/#155/#178/#197/#227/#230): diseñada específicamente para poblar campos individuales de registro con contenido generado usando contexto del registro y datos relacionados — exactamente el caso de Description en Policy. **Nota:** la explicación de esta fuente afirma que \"Record Summary no es un tipo estándar de plantilla en Salesforce\", lo cual es **incorrecto** — Record Summary sí es un tipo real y confirmado repetidamente en este banco (V2 #66/#159/#178/#253). No afecta la respuesta correcta de esta pregunta (Field Generation sigue siendo la correcta para poblar un campo), pero la justificación de la fuente sobre la opción C es errónea. [Consistente con Field Generation ya verificado en este banco; se corrige una afirmación errónea en la explicación de la fuente sobre Record Summary, sin cambiar la respuesta.]"
-  },
-  {
-    "id": 818,
-    "module": "Agentforce exam",
-    "question": "Momentum Financial's wealth advisors are using an internal assistant to generate client portfolio summaries, but the default output format doesn't include the specific performance metrics the advisors need. What customization should the specialist recommend?",
-    "options": [
-      "Develop a custom Record Summary prompt template that specifies exactly which portfolio metrics to include and how to format them.",
-      "Modify the standard summary action configuration to include additional fields.",
-      "Create a Knowledge Answer template that pulls portfolio data from attached documents."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "Duplicado conceptual de Record Summary custom ya verificado repetidamente en este banco (V2 #66/#159/#178): una plantilla custom da control total sobre qué métricas incluir y cómo formatearlas. Modificar la standard action (B) no es posible/soportado según ya establecido en V2 #159 (las standard actions no se modifican directamente). Knowledge Answer (C) es para contenido basado en documentos, no para resumir datos de registros en vivo. [Consistente con Record Summary custom ya verificado en este banco; no requirió verificación adicional.]"
-  },
-  {
-    "id": 819,
-    "module": "Agentforce exam",
-    "question": "Mountain Peak Resorts is indexing hundreds of HTML documents containing detailed property descriptions, amenity lists, and local attraction information for their new resort properties. They need the assistant to retrieve accurate information quickly while maintaining contextual relationships within the documents. What indexing strategy should they apply to preserve document structure and improve retrieval accuracy?",
-    "options": [
-      "Semantic passage extraction, identifying conceptually complete paragraphs regardless of document structure.",
-      "Section-aware chunking that splits documents based on natural headings and logical divisions to preserve contextual integrity.",
-      "Fixed-size chunking, uniform segments regardless of structure."
-    ],
-    "correctAnswers": [
-      1
-    ],
-    "explanation": "Consistente con el concepto de chunking ya establecido en este banco (V2 #19/#83, aumentar tamaño de chunk para preservar contexto): el chunking consciente de la estructura (por encabezados/secciones) es otra estrategia válida para mantener relaciones contextuales dentro de documentos con estructura clara como HTML — complementaria al enfoque de \"aumentar tamaño\" ya visto. Extracción semántica de pasajes (A) puede romper la organización estructural real del documento. Chunking de tamaño fijo (C) ignora la estructura por completo, ya descartado como mala práctica en V2 #83. [Consistente con los conceptos de chunking ya verificados en este banco; no requirió verificación adicional específica.]"
-  },
-  {
-    "id": 820,
-    "module": "Agentforce exam",
-    "question": "Nexus Innovations has deployed an internal HR assistant to help employees with benefits questions and time-off requests. The team now needs this assistant to be accessible within their corporate communication platform where employees already collaborate. What foundational setup must the implementation specialist complete to enable this integration?",
-    "options": [
-      "Create an embedded chat deployment for internal employee portals.",
-      "Establish a connection between the Salesforce org and the corporate communication platform's workspace infrastructure.",
-      "Build an Omni-Channel routing configuration that directs messages to an HR queue before reaching the assistant."
-    ],
-    "correctAnswers": [
-      1
-    ],
-    "explanation": "Consistente con el patrón de configuración de canales ya establecido en este banco (Slack, V2 #153): conectar el org de Salesforce con la infraestructura del workspace de la plataforma de comunicación es el prerrequisito fundacional antes de instalar el agente específico y dar acceso a usuarios. Embedded chat (A) es para portales/sitios web externos, no para plataformas de colaboración interna. Omni-Channel routing a una queue humana (C) no es necesario para la conexión fundacional entre plataformas. [Consistente con el patrón de configuración de canales (Slack) ya verificado en este banco; no requirió verificación adicional.]"
-  },
-  {
-    "id": 821,
-    "module": "Agentforce exam",
-    "question": "Nova Financial Services is implementing an AI agent to handle customer inquiries via email. They have created an email template and need to link it to their service agent. What step should the implementation specialist take?",
-    "options": [
-      "Create an Email Configuration for the Service Agent to explicitly associate the template with the agent.",
-      "Add the template to the agent's response library.",
-      "Configure a workflow rule to apply the template when certain conditions are met."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "Consistente con el hecho de configuración de email ya verificado con búsqueda web en este banco (V2 #72, Lightning email template + Agentforce Service Agent on Email): se requiere una asociación explícita vía configuración de email del agente, no solo agregar el template a una \"librería\" (B, no crea la configuración necesaria) ni workflow rules (C, pensadas para actualizaciones/aprobaciones de registros, no para vincular templates a agentes de IA). [Consistente con V2 #72 ya verificado en este banco; no requirió verificación adicional nueva.]"
-  },
-  {
-    "id": 822,
-    "module": "Agentforce exam",
-    "question": "OmniCorp's support assistant needs to access several custom fields on the Service Contract object and related custom objects to provide customers with accurate contract information during calls. What is the recommended approach for granting this access to the assistant?",
-    "options": [
-      "Create a new permission set and assign it to the existing assistant permission set group.",
-      "Add read permissions directly to the standard Einstein Agent profile.",
-      "Update the object and field permissions within the pre-configured assistant permission set group that is already assigned to the assistant user."
+      "Enable \"Use Public Knowledge Article\" only.",
+      "Use Data Categories to classify public articles.",
+      "Enable \"Use Public Knowledge Article\" and select \"Show sources\" in the data library Knowledge Settings."
     ],
     "correctAnswers": [
       2
     ],
-    "explanation": "Buena práctica general de administración de permisos en Salesforce, consistente con el enfoque de mínimo privilegio/gestión centralizada ya establecido en este banco: actualizar el permission set group ya existente evita proliferación de permission sets y mantiene la gestión centralizada. Crear uno nuevo (A) añade complejidad innecesaria cuando el grupo existente puede actualizarse. Modificar el profile estándar (B) es menos flexible y podría afectar a otros usuarios que compartan ese profile. [Buena práctica general de administración de permisos, consistente con el banco; no requirió verificación adicional específica.]"
-  },
-  {
-    "id": 823,
-    "module": "Agentforce exam",
-    "question": "Peak Performance Outfitters has registered an external inventory management service and built an automated flow triggered by a prompt template. This flow calls the external service to fetch real-time product availability data through a REST endpoint. The team now needs to incorporate the returned inventory data as dynamic fields within their prompt template when it executes. What configuration should the team implement to make this external data accessible as merge fields?",
-    "options": [
-      "Convert the JSON response into XML before passing it to the prompt template.",
-      "Reference the External Service Record fields directly in the prompt template to access structured data from the API response.",
-      "Store the API response in a custom object and query it via SOQL within the prompt template instructions."
-    ],
-    "correctAnswers": [
-      1
-    ],
-    "explanation": "Verifiqué por búsqueda web: confirmé que \"External Services\" es un concepto real y documentado de Flow para registrar APIs REST externas como invocables (\"Flow External Services\"), y que Prompt Builder soporta Flow como data provider con acceso flexible a datos de cualquier fuente, incluyendo servicios externos. No encontré una página oficial que use el nombre exacto \"External Service Record fields\" como categoría de merge field — es plausible que sea el nombre correcto (paralelo a \"External Object Record merge fields\" ya visto en V2 #79/#177) pero no lo confirmé 1:1. Convertir a XML (A) es innecesario y no está soportado como paso estándar. Almacenar en objeto custom + SOQL (C) añade complejidad y latencia innecesarias frente al acceso directo. [Nota de confianza: el mecanismo general (Flow + External Services expuesto como data provider en Prompt Builder) está confirmado, pero el nombre literal exacto \"External Service Record fields\" no está 100% confirmado en documentación oficial.]"
-  },
-  {
-    "id": 824,
-    "module": "Agentforce exam",
-    "question": "RetailCorp wants to improve customer service efficiency by reducing the time agents spend typing common responses and minimizing post-interaction work through automated case field population. Which combination of Einstein features should RetailCorp implement?",
-    "options": [
-      "Suggested Responses and Auto-Classification.",
-      "Service Recommendations and Interaction Summaries.",
-      "Einstein Bots and Case Routing."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "Verifiqué por búsqueda web y confirmé la mitad con solidez: **Einstein Case Classification** (a veces descrito como \"Auto-Classification\") es real y confirmado en documentación oficial — usa ML para autopoblar campos de caso (tipo, prioridad, categoría) basado en el contenido de la interacción, justo lo descrito para \"reducir trabajo post-interacción\". La parte de \"Suggested Responses\" no la encontré con ese nombre literal exacto, pero es conceptualmente equivalente a **Einstein Service Replies** (ya confirmado en V2 #243) — sugerencias de respuesta grounded en Knowledge para reducir tiempo de tipeo. Es probable que sean el mismo concepto con nombre distinto usado por la fuente. B y C sí quedan bien descartados por lógica (no atacan ambos objetivos simultáneamente). [Nota de confianza: Auto-Classification (Einstein Case Classification) confirmado con solidez; \"Suggested Responses\" probablemente equivale a Service Replies (V2 #243), aunque el nombre exacto no coincide.]"
-  },
-  {
-    "id": 825,
-    "module": "Agentforce exam",
-    "question": "Sales representatives at Technology Solutions spend significant time reviewing customer histories and past communications before sending follow-up emails about renewals and upsell opportunities. Which standard agent action helps representatives create personalized outreach emails based on previous successful customer interactions?",
-    "options": [
-      "Draft or Revise Sales Email.",
-      "\"Generate Email from Template\".",
-      "\"Compose Personalized Message\"."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "Verifiqué por búsqueda web: **\"Draft or Revise Sales Email\"** es confirmado como una acción real de Agentforce for Sales (Agent Action) — crea o revisa borradores de email de ventas basados en el contexto del contacto/lead y comunicaciones previas. \"Generate Email from Template\" (B) y \"Compose Personalized Message\" (C) no son nombres reales de acciones estándar de Agentforce. [Verificado con búsqueda web: \"Draft or Revise Sales Email\" confirmado como acción estándar real de Agentforce for Sales.]"
-  },
-  {
-    "id": 826,
-    "module": "Agentforce exam",
-    "question": "Sales representatives should be able to use existing prompt templates but must not have the ability to create, modify, or delete them. Which permission set should be assigned to these users?",
-    "options": [
-      "Prompt Template Manager.",
-      "Prompt Template User, allowing execution without modification permissions.",
-      "\"Prompt Template Executor\" — not a standard permission set name."
-    ],
-    "correctAnswers": [
-      1
-    ],
-    "explanation": "Duplicado exacto de V2 #144 de este mismo banco, ya verificado: Prompt Template User da acceso de ejecución sin crear/editar/borrar — exactamente lo pedido. Prompt Template Manager (A) excede el requisito. \"Prompt Template Executor\" (C) es un nombre inventado. [Consistente con V2 #144 ya verificado en este banco; no requirió verificación adicional.]"
-  },
-  {
-    "id": 827,
-    "module": "Agentforce exam",
-    "question": "SecureHealth Insurance wants their claims assistant to verify a member's identity before discussing any sensitive claim details. The verification must be absolute—no claim information should be accessible unless identity confirmation is successfully completed through a multi-step verification process. Which implementation approach guarantees deterministic enforcement of this security requirement?",
-    "options": [
-      "Establish a session variable that tracks verification status and configure conditional filters that only allow claim-related actions when the variable confirms successful verification.",
-      "Include explicit instructions in the topic description with verification dialogue examples.",
-      "Store verification status in a custom object field and instruct the assistant to query this field before every response."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "Duplicado conceptual del patrón determinista variable + filtro condicional ya verificado extensamente en este banco (V2 #63/#87/#105/#146/#183/#184/#221): la variable de sesión + guarda condicional hace que las acciones sensibles sean físicamente inaccesibles hasta verificación exitosa — control no evadible. Instrucciones con ejemplos (B) son probabilísticas. Consultar un campo custom vía instrucción (C) da datos pero no fuerza la restricción de acción en sí. [Consistente con el patrón determinista variable + filtro ya verificado varias veces en este banco; no requirió verificación adicional.]"
-  },
-  {
-    "id": 828,
-    "module": "Agentforce exam",
-    "question": "Summit Peak Properties wants to configure their property management agent so that maintenance request capabilities are only accessible when a tenant's lease status is \"Active\" or \"Current.\" This business rule needs to be enforced programmatically without relying on AI interpretation. What configuration should Summit Peak Properties implement?",
-    "options": [
-      "Add instructions to the topic description specifying eligible scenarios.",
-      "Establish a context variable mapped to the tenant's lease status field and configure conditional filters requiring \"Active\" or \"Current\" for maintenance actions to be available.",
-      "Create a validation rule on the maintenance request object that blocks submissions after initiation."
-    ],
-    "correctAnswers": [
-      1
-    ],
-    "explanation": "Duplicado conceptual del patrón determinista variable + filtro condicional ya verificado extensamente en este banco (V2 #221/#262, entre muchos otros): la guarda condicional sobre una variable de estado de contrato de arrendamiento garantiza cumplimiento sin depender de interpretación de IA. Instrucciones en topic description (A) son probabilísticas. Una validation rule (C) bloquea después de que la acción ya fue ofrecida/iniciada, generando mala experiencia. [Consistente con el patrón determinista variable + filtro ya verificado varias veces en este banco; no requirió verificación adicional.]"
-  },
-  {
-    "id": 829,
-    "module": "Agentforce exam",
-    "question": "TechFlow Solutions is launching a customer support assistant accessible through their authenticated customer portal built on Experience Cloud. Customers need to provide their policy number through a pre-chat form before the assistant can access their specific account information. What essential component must be configured to ensure incoming chat requests are properly directed to the support assistant with the pre-chat data intact?",
-    "options": [
-      "Implement an API gateway using MuleSoft.",
-      "Deploy a messaging web component on the portal pages to render the chat interface.",
-      "Create an Omni-Channel flow that manages message routing and preserves pre-chat variables for context passing."
-    ],
-    "correctAnswers": [
-      2
-    ],
-    "explanation": "Este resultado refuerza directamente la duda que dejé abierta en **V2 #110** (WaveRider Surf Co.) de este mismo banco: ahí encontré evidencia de que el Omni-Channel Flow (no solo el componente LWC de messaging) es lo que realmente mapea/preserva las pre-chat variables, contradiciendo parcialmente la respuesta de la fuente en ese momento. Esta pregunta nueva, de una fuente distinta, confirma exactamente eso: el Omni-Channel flow es el componente esencial para enrutar y preservar las variables de pre-chat, mientras que el componente de messaging (B, la respuesta que SÍ fue la correcta en #110) \"muestra la interfaz de chat pero no maneja el ruteo ni preserva los datos de pre-chat\" según esta fuente. MuleSoft (A) no es necesario para integración de messaging estándar. [Refuerza y ayuda a resolver la nota de disputa de V2 #110: el Omni-Channel flow parece ser el componente central para preservar pre-chat variables, más que el LWC de messaging solo — revisar ambas entradas juntas.]"
-  },
-  {
-    "id": 830,
-    "module": "Agentforce exam",
-    "question": "TechSolutions Inc. needs to monitor and analyze complete interaction logs for all customer service conversations handled by their AI agent. Which tool should TechSolutions use to obtain comprehensive visibility into the agent's decision-making process throughout each conversation, including the logic applied, actions performed, data passed to and from prompts and decision points, system errors encountered, and the ultimate reply delivered to customers?",
-    "options": [
-      "\"Conversation Analytics\".",
-      "Session Trace, capturing a complete end-to-end record of the agent's behavior including reasoning engine decisions and all inputs/outputs.",
-      "\"Agent Performance Dashboard\"."
-    ],
-    "correctAnswers": [
-      1
-    ],
-    "explanation": "Consistente con el hecho de Session Tracing ya verificado repetidamente en este banco (V2 #35/#92/#186, denominado también \"Agentforce Session Tracing\"/\"AIAgentSession\"): captura el registro completo turno-por-turno, incluyendo razonamiento, acciones, inputs/outputs y errores — exactamente lo descrito. \"Conversation Analytics\" (A) se enfoca en patrones agregados (sentimiento, intents) entre conversaciones, no en el flujo de ejecución de una sesión. Un dashboard de métricas agregadas (C) no da los logs de ejecución detallados. [Consistente con Session Tracing ya verificado en este banco; no requirió verificación adicional.]"
+    "explanation": "Refuerza y es consistente con V2 #120 de este mismo banco (Cedar Valley Nursery, misma pareja de settings): verifiqué de nuevo por búsqueda web y confirmé con más solidez que \"Use Public Knowledge Article\" es un toggle real y documentado en Knowledge Settings del data library, que restringe el indexado a artículos públicos. La combinación con un ajuste de \"Show sources\" para mostrar las fuentes usadas es consistente con lo que ya se señaló en V2 #120, aunque —igual que ahí— no encontré una captura de pantalla o página oficial que confirme el nombre literal exacto de ese segundo toggle. Data Categories (B) clasifica pero no restringe automáticamente a público ni garantiza mostrar fuentes. [Consistente con V2 #120 ya evaluado en este banco: \"Use Public Knowledge Article\" confirmado con más solidez esta vez; \"Show sources\" con la misma nota de confianza que en #120.]"
   },
   {
     "id": 831,
-    "module": "Agentforce exam",
+    "module": "AI Agents",
     "question": "TechStart Inc. wants to deploy a Sales Development Representative (SDR) AI Agent to engage with potential customers and qualify leads. Which channel requirement should TechStart Inc. be aware of when implementing the SDR Agent?",
     "options": [
       "The SDR Agent must be deployed through messaging channels.",
@@ -421,148 +294,136 @@
     "explanation": "Consistente con los hechos sobre SDR/Lead Nurturing Agent ya verificados repetidamente en este banco (V2 #29/#46/#89/#152/#207): diseñado para engagement conversacional en tiempo real, lo cual requiere canales de messaging (SMS, WhatsApp, web chat, etc.), no solo email (B, insuficiente para el intercambio interactivo necesario) ni restringido específicamente a un chat widget de sitio web (C, es una opción entre varios canales de messaging posibles, no un requisito exclusivo). [Consistente con los hechos sobre SDR Agent ya verificados en este banco; no requirió verificación adicional.]"
   },
   {
-    "id": 832,
-    "module": "Agentforce exam",
-    "question": "TechSupport Corp has launched their Agentforce Service Agent on the customer portal, but customers are complaining that the agent cannot provide answers that exist in the company's Knowledge base articles, even though the articles are published and accessible. What is the most likely cause of this issue?",
+    "id": 530,
+    "module": "Governance and Observability",
+    "question": "Universal Containers' COO wants weekly trends of agent KPIs — usage, engagement, ineffective topics and actions — to steer the roadmap. Which Agentforce Observability pillar provides this?",
     "options": [
-      "The Service Agent user account requires the Knowledge User feature license.",
-      "The Service Agent user account needs to be assigned to the Service Agent permission set group.",
-      "The Service Agent user account is missing the Knowledge Access permission set."
-    ],
-    "correctAnswers": [
-      2
-    ],
-    "explanation": "Duplicado conceptual del hecho de permisos de Knowledge ya verificado repetidamente en este banco (V2 #215/#234): el Agent User opera con su propia cuenta y requiere permisos explícitos de Knowledge, independientemente de que los artículos estén publicados y visibles para usuarios regulares. La licencia (A) controla disponibilidad general, no acceso granular a Knowledge. Un permission set group genérico (B) podría no incluir específicamente este permiso — el problema apunta a un permiso específico faltante, no a la ausencia total del grupo. [Consistente con los hechos de permisos de Knowledge ya verificados en este banco; no requirió verificación adicional.]"
-  },
-  {
-    "id": 833,
-    "module": "Agentforce exam",
-    "question": "TechVenture Solutions is building a custom capability within their AI agent to automate specific business processes. The AI implementation team needs to select the appropriate component type for creating this custom agent capability. Which component should the AI implementation team select to build this custom agent capability?",
-    "options": [
-      "Prompt templates.",
-      "Workflow rules.",
-      "Flow automation."
-    ],
-    "correctAnswers": [
-      2
-    ],
-    "explanation": "Duplicado conceptual del patrón custom action + flow ya verificado extensamente en este banco (V2 #61/#106/#164/#202): los flows dan el framework declarativo para lógica de negocio compleja invocable como Agent Action. Prompt templates (A) estructuran contenido generado por IA, no ejecutan procesos de negocio. Workflow rules (B) son una herramienta legada que corre en background, no invocable como Agent Action. [Consistente con el patrón custom action + flow ya verificado en este banco; no requirió verificación adicional.]"
-  },
-  {
-    "id": 834,
-    "module": "Agentforce exam",
-    "question": "Telecommunications Inc. wants to provide their sales team with automatic post-call analysis that identifies when customers mention competitor names, specific products, or key business terms during sales conversations. Which Einstein feature should Telecommunications Inc. implement?",
-    "options": [
-      "Conversation Insights.",
-      "\"Call Analytics\" — not the specific Einstein feature name.",
-      "\"Discussion Tracker\" — not a recognized Salesforce feature."
+      "Agent Analytics: aggregated performance dashboards and KPI trends.",
+      "Agent Health Monitoring: near-real-time alerts on errors and latency.",
+      "Agent Optimization: per-session traces and clustering."
     ],
     "correctAnswers": [
       0
     ],
-    "explanation": "Verifiqué por búsqueda web: **Einstein Conversation Insights (ECI)** es real y está ampliamente documentado — graba/transcribe/analiza llamadas de ventas y detecta menciones de competidores, productos, precios y keywords personalizadas, con \"Sales Signals\" y coaching por timestamp. Esto **aclara la nota de confianza que dejé en V2 #220**: ahí no pude confirmar \"Conversation Insights dashboard\" para análisis de utterances de un agente de IA (el nombre real para eso parece ser \"User Utterances\"/\"Utterance Analysis\") — resulta que \"Conversation Insights\" SÍ es un nombre real de Salesforce, pero corresponde a una feature distinta (ECI, análisis de llamadas de venta con humanos), no a la analítica de utterances de agentes de IA que pedía V2 #220. Son dos features con nombres parecidos pero propósitos diferentes. [Verificado con búsqueda web: Einstein Conversation Insights (ECI) confirmado en documentación oficial — aclara y distingue el nombre de la feature real en V2 #220 (que era sobre otra cosa, análisis de utterances de agentes IA).]"
+    "explanation": "Los 3 pilares de Observability se distinguen por la pregunta que responden: Analytics = \"¿cómo va el agente en agregado?\" (KPIs, tendencias); Optimization = \"¿por qué falló esta interacción?\" (trazas, clustering, quality scores); Health Monitoring = \"¿está sano AHORA?\" (alertas casi en tiempo real). Aquí piden tendencias agregadas → Analytics. [Generada v3 — fuente: salesforce.com/news/stories/agentforce-studio-observability-tools-announcement/]"
   },
   {
-    "id": 835,
-    "module": "Agentforce exam",
-    "question": "The concierge assistant at Seaside Resort keeps forgetting guests' preferred room temperatures and activity interests mentioned earlier in the conversation, forcing guests to repeat themselves. What should the resort implement to maintain this information throughout the session?",
+    "id": 599,
+    "module": "AI Agents",
+    "question": "A property management company's agent must check if a maintenance request is within warranty before dispatching a technician. The company wants to keep the conversation natural for tenants but ensure the warranty check always happens first. What should the specialist do?",
     "options": [
-      "Configure context variables that capture and retain guest preferences from action outputs for the duration of the session.",
-      "Rely on the assistant's natural conversation memory.",
-      "Store preferences in a custom object and query them before each response."
+      "Use procedural instructions in Agent Script to enforce the warranty check step before any technician dispatch action.",
+      "Move the warranty check logic into a separate agent and route all maintenance requests through that agent first.",
+      "Add a natural language instruction at the top of the subagent prompt saying \"Always check warranty before dispatching.\""
     ],
     "correctAnswers": [
       0
     ],
-    "explanation": "Consistente con el mecanismo de variables de sesión de Agent Script ya establecido en todo este banco (V2 #42, contexto vía flow; y el patrón general de `@utils.setVariables`): las context variables retienen información durante la sesión de forma determinista, sin depender de que el LLM \"recuerde\" de forma probabilística (B, poco confiable). Consultar un objeto custom antes de cada respuesta (C) es más pesado operacionalmente que usar variables de sesión ya disponibles en el contexto del agente. [Consistente con el mecanismo de variables de sesión ya establecido en este banco; no requirió verificación adicional.]"
+    "explanation": "El mismo principio de diseño de razonamiento híbrido ya se ha establecido repetidamente en este banco: un paso comercial obligatorio y sensible al orden (el cheque de garantía) pertenece a instrucciones de procedimiento (`->`), que se ejecutan de manera determinista y no se pueden omitir, mientras que el resto de la conversación con el inquilino se mantiene flexible y basada en un lenguaje natural. Esto mantiene todo en un solo agente en lugar de fragmentar la experiencia. Dividir el cheque de garantía en un agente separado (B) es una sobrecarga arquitectónica innecesaria que corre el riesgo de romper la continuidad conversacional: el mismo problema que las instrucciones de procedimiento resuelven dentro de un solo agente. Una instrucción en lenguaje natural que le dice al LLM que \"siempre verifique la garantía antes de enviar\" (C) no es determinista y el LLM puede omitirla o reordenarla, que es exactamente el modo de falla que el razonamiento híbrido está diseñado para prevenir. [Consistente con el principio de razonamiento híbrido ya verificado varias veces en este banco; no requirió verificación adicional.]"
   },
   {
-    "id": 836,
-    "module": "Agentforce exam",
-    "question": "The experience team at Harbor Hospitality Group wants to deploy an AI agent that can automatically resolve guest complaints about their stay experiences. The agent should be able to offer complimentary amenities, dining credits, and future stay discounts. Additionally, the agent must identify and escalate to human staff any complaints involving safety concerns or major service failures. Following Salesforce's recommended architecture, which agent configuration should the team create?",
+    "id": 543,
+    "module": "Testing, Deployment, and Maintenance",
+    "question": "Sunrays Limited's QA team is sizing its regression suite for the Agentforce Testing Center and asks about the practical limits and the format of expected results. What should the Agentforce Specialist tell them?",
     "options": [
-      "\"Guest Experience Agent\" with Standard prompt template — not a standard Salesforce agent type.",
-      "Customer Service Agent (Service Agent) with Flex prompt template.",
-      "\"Revenue Agent\" (Sales Agent) with Flex prompt template — optimized for revenue generation, not complaint resolution."
+      "Each test supports up to 1,000 test cases (CSV), and expected values must use the API names of the expected topic and actions; run the suite in a sandbox.",
+      "Test cases are unlimited, and expected values are written in natural language for the LLM-as-judge to interpret.",
+      "Each test supports a maximum of 50 cases, and results must be validated manually one by one."
+    ],
+    "correctAnswers": [
+      0
+    ],
+    "explanation": "Límites operativos del Testing Center: hasta 1,000 test cases por test vía plantilla CSV, y los valores esperados se expresan con API names (Expected Topic API Name / acciones), lo que da lógica pass/fail consistente; mejores prácticas: ejecutarlo en sandbox. (Dato adicional reportado: ~10 test jobs por ventana de 10 horas — confianza media.) [Reportada examen 2026 — límites confirmados en help.salesforce.com/s/articleView?id=ai.agent_testing_center.htm]"
+  },
+  {
+    "id": 587,
+    "module": "Multi-Agent Orchestration",
+    "question": "A hospital network uses Agentforce for patient appointment scheduling. It also runs a separate AI system from a different vendor for managing operating room inventory. The hospital wants the Agentforce scheduler to autonomously request supply checks from the inventory system when scheduling surgeries. Which open standard protocol is specifically designed for this cross-vendor agent collaboration?",
+    "options": [
+      "Inter-Agent Messaging Protocol (IMP)",
+      "Agent-to-Agent (A2A) protocol",
+      "Cross-Platform Agent Bridge (CPAB)"
     ],
     "correctAnswers": [
       1
     ],
-    "explanation": "Duplicado conceptual del patrón Service Agent + Flex template para escenarios de recuperación de servicio ya verificado repetidamente en este banco (V2 #62/#137, entre otros): compensaciones, escalamiento a humano en casos graves — exactamente el caso descrito. \"Guest Experience Agent\" (A) no es un tipo estándar. Sales Agent (C) está optimizado para upsell/venta, no para resolución de quejas. [Consistente con el patrón Service Agent + Flex template ya verificado en este banco; no requirió verificación adicional.]"
+    "explanation": "Ya confirmado varias veces en este banco: el Agent-to-Agent (A2A) protocol es el estándar abierto diseñado específicamente para que agentes autónomos e independientes de distintos vendors se descubran, negocien y deleguen tareas entre sí de forma segura — exactamente el escenario de un scheduler de Agentforce pidiendo autónomamente un chequeo de inventario a un sistema de IA de otro proveedor. \"Inter-Agent Messaging Protocol (IMP)\" y \"Cross-Platform Agent Bridge (CPAB)\" no son estándares reales; son nombres inventados para esta pregunta (patrón de distractor ya visto: nombres que suenan plausibles pero no existen, como \"Prompt Execute User\" o \"apex__TextList\" en otras preguntas de este banco). [Ya verificado en preguntas previas de este banco (A2A) — no requirió nueva verificación.]"
   },
   {
-    "id": 837,
-    "module": "Agentforce exam",
-    "question": "The marketing department at OmniCorp needs an AI tool to help them quickly access campaign performance data, generate creative copy variations, and track project milestones—all without leaving their Salesforce workflow. Which assistant type should be implemented?",
+    "id": 579,
+    "module": "Data 360 Fundamentals",
+    "question": "An auto parts retailer has a knowledge base with articles categorized by vehicle type (Car, Truck, Motorcycle). They want the agent to retrieve only Car articles. What does enabling \"Filter by Knowledge Data Categories\" do in a knowledge-based data library?",
     "options": [
-      "\"Marketing Assistant\" — not a standard Salesforce agent type.",
-      "Employee Assistant, configured for marketing team needs including data access, content creation, and task management.",
-      "Service Assistant adapted for internal use."
+      "It adds the selected category names as metadata tags to each article to improve search ranking.",
+      "It limits the indexing process to include only articles assigned to the selected categories, excluding all others from retrieval.",
+      "It creates separate vector indexes for each category and searches them in parallel."
     ],
     "correctAnswers": [
       1
     ],
-    "explanation": "Consistente con el hecho sobre Employee Agent ya verificado en este banco (V2 #7, SOMA): diseñado para productividad interna de equipos across departamentos — incluyendo marketing —, configurable para acceso a datos, generación de contenido y gestión de tareas. \"Marketing Assistant\" (A) no es un tipo estándar de Agentforce. Service Assistant (C) está diseñado para soporte externo a clientes, no productividad interna. [Consistente con Employee Agent ya verificado en este banco; no requirió verificación adicional.]"
+    "explanation": "Al configurar los ajustes de Conocimiento para una biblioteca de datos, un administrador puede filtrar qué artículos se basan por categoría de datos (así como por canal o tipo de artículo), junto con el filtro estándar \"solo publicado\". Este filtro de categorías se aplica en el momento de la ingesta/indexación: solo los artículos asignados a las categorías de datos seleccionadas (por ejemplo, Auto) se indexan en el índice de búsqueda de la biblioteca, por lo que los artículos fuera de esas categorías (Camioneta, Motocicleta) nunca se indexan y, por lo tanto, nunca se pueden recuperar, lo que mejora la precisión en lugar de depender del LLM para ordenar los artículos por categoría en el momento de la consulta. No agrega etiquetas de metadatos a los artículos (A): filtra según las asignaciones de categorías que ya tienen los artículos. Tampoco crea índices paralelos separados por categoría (C): hay un índice único y el filtro de categoría simplemente limita lo que contiene. [Verificado con búsqueda web: el filtrado por Data Category en la configuración de Knowledge de una Data Library es una función real y documentada (help.salesforce.com/s/articleView?id=ai.data_library_select_fields.htm), aplicado al indexar/groundear artículos.]"
   },
   {
-    "id": 838,
-    "module": "Agentforce exam",
-    "question": "To ensure a custom agent action performs reliably in conversations, what should a specialist prioritize when creating action instructions?",
+    "id": 433,
+    "module": "Data 360 Fundamentals",
+    "question": "A tech startup is building a chatbot to assist users with complex troubleshooting tasks. The team is debating between using a standard Salesforce LLM, customizing their own model, or bringing in an external LLM that was trained on a vast amount of technical documentation. Under which condition would it be most appropriate to configure a custom generative model?",
     "options": [
-      "Technical specifications of the underlying API.",
-      "Exhaustive details covering all scenarios.",
-      "Clear, focused instructions followed by testing in Agentforce Builder to validate proper action selection and execution."
+      "When the startup requires the chatbot to understand and generate responses based on very specific, in-house technical terminology that standard models might not cover",
+      "When the startup needs the chatbot to handle basic customer inquiries that do not require technical depth",
+      "When the startup wants to use a model trained exclusively on general, public domain technical documents",
+      "When the startup has a very limited dataset and no specific customization needs"
+    ],
+    "correctAnswers": [
+      0
+    ],
+    "explanation": "Respuesta correcta: A. Cuando la startup requiere que el chatbot comprenda y genere respuestas basadas en terminología técnica interna muy específica que los modelos estándar podrían no cubrir. Un modelo generativo personalizado es mejor cuando es necesario integrar un lenguaje técnico patentado y altamente específico en las respuestas del chatbot, asegurando que pueda manejar tareas complejas de resolución de problemas específicas de la empresa de manera efectiva. La opción B es incorrecta. Los modelos estándar son suficientes para atender las consultas básicas de los clientes, por lo que la personalización sería innecesaria. La opción C es incorrecta. Si el modelo se entrena con datos generales de dominio público, se podría considerar un BYOLLM, pero puede que no sea tan efectivo como un modelo personalizado entrenado con datos propietarios. La opción D es incorrecta. Con datos limitados y sin necesidad de personalización, un modelo estándar normalmente sería más apropiado."
+  },
+  {
+    "id": 702,
+    "module": "AI Agents",
+    "question": "A company is launching a partner portal on Experience Cloud and wants to provide partners with an agent that can answer questions about product specifications from the knowledge base and allow them to submit leads for potential customers. The agent must be accessible only to authenticated partner users. Which agent type is required?",
+    "options": [
+      "Sales Agent.",
+      "Service Agent.",
+      "Commerce Agent."
+    ],
+    "correctAnswers": [
+      1
+    ],
+    "explanation": "Consistente y reforzado por la corrección ya hecha en este banco (V2 #38, misma categoría de escenario \"partner portal\"): confirmé anteriormente con documentación oficial de Salesforce (help.salesforce.com, ai.service_agent_setup.htm y sales.sales_cloud_agents.htm) que un Service Agent es el tipo correcto para portales de partners autenticados — puede recuperar artículos de Knowledge y ejecutar acciones como envío de leads. Sales Agent (A) asiste a equipos internos de ventas, no a usuarios externos autenticados de un portal. Commerce Agent (C) se enfoca en compras/transacciones, no en conocimiento o generación de leads. [Consistente con V2 #38, ya verificado con documentación oficial en este banco; no requirió verificación adicional.]"
+  },
+  {
+    "id": 472,
+    "module": "Governance and Observability",
+    "question": "When configuring a custom AI model in Salesforce, what is a key factor to consider?",
+    "options": [
+      "The number of users who will interact with the model",
+      "The cost of model deployment",
+      "The time required for training the model",
+      "The model's ability to integrate with existing Salesforce workflows"
+    ],
+    "correctAnswers": [
+      3
+    ],
+    "explanation": "Un factor clave a considerar es la capacidad del modelo para integrarse con los flujos de trabajo existentes de Salesforce. La integración efectiva garantiza que el modelo de IA personalizado complemente y mejore los procesos actuales sin causar interrupciones."
+  },
+  {
+    "id": 51,
+    "module": "Data 360 Fundamentals",
+    "question": "After configuring and saving a Salesforce Agentforce Data Library (regardless of the data source), which components are automatically created and available in Data Cloud?",
+    "options": [
+      "A data pipeline, an indexing engine, and a query processor.",
+      "A data connector, an analytics dashboard, and a workflow rule.",
+      "A data stream, a search index, and a retriever."
     ],
     "correctAnswers": [
       2
     ],
-    "explanation": "Duplicado conceptual del componente \"Instructions\" ya verificado repetidamente en este banco (V2 #165/#168/#196/#211): instrucciones claras y enfocadas ayudan al Reasoning Engine a entender cuándo/cómo usar la acción, validadas iterativamente mediante testing. Especificaciones técnicas de API (A) ayudan a desarrolladores pero no guían al Reasoning Engine. Detalle exhaustivo cubriendo todos los escenarios (B) puede saturar al Reasoning Engine en vez de ayudarlo — mismo principio ya visto en V2 #201 (few-shot con ejemplos específicos, no exhaustividad). [Consistente con el componente \"Instructions\" ya verificado en este banco; no requirió verificación adicional.]"
-  },
-  {
-    "id": 839,
-    "module": "Agentforce exam",
-    "question": "What advantage does a hybrid search index offer over other search types in Data Cloud?",
-    "options": [
-      "It eliminates the need for semantic embedding generation, improving query performance.",
-      "It combines exact keyword matching with semantic understanding for queries mixing specific terms and general intent.",
-      "It automatically encrypts all indexed data."
-    ],
-    "correctAnswers": [
-      1
-    ],
-    "explanation": "Duplicado conceptual de hybrid search ya verificado repetidamente en este banco (V2 #136/#174/#209): combina precisión de keyword con comprensión semántica, útil cuando las consultas mezclan términos exactos e intención general. Sigue requiriendo generación de embeddings (A, falso). Encriptación (C) es una feature de seguridad independiente del tipo de índice. [Consistente con hybrid search ya verificado en este banco; no requirió verificación adicional.]"
-  },
-  {
-    "id": 840,
-    "module": "Agentforce exam",
-    "question": "What best describes the data preparation process for assistant retrieval in Data Cloud?",
-    "options": [
-      "Aggregating and normalizing structured datasets for governance compliance.",
-      "Real-time streaming with on-the-fly indexing, eliminating preprocessing steps.",
-      "Loading content, chunking into segments, converting to vector embeddings, and optimizing for search."
-    ],
-    "correctAnswers": [
-      2
-    ],
-    "explanation": "Duplicado conceptual de V2 #245 de este mismo banco, ya establecido: cargar, trocear, vectorizar y optimizar para búsqueda son los pasos fundamentales de preparación para retrieval semántico. Gobernanza/compliance (A) describe otro proceso. Streaming en tiempo real sin preprocesamiento (B) no es viable para retrieval vectorial eficiente. [Consistente con V2 #245 ya verificado en este banco; no requirió verificación adicional.]"
-  },
-  {
-    "id": 841,
-    "module": "Agentforce exam",
-    "question": "What characteristic defines a prompt template version as immutable after it has been activated? (Pregunta repetida dos veces con distinta redacción en el mensaje del usuario — se agregó una sola vez.)",
-    "options": [
-      "Any modification automatically creates a new version while preserving the original.",
-      "Once a prompt template version is activated, no further edits can be saved to that specific version.",
-      "Only the most recent version of a template can be activated for use in production."
-    ],
-    "correctAnswers": [
-      1
-    ],
-    "explanation": "Verifiqué por búsqueda web: confirmado en documentación oficial de Salesforce Help (\"Use Multiple Versions of a Prompt Template\") — al activar una versión, esta se vuelve inmutable, y esa inmutabilidad persiste incluso si luego se desactiva. Para modificarla hay que guardarla como una nueva versión. La opción A describe el comportamiento general de versionado, no la inmutabilidad en sí. La opción C es falsa — cualquier versión puede activarse, no solo la más reciente. [Verificado con búsqueda web: inmutabilidad de versiones activadas confirmada en documentación oficial de Salesforce Help.]"
+    "explanation": "Crea un data stream, search index y retriever automáticamente."
   },
   {
     "id": 842,
-    "module": "Agentforce exam",
+    "module": "Testing, Deployment, and Maintenance",
     "question": "What critical factors must an organization consider when deploying a multi-topic service agent with multiple actions to production?",
     "options": [
       "Configuration freeze during deployment, which prevents changes but doesn't ensure the deployment is complete/functional.",
@@ -575,218 +436,361 @@
     "explanation": "Consistente con los hechos de deployment ya establecidos en este banco (dependencias en change sets V2 #93/#126/#156/#213/#217, testing V2 #170/#229, activación manual V2 #29/#194): cubrir dependencias, testear adecuadamente, planear la estrategia de versiones y activar explícitamente son los factores que garantizan un deployment funcional. Un freeze de configuración (A) no garantiza que el deployment en sí esté completo. El orden de deployment solo (C) no basta sin dependencias y testing. [Consistente con los hechos de deployment ya verificados en este banco; no requirió verificación adicional.]"
   },
   {
-    "id": 843,
-    "module": "Agentforce exam",
-    "question": "What information becomes available to an Agentforce Specialist when the 'Enrich event logs with conversation data' setting is enabled?",
+    "id": 92,
+    "module": "AI Agents",
+    "question": "An AI Specialist has created a Agentforce  custom action using flow as the reference action type. However, it is not delivering the expected results to the conversation preview, and therefore needs troubleshooting.\nWhat should the AI Specialist do to identify the root cause of the problem?",
     "options": [
-      "Session data including complete user inputs and agent responses becomes available for interaction analysis.",
-      "Comprehensive reports across all conversations can be generated automatically by this setting alone.",
-      "User click paths leading to each agent action become visible."
+      "In Agentforce  Builder within the Dynamic Panel, turn on dynamic debugging to show the inputs and outputs.",
+      "In Agentforce  Builder within the Dynamic Panel, confirm selected action and observe the values in Input and Output sections.",
+      "In Agentforce  Builder, verify the utterance entered by the user and review session event logs for debug information."
     ],
     "correctAnswers": [
       0
     ],
-    "explanation": "Consistente con el concepto de Event Logs ya verificado con búsqueda web en este banco (V2 #205, \"Enhanced Event Logs\" en la pestaña Events de Agentforce Builder): habilitar el enriquecimiento con datos de conversación da acceso a inputs de usuario y respuestas del agente a nivel de sesión, para análisis y debugging. Esta configuración sola no genera reportes agregados automáticamente (B, requeriría herramientas de reporting adicionales). No rastrea rutas de clics de UI (C, no es lo que hace esta feature). [Consistente con V2 #205 (Event Logs) ya verificado en este banco; no requirió verificación adicional.]"
+    "explanation": "La mejor práctica para solucionar problemas de una acción basada en un flujo en Agent Builder es activar la depuración dinámica en el Panel dinámico para observar las entradas y salidas. La respuesta original (verificar expresiones y revisar registros de eventos de sesión) es incorrecta porque se basa en registros de eventos estándar que no ofrecen la visibilidad granular de entrada/salida en tiempo real para las acciones de flujo que proporciona la herramienta de depuración del Panel dinámico."
   },
   {
-    "id": 844,
-    "module": "Agentforce exam",
-    "question": "What is automatically generated when a custom search index is created in Data Cloud?",
+    "module": "Prompt Engineering",
+    "question": "Universal Containers (UC) is creating a new custom prompt template to populate a field with generated output. UC enabled the Einstein Trust Layer to ensure AI Audit data is captured and monitored for adoption and possible enhancements. Which prompt template type should UC use, and what additional configuration is required?",
     "options": [
-      "A retriever component with the same name as the search index.",
-      "A pre-configured Apex class for custom retrieval logic.",
-      "A dynamic query builder for runtime parameter configuration."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "Investigué esto y encontré confirmación parcial: sí es cierto que se crea un retriever (por defecto, con muchos campos) cuando se construye un search index — eso está confirmado. Sin embargo, no pude confirmar específicamente que ese retriever automático tenga **el mismo nombre exacto** que el search index, ni distinguir con precisión ese comportamiento \"automático\" de la creación manual de custom retrievers en Einstein Studio para refinar la búsqueda (que sí requiere pasos explícitos posteriores). No se genera una clase Apex automáticamente (B, descartado con más confianza — desarrollar Apex para interactuar con retrievers es una tarea manual). Un \"dynamic query builder\" (C) tampoco es algo que se genere automáticamente. [Nota de confianza: se confirma que se crea un retriever por defecto al crear un search index, pero no pude confirmar el detalle específico de que comparta el mismo nombre exacto que el índice.]"
-  },
-  {
-    "id": 845,
-    "module": "Agentforce exam",
-    "question": "What is the core responsibility of the reasoning engine within the Agentforce architecture?",
-    "options": [
-      "Generating natural language responses that sound conversational and human-like.",
-      "Determining which topics and actions are most appropriate for responding to user utterances.",
-      "Executing database queries to retrieve records."
+      "Sales Email, and that the object is associated with a campaign.",
+      "Field Generation, and that Dynamic Forms is enabled.",
+      "Record Summary, and that the Lightning page is updated to Dynamic Forms."
     ],
     "correctAnswers": [
       1
     ],
-    "explanation": "Concepto fundacional de Agentforce ya implícito en este banco (V2 #188, el LLM interpreta la intención y arma un plan de ejecución de topics/acciones): el Reasoning Engine decide qué topic/acción encaja con el input del usuario. La generación de lenguaje natural (A) la hace el LLM en sí, no específicamente \"el Reasoning Engine\" como componente de decisión. Ejecutar queries (C) es parte de una acción, no la función primaria del Reasoning Engine. [Concepto fundacional de Agentforce ya bien establecido en este banco; no requirió verificación adicional.]"
+    "explanation": "Para poblar un campo con output generado por IA, se debe usar Field Generation como tipo de template, y ademas habilitar Dynamic Forms en la pagina Lightning donde reside el campo. Sin Dynamic Forms, el icono de generacion de campo (sparkle icon) no aparecera.",
+    "id": 160
   },
   {
-    "id": 846,
-    "module": "Agentforce exam",
-    "question": "What is the fundamental purpose of action instructions when configuring a custom action for an AI agent?",
+    "id": 537,
+    "module": "Multi-Agent Orchestration",
+    "question": "Sunrays Limited wants its service agent to use tools from Stripe (payments) and Box (documents) without writing custom code for each API. What is the recommended 2026 approach?",
     "options": [
-      "Guide the reasoning engine in determining when to select the action by describing its purpose and usage context.",
-      "Define the data structure and format of information returned by the action.",
-      "Provide end users with guidance on how to phrase requests."
+      "Use Agentforce's native MCP client: discover the partners' MCP servers on AgentExchange, connect them from the Builder without code, and govern them via MuleSoft's AI Agent Gateway.",
+      "Build one custom Apex action per Stripe and Box endpoint.",
+      "Use the Agent-to-Agent (A2A) protocol to delegate payment tasks to Stripe."
     ],
     "correctAnswers": [
       0
     ],
-    "explanation": "Duplicado conceptual del componente \"Instructions\" ya verificado repetidamente en este banco (V2 #165/#168/#196/#211/#273): guían al Reasoning Engine sobre cuándo/cómo usar la acción. El formato de datos de retorno (B) lo define la configuración de output de la acción, no las instrucciones. Las instrucciones son para el razonamiento interno del agente, no guía dirigida al usuario final (C). [Consistente con el componente \"Instructions\" ya verificado en este banco; no requirió verificación adicional.]"
+    "explanation": "Agentforce actúa como cliente MCP nativo (Agentforce 3, jun 2025; GA ampliada 2026): los MCP servers de 30+ partners se descubren en AgentExchange y se gobiernan con el AI Agent Gateway de MuleSoft. A2A es para hablar con OTROS AGENTES, no con herramientas/APIs. [Generada v3 — fuente: salesforce.com/news/press-releases/2025/06/23/agentforce-3-announcement/]"
   },
   {
-    "id": 847,
-    "module": "Agentforce exam",
-    "question": "What is the primary benefit of creating a custom retriever instead of using the default retriever when configuring data access for an AI agent?",
+    "id": 19,
+    "module": "AI Agents",
+    "question": "A sales manager needs to contact leads at scale with hyper-relevant solutions and customized communications in the most efficient manner possible. Which Salesforce solution best suits this need?",
     "options": [
-      "Enables precise control over filtering criteria, returned fields, and result limits for targeted data retrieval.",
-      "Combines data from multiple sources into a single result set through complex aggregation logic.",
-      "Automatically refreshes search indexes when source data changes."
+      "Einstein Sales Assistant",
+      "Prompt Builder",
+      "Einstein Lead follow-up"
     ],
     "correctAnswers": [
       0
     ],
-    "explanation": "Duplicado conceptual del beneficio central de custom retrievers ya verificado repetidamente en este banco (V2 #78/#85/#125/#145/#150/#161/#176/#231/#233/#249): control granular sobre filtros, campos devueltos y límites, frente a las opciones limitadas del retriever por defecto. Combinar múltiples fuentes en un solo resultado (B) es más bien el rol del Ensemble Retriever (V2 #28), no el beneficio central de un custom retriever simple. Refrescar índices automáticamente (C) es un proceso de sincronización de datos, no de configuración del retriever. [Consistente con el beneficio central de custom retrievers ya verificado en este banco; no requirió verificación adicional.]"
+    "explanation": "Einstein Sales Assistant ofrece capacidades de outreach a escala con mensajes personalizados y recomendaciones para leads. Es la solución adecuada para el caso de uso de contactación masiva."
   },
   {
-    "id": 848,
-    "module": "Agentforce exam",
-    "question": "What scenario represents a valid use case for implementing retrievers in a data cloud environment?",
+    "id": 36,
+    "module": "Testing, Deployment, and Maintenance",
+    "question": "Universal Containers’ Agent Action includes several Apex classes for the new Agentforce Agent. What is an important consideration when deploying Apex that is invoked by an Agent Action?",
     "options": [
-      "Returning semantically relevant information from the vector database to enhance AI prompts.",
-      "Modifying and updating records in source systems based on AI-generated insights.",
-      "Aggregating data from multiple external websites in real-time during conversations."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "Duplicado conceptual de V2 #246 de este mismo banco, ya establecido: los retrievers son de solo lectura, diseñados para RAG — no pueden modificar datos en sistemas fuente (B) ni hacer scraping de sitios web externos en tiempo real durante una conversación (C), solo trabajan con datos ya ingeridos y vectorizados en Data Cloud. [Consistente con V2 #246 ya verificado en este banco; no requirió verificación adicional.]"
-  },
-  {
-    "id": 849,
-    "module": "Agentforce exam",
-    "question": "What scenario represents an appropriate use of a sales-focused AI assistant in a business environment?",
-    "options": [
-      "Providing sales representatives with guided data entry workflows.",
-      "Automatically logging incoming emails to the correct opportunity/contact records.",
-      "Enabling sales professionals to use natural language to execute predefined selling tasks grounded in relevant data while ensuring company policies are applied conversationally in real-time."
-    ],
-    "correctAnswers": [
-      2
-    ],
-    "explanation": "Concepto general de Sales Agent ya establecido en este banco (V2 #101/#137/#152): permite ejecutar tareas de venta vía lenguaje natural, fundamentadas en datos y con políticas aplicadas en tiempo real — distinto de un flujo de captura de datos guiado (A) o un logging automático de correos (B), que son herramientas de automatización, no de asistente conversacional con IA. [Consistente con los hechos sobre Sales Agent ya verificados en este banco; no requirió verificación adicional.]"
-  },
-  {
-    "id": 850,
-    "module": "Agentforce exam",
-    "question": "What should FinanceHub consider when deploying an AI Service Agent with multiple conversation topics and custom actions to their production environment?",
-    "options": [
-      "Deploy all components simultaneously without staging validation.",
-      "Ensure all required dependencies are included, verify Apex code meets minimum test coverage requirements, and confirm configuration alignment with production settings before deployment.",
-      "Deploy custom actions and Apex logic first, then agent topics/configurations afterward."
+      "Apex classes invoked by an Agent Action may be deployed with less than 75% test coverage as long as the agent is not activated in production.",
+      "The Apex classes must have at least 75% code coverage from unit tests, and all dependencies must be in the deployment package.",
+      "The Apex classes may bypass the 75% code coverage requirement as long as they are only used by the agent."
     ],
     "correctAnswers": [
       1
     ],
-    "explanation": "Consistente con los hechos de deployment ya establecidos en este banco (dependencias V2 #93/#126/#156/#213/#217/#277, cobertura de test de Apex/flow ya mencionada en V2 #213): cubrir dependencias, cumplir el mínimo de cobertura de test de Apex (75%, requisito general y bien conocido de la plataforma Salesforce) y alinear configuración con producción antes de desplegar. Saltarse staging (A) viola buenas prácticas y arriesga a usuarios reales. Desplegar en dos fases separadas (C) puede crear una ventana con funcionalidad incompleta — mejor desplegar componentes interdependientes juntos. [Consistente con los hechos de deployment ya verificados en este banco; no requirió verificación adicional.]"
+    "explanation": "Apex invocado por Agent Action requiere 75% cobertura y todas las dependencias en despliegue."
   },
   {
-    "id": 851,
-    "module": "Agentforce exam",
-    "question": "When a search index is created in Data Cloud, what component is automatically generated to enable querying?",
+    "id": 340,
+    "module": "AI Agents",
+    "question": "Choose 1 option. Universal Containers deploys a new Agentforce Service Agent into the company's website but is getting feedback that the Service Agent is not providing answers to customer questions that are found in the company’s Salesforce Knowledge articles. What is the likely issue?",
     "options": [
-      "A default retriever sharing the name of the search index.",
-      "A dynamic query builder with configurable runtime parameters.",
-      "A custom Apex class for programmatic retrieval."
+      "The Agentforce Service Agent user was not given the Allow View Knowledge permission set.",
+      "The Agentforce Service Agent user is not assigned the correct Agent Type License.",
+      "The Agentforce Service Agent user needs to be created under the standard Agent Knowledge profile."
     ],
     "correctAnswers": [
       0
     ],
-    "explanation": "Refuerza a V2 #280 de este mismo banco: una segunda fuente independiente confirma la misma afirmación específica (retriever por defecto con el mismo nombre que el search index), lo que aumenta la confianza frente a la nota que dejé en #280 (donde no había podido confirmar el detalle del \"mismo nombre\" con una fuente oficial). Sigue sin ser una página oficial de Salesforce Help la que lo confirme 1:1, pero dos fuentes independientes coincidiendo refuerza la plausibilidad. B y C quedan descartadas con la misma lógica ya establecida en #280. [Refuerza V2 #280 con una segunda fuente independiente; aumenta la confianza pero sigue sin confirmación de una página oficial dedicada.]"
+    "explanation": "Según la Guía de configuración de acceso e integración de AgentForce Knowledge, un agente de servicio recupera y fundamenta sus respuestas utilizando datos de Salesforce Knowledge cuando se asignan los permisos correctos. Si los clientes informan que el agente no puede acceder a los artículos de conocimiento ni proporcionar respuestas a ellos, la causa principal más común es que el usuario del agente de servicio de AgentForce carece del permiso \"Permitir ver conocimiento\". Este permiso permite al agente recuperar y leer artículos publicados de Salesforce Knowledge para obtener respuestas fundamentadas. Sin él, el agente no puede acceder al repositorio de contenido, lo que genera respuestas incompletas o genéricas. La opción B es incorrecta porque un problema de licencia impediría que el agente se ejecute en absoluto, no bloquearía selectivamente el acceso a datos específicos. La opción C también es incorrecta ya que el perfil de conocimiento por sí solo no controla la visibilidad del artículo; los conjuntos de permisos sí lo hacen. Por lo tanto, la respuesta correcta es la Opción A: al usuario del agente de servicio de AgentForce no se le otorgó el conjunto de permisos Permitir ver conocimiento, que otorga el acceso necesario para respuestas basadas en artículos. Referencia: Guía de integración de conocimientos de AgentForce: “Habilitación del acceso al conocimiento para agentes de servicio”."
   },
   {
-    "id": 852,
-    "module": "Agentforce exam",
-    "question": "When a user asks an agent, \"Find all contacts in California,\" which standard action will the planning service invoke?",
+    "module": "AI Agents",
+    "question": "Universal Containers has implemented an agent that answers questions based on Knowledge articles. Which topic and action combination should be used?",
     "options": [
-      "Query Records, which searches for and retrieves records based on user-specified criteria.",
-      "\"Find Contacts\" — not a standard agent action name.",
-      "\"Retrieve Records\" — not the correct standard action name."
+      "Service Support topic and Retrieve Knowledge Action.",
+      "General FAQ topic and Answers Questions with Knowledge Action.",
+      "Knowledge Management topic and Search Knowledge Action."
+    ],
+    "correctAnswers": [
+      1
+    ],
+    "explanation": "La combinacion correcta es un topic de General FAQ con la accion Answer Questions with Knowledge. Esta accion estandar de Agentforce esta disenada especificamente para responder preguntas usando articulos de Knowledge indexados.",
+    "id": 149
+  },
+  {
+    "id": 110,
+    "module": "AI Agents",
+    "question": "Universal Containers (UC) uses Salesforce Service Cloud to support its customers and agents handling cases. UC is considering implementing Agentforce  and extending Service Cloud to mobile users. \nWhen would Agentforce  implementation be most advantageous?",
+    "options": [
+      "When the goal is to streamline customer support processes and improve response times",
+      "When the main objective is to enhance data security and compliance measures",
+      "When the focus is on optimizing marketing campaigns and strategies"
     ],
     "correctAnswers": [
       0
     ],
-    "explanation": "Verifiqué por búsqueda web: **Query Records** es confirmado como una standard action real de Agentforce (página oficial help.salesforce.com, \"Agentforce Platform | Query Records\"), usada para buscar y recuperar registros según criterios especificados por el usuario — un action genérico que maneja distintos tipos de objeto según el contexto. \"Find Contacts\" (B) y \"Retrieve Records\" (C) no son nombres reales de acciones estándar. [Verificado con búsqueda web: \"Query Records\" confirmado como standard action real en documentación oficial de Salesforce.]"
+    "explanation": "Einstein Agentforce es más ventajoso cuando el objetivo es agilizar los procesos de soporte al cliente y mejorar los tiempos de respuesta, no para seguridad de datos ni optimización de marketing. Su valor principal está en la automatización inteligente de interacciones de servicio al cliente."
   },
   {
-    "id": 853,
-    "module": "Agentforce exam",
-    "question": "When a user asks an assistant a question, what process determines which action the assistant will use to respond?",
+    "id": 327,
+    "module": "Prompt Engineering",
+    "question": "Universal Containers (UC) is implementing generative AI and wants to leverage a prompt template to provide responses to customers that gives personalized product recommendations to website visitors based on their browsing history. Which initial step should UC take to ensure the chatbot can deliver accurate recommendations'",
     "options": [
-      "The reasoning engine matches exact keywords against a predefined list of action triggers.",
-      "The assistant sequentially tests each available action until one works.",
-      "The language model interprets user intent, selects the appropriate topic, and identifies the corresponding action based on understanding."
+      "Design universal product recommendations.",
+      "Write a response scrip for the chatbot.",
+      "Collect and analyze browsing data."
     ],
     "correctAnswers": [
       2
     ],
-    "explanation": "Duplicado conceptual del proceso de razonamiento ya verificado repetidamente en este banco (V2 #188/#281): el LLM interpreta la intención, selecciona el topic apropiado e identifica la acción correspondiente por comprensión semántica, no por matching exacto de keywords (A) ni prueba secuencial de acciones (B), ambos contrarios al diseño de comprensión contextual de Agentforce. [Consistente con V2 #188/#281 ya verificados en este banco; no requirió verificación adicional.]"
+    "explanation": "Para permitir recomendaciones de productos personalizadas utilizando IA generativa, el paso fundamental de Universal Containers (UC) es recopilar y analizar datos de navegación (Opción C). Las recomendaciones personalizadas dependen de comprender el comportamiento del usuario, lo que requiere datos estructurados sobre su historial de navegación. Sin estos datos, el modelo de IA carece del contexto necesario para generar sugerencias relevantes. Recopilación de datos: la UC primero debe agregar datos de navegación (por ejemplo, páginas visitadas, productos vistos, duración de la sesión) para crear un conjunto de datos que refleje las preferencias del usuario. Análisis de datos: el análisis de estos datos identifica patrones (por ejemplo, categorías vistas con frecuencia) que informan cómo se deben estructurar las indicaciones para recuperar recomendaciones relevantes. Basado en datos: las prompt templates de Salesforce se basan en datos básicos para generar resultados precisos. Sin analizar los datos de navegación, la prompt template no puede hacer referencia a información significativa para la personalización. Las opciones A y D son incorrectas porque: Las recomendaciones universales (A) ignoran la personalización, que es el requisito principal. Escribir un guión de respuesta (D) aborda el diseño de interacción del chatbot, no la precisión de las recomendaciones."
   },
   {
-    "id": 854,
-    "module": "Agentforce exam",
-    "question": "When an authenticated premium member says, \"I need to upgrade my current service tier,\" an AI assistant must: validate member status, calculate applicable discounts, generate a new service quote, and route to a relationship manager only if the annual value exceeds $50,000. Which assistant type should be configured to handle this complete customer-facing workflow?",
+    "id": 636,
+    "module": "Governance and Observability",
+    "question": "A conversational AI specialist at GreenLeaf Insurance is presenting the value of Observability to the product team. The team wants to understand why monitoring intents and session metrics is essential when managing a deployed agent. What is the primary reason for reviewing these metrics?",
     "options": [
-      "Service Assistant, to manage the end-to-end member interaction and create appropriate sales records for follow-up.",
-      "Sales Assistant, to focus on the upselling opportunity and handle high-value escalations directly.",
-      "Commerce Assistant, to process the transaction and manage payment collection."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "Noto una tensión temática (no necesariamente una contradicción directa, pero vale la pena señalarla) con **V2 #101** de este mismo banco (Peak Equipment Rentals): ahí, un escenario muy similar en estructura — verificar contrato/crédito, generar nuevo contrato, calcular tarifa prorrateada, escalar por umbral de valor ($25,000) — se resolvió como **Sales Agent**, no Service Agent. Aquí, con la misma estructura general (validar estado, calcular descuento, generar cotización, escalar por umbral de $50,000), la fuente elige **Service Assistant**. La diferencia podría justificarse por el encuadre: \"upgrade my rental to a larger model\" (claramente una transacción de upsell/venta nueva) vs. \"upgrade my current service tier\" de un \"premium member\" (podría interpretarse como cambio de plan de servicio, más cercano a soporte/cuenta que a una venta nueva) — pero la línea entre ambos tipos de agente en escenarios de \"upgrade con cotización y escalamiento por valor\" es genuinamente ambigua y depende de cómo cada organización categorice el proceso. No encontré una regla oficial que distinga con precisión estos dos casos. [Nota: mantengo la respuesta de la fuente, pero señalo la tensión conceptual con V2 #101 — ambos escenarios son estructuralmente muy parecidos y llegan a tipos de agente distintos; podría depender del encuadre específico de cada empresa más que de una regla universal.]"
-  },
-  {
-    "id": 855,
-    "module": "Agentforce exam",
-    "question": "When building a custom retriever in Einstein Studio, which configuration step is essential?",
-    "options": [
-      "Select the search index, specify the associated data model object and data space, and optionally configure filters to refine results.",
-      "Configure output parameters including result limits and field mappings.",
-      "Define search methodology, select filterable fields, and establish result ranking criteria."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "Consistente con el flujo de configuración de retrievers ya establecido en este banco (search index → mapping → retriever, V2 #125/#249): establecer primero la fuente de datos (search index), la estructura (data model object) y la ubicación (data space) es el paso fundacional del que dependen los pasos posteriores. Configurar outputs (B) y criterios avanzados de ranking/métodos de búsqueda (C) son pasos secundarios que se construyen sobre esa base ya establecida. [Consistente con el flujo de configuración de retrievers ya verificado en este banco; no requirió verificación adicional.]"
-  },
-  {
-    "id": 856,
-    "module": "Agentforce exam",
-    "question": "When configuring a custom action for an AI assistant, why are action instructions critically important?",
-    "options": [
-      "They provide end users with guidance on how to phrase requests.",
-      "They define the expected user experience and conversation flow.",
-      "They direct the language model on which action to select based on the conversation context."
+      "To pinpoint the exact moment in a single session where the agent gave an incorrect answer to a user.",
+      "To measure how many sessions ended without a human handoff and calculate the cost savings per deflection.",
+      "To assess the agent's overall effectiveness by analyzing patterns such as misrouted intents, escalation frequency, and resolution success across all conversations."
     ],
     "correctAnswers": [
       2
     ],
-    "explanation": "Duplicado conceptual del componente \"Instructions\" ya verificado repetidamente en este banco (V2 #165/#168/#196/#211/#273/#282): dirigen al LLM sobre qué acción seleccionar según el contexto. No están dirigidas al usuario final (A) ni definen la UX/flujo de conversación en general (B) — eso es diseño de conversación separado. [Consistente con el componente \"Instructions\" ya verificado en este banco; no requirió verificación adicional.]"
+    "explanation": "Consistente con los hechos de Observability ya establecidos en este banco (Agent Optimization, Session Tracing Data Model, Interaction Explorer): las métricas de intents y sesión están pensadas para inteligencia agregada entre conversaciones, revelando patrones sistémicos (intents mal enrutados, tasa de escalamiento, éxito de resolución), no para depurar una sesión puntual (A, que requiere tracing/replay individual) ni para reducirse a una sola métrica de costo (B, que es solo una parte del panorama). [Consistente con los hechos de Observability agregada ya verificados en este banco; no requirió verificación adicional.]"
   },
   {
-    "id": 857,
-    "module": "Agentforce exam",
-    "question": "When configuring a topic, which two elements does the reasoning engine use to determine whether to select this topic for a user's request?",
+    "id": 11,
+    "module": "Data 360 Fundamentals",
+    "question": "How does the AI retriever function within Data Cloud?",
     "options": [
-      "Classification Description and Scope, working together to understand intent and evaluate request boundaries.",
-      "Topic Name — human-readable identification, not evaluated by the reasoning engine.",
-      "Sample utterances — help train but aren't the primary runtime decision criteria."
+      "It automatically extracts and reformats raw data from diverse sources into standardized datasets for use in historical trend analysis and forecasting.",
+      "It monitors and aggregates data quality metrics across various data pipelines to ensure only high-integrity data is used for strategic decision-making.",
+      "It performs contextual searches over an indexed repository to quickly fetch the most relevant documents, enabling grounding AI responses with trustworthy, verifiable information."
+    ],
+    "correctAnswers": [
+      2
+    ],
+    "explanation": "El retriever hace búsquedas contextuales sobre datos indexados en Data Cloud para traer documentos grounded. Es la pieza clave para entregar información verificable a la IA."
+  },
+  {
+    "id": 678,
+    "module": "Multi-Agent Orchestration",
+    "question": "Summit Rock Climbing Gym uses an Agentforce agent for membership signups. They now partner with an external gear rental shop that runs its own AI agent. When a member wants to rent climbing shoes during a visit, the Agentforce agent must send the member's size and rental duration to the shop's agent and let it finalize the rental. Which open standard enables this secure, autonomous task handoff?",
+    "options": [
+      "OpenAPI 3.1 specification",
+      "Agent-to-Agent (A2A) protocol",
+      "GraphQL federation"
+    ],
+    "correctAnswers": [
+      1
+    ],
+    "explanation": "Hecho ya verificado repetidamente en este banco (V2 #22, #52): A2A es el estándar abierto diseñado específicamente para que agentes de IA distintos se descubran, deleguen tareas y negocien resultados sin intervención humana — exactamente el caso de dos agentes de organizaciones distintas coordinando una entrega. OpenAPI (A) describe APIs REST, no semántica de colaboración entre agentes. GraphQL federation (C) combina esquemas GraphQL, no negocia tareas entre agentes. [Consistente con A2A ya verificado varias veces en este banco; no requirió verificación adicional.]"
+  },
+  {
+    "id": 360,
+    "module": "Prompt Engineering",
+    "question": "An Agentforce is considering using a Field Generation prompt template type. What should the Agentforce Specialist check before creating the Field Generation prompt to ensure it is possible for the field to be enabled for generative AI?",
+    "options": [
+      "That the field chosen must be a rich text field with 255 characters or more.",
+      "That the org is set to API version 59 or higher",
+      "That the Lightning page layout where the field will reside has been upgraded to Dynamic Forms"
+    ],
+    "correctAnswers": [
+      2
+    ],
+    "explanation": "Antes de crear una prompt template de generación de campos en Agentforce, el especialista debe asegurarse de que el campo de destino esté disponible en un diseño de página Lightning habilitado para formulario dinámico. Las prompt templates de generación de campos funcionan incorporando sugerencias generadas por IA directamente en campos de registro editables en la página de registro Lightning. Esta funcionalidad requiere formularios dinámicos, que permiten colocar y administrar campos como componentes individuales en la página Lightning. Sin los formularios dinámicos habilitados, la IA no puede mostrar sugerencias directamente en el campo. Plantillas de generación."
+  },
+  {
+    "id": 290,
+    "module": "AI Agents",
+    "question": "Cloud Kicks (CK) is launching a new partner portal on Experience Cloud. CK wants to provide partners with an agent that can answer questions about product specifications from the knowledge base and allow them to submit a new Lead for a potential customer they've identified. The agent must be accessible only to authenticated partner users on the portal. Which agent type is required to meet this scenario?",
+    "options": [
+      "Sales Agent",
+      "Commerce Agent",
+      "Service Agent"
+    ],
+    "correctAnswers": [
+      2
+    ],
+    "explanation": "Un Service Agent es el tipo correcto para este escenario: responder preguntas basadas en Knowledge y permitir enviar Leads en un portal de Experience Cloud para usuarios autenticados. Service Agent soporta integracion con Knowledge y acciones de CRM como creacion de Leads."
+  },
+  {
+    "id": 459,
+    "module": "AI Agents",
+    "question": "Which Einstein for Sales feature can automatically create follow-up tasks based on customer interactions and insights?",
+    "options": [
+      "Einstein Activity Capture",
+      "Einstein Lead Scoring",
+      "Einstein Opportunity Insights",
+      "Einstein Task Automation"
+    ],
+    "correctAnswers": [
+      3
+    ],
+    "explanation": "Einstein Task Automation puede crear automáticamente tareas de seguimiento basadas en interacciones y conocimientos de los clientes, agilizando el proceso de ventas."
+  },
+  {
+    "id": 625,
+    "module": "Governance and Observability",
+    "question": "Coastline Credit Union needs a weekly dashboard for its leadership team showing agent deflection and escalation trends over time, without building custom reports from scratch. Which native Agentforce Observability capability should the specialist point them to?",
+    "options": [
+      "Agent Analytics, which provides prebuilt, Tableau-powered dashboards covering deflection, abandonment, escalations, and volume trends.",
+      "The raw Session Tracing Data Model objects, queried manually via SOQL each week.",
+      "Testing Center pass/fail results, exported to a spreadsheet weekly."
     ],
     "correctAnswers": [
       0
     ],
-    "explanation": "Verifiqué por búsqueda web: confirmado que el Atlas Reasoning Engine usa **Classification Description** (primer nivel: ¿la conversación se relaciona con este topic?) y **Scope** (segundo nivel: qué puede/no puede hacer el agente dentro de este topic) como los dos elementos clave para la selección de topic — coincide exactamente con la respuesta de la fuente. El nombre del topic (B) es solo para organización humana. Los sample utterances (C) ayudan a entrenar pero no son el criterio primario en runtime. [Verificado con búsqueda web: Classification Description + Scope confirmados como los dos elementos clave, consistente con fuentes sobre el Atlas Reasoning Engine.]"
+    "explanation": "Verifiqué por búsqueda web: Agent Analytics es real y efectivamente ofrece paneles pre-construidos con tecnología Tableau que cubren deflection, abandonment, escalations y tendencias de volumen — exactamente el caso de uso descrito. Consultar manualmente los objetos del Session Tracing Data Model vía SOQL (B) es la opción \"hazlo tú mismo\" para casos avanzados/custom, no la vía nativa pensada para un dashboard de liderazgo listo para usar. Testing Center (C) mide resultados de pruebas antes de producción, no tendencias de uso en producción. [Verificado con búsqueda web: Agent Analytics confirmado como real, Tableau-powered, con las métricas de deflection/abandonment/escalations mencionadas.]"
+  },
+  {
+    "id": 447,
+    "module": "Data 360 Fundamentals",
+    "question": "A financial services company needs to assess the credit risk of loan applicants based on their financial history and other relevant factors. When should they use Model Builder?",
+    "options": [
+      "When manually reviewing each applicant's credit history",
+      "When calculating loan interest rates using a standard formula",
+      "When developing a model to predict the likelihood of loan default based on applicant data",
+      "When sending automated approval emails to low-risk applicants"
+    ],
+    "correctAnswers": [
+      2
+    ],
+    "explanation": "Respuesta correcta: C. Al desarrollar un modelo para predecir la probabilidad de incumplimiento de préstamos basándose en los datos del solicitante, Model Builder es adecuado para crear modelos predictivos que evalúen la probabilidad de resultados específicos, como incumplimientos de préstamos. Puede analizar varios factores y proporcionar información para ayudar a la empresa a tomar decisiones informadas. La opción A es incorrecta. Revisar manualmente el historial crediticio es un proceso que requiere mucho tiempo y no utiliza el poder predictivo de Model Builder. La opción B es incorrecta. Calcular las tasas de interés con una fórmula es sencillo y no implica modelos predictivos. La opción D es incorrecta. El envío de correos electrónicos automatizados es una tarea operativa que no requiere el uso de Model Builder."
+  },
+  {
+    "id": 729,
+    "module": "AI Agents",
+    "question": "A developer needs to create a custom action that performs complex calculations, queries multiple objects, and updates records based on business rules. What implementation option should they choose for this custom action?",
+    "options": [
+      "Apex triggers that fire when related records are created or updated.",
+      "SOQL queries embedded directly in the action configuration.",
+      "Flows that can be invoked by the assistant to execute the required logic."
+    ],
+    "correctAnswers": [
+      2
+    ],
+    "explanation": "Consistente con el patrón de custom action + flow ya verificado extensamente en este banco (V2 #61, #106, #164-ish, y el patrón general de acciones custom respaldadas por flow/Apex): los flows dan una forma declarativa de automatizar cálculos, consultas y actualizaciones de registros, invocables directamente por el agente. Los Apex triggers (A) corren automáticamente por eventos DML, no son invocables como acciones por el agente. SOQL embebido directamente en la configuración de la acción (B) no es un mecanismo soportado — debe vivir dentro de un flow o Apex. [Consistente con el patrón de custom action + flow ya verificado en este banco; no requirió verificación adicional.]"
+  },
+  {
+    "id": 633,
+    "module": "Data 360 Fundamentals",
+    "question": "DataSphere Analytics has ingested and vectorized unstructured client feedback documents into a Data Cloud search index. An Agentforce Specialist needs to wire this indexed data into a prompt template so the most relevant feedback passages are dynamically surfaced during AI-generated responses. What is the correct configuration approach?",
+    "options": [
+      "Build a Flex template pointing to a Data Lake Object (DLO) to access the raw ingested feedback files.",
+      "Build a Flex template that references a retriever connected to the vector search index.",
+      "Build a Flex template that queries a Data Model Object (DMO) to pull structured feedback records."
+    ],
+    "correctAnswers": [
+      1
+    ],
+    "explanation": "Consistente con los hechos sobre retrievers ya verificados repetidamente en este banco: el retriever es el componente diseñado específicamente para consultar un índice de búsqueda vectorial y devolver los fragmentos semánticamente más relevantes; referenciarlo dentro de un Flex template es la forma correcta de fundamentar al LLM en contenido no estructurado vectorizado. Un DLO (A) contiene datos crudos sin procesar, sin embeddings ni indexación para búsqueda semántica. Un DMO (B/C) representa datos estructurados y armonizados — no optimizado para similitud semántica sobre texto no estructurado. [Consistente con los hechos sobre retrievers y RAG ya verificados en este banco; no requirió verificación adicional.]"
+  },
+  {
+    "id": 5,
+    "module": "Prompt Engineering",
+    "question": "Universal Containers wants to leverage the Record Snapshots grounding feature in a prompt template. What preparations are required?",
+    "options": [
+      "Configure page layout of the master record type.",
+      "Create a field set for all the fields to be grounded.",
+      "Enable and configure dynamic form for the object."
+    ],
+    "correctAnswers": [
+      0
+    ],
+    "explanation": "La grounding de Record Snapshots se basa en los campos visibles en el diseño de página del tipo de registro maestro, no en los conjuntos de campos. Por lo tanto, configurar el diseño de la página es la preparación necesaria."
+  },
+  {
+    "id": 471,
+    "module": "AI Agents",
+    "question": "How does the LLM in Agentforce utilize user interaction data to improve its actions?",
+    "options": [
+      "By creating new user profiles based on interaction data",
+      "By increasing the number of available actions",
+      "By adjusting the CRM system’s security settings"
+    ],
+    "correctAnswers": [
+      0
+    ],
+    "explanation": "El LLM utiliza datos de interacción del usuario y comentarios para refinar sus sugerencias de acciones, mejorando la relevancia y efectividad de las acciones con el tiempo."
+  },
+  {
+    "id": 785,
+    "module": "Governance and Observability",
+    "question": "An AI specialist at RetailCorp is analyzing how users interact with their AI agent, examining the specific questions customers ask and the language they use to identify trends and improvement opportunities. Which analytics tool should the AI specialist use for this analysis?",
+    "options": [
+      "\"Conversation Insights dashboard\".",
+      "\"Agent Activity Log viewer\".",
+      "\"Prompt Performance dashboard\"."
+    ],
+    "correctAnswers": [
+      0
+    ],
+    "explanation": "Verifiqué por búsqueda web: el concepto está confirmado — existe una feature real llamada **\"User Utterances\" / \"Utterance Analysis\"** dentro de Agentforce Analytics (Trailhead, \"Utterance Analysis for Agent Conversation Monitoring\") que agrupa utterances similares en clusters/categorías para identificar patrones y tendencias de lo que los usuarios preguntan — exactamente el caso de uso descrito. No encontré el nombre literal \"Conversation Insights dashboard\" en ninguna fuente oficial; el nombre real parece ser \"User Utterances\" o \"Utterance Analysis\". [Nota de confianza: el concepto (dashboard de análisis de utterances/preguntas de usuarios) está confirmado, pero el nombre oficial parece ser \"User Utterances\"/\"Utterance Analysis\", no \"Conversation Insights dashboard\".]"
+  },
+  {
+    "id": 552,
+    "module": "AI Agents",
+    "question": "Universal Containers has deployed Agentforce to handle customer order tracking, returns, and loyalty support. The agent needs to balance conversational flexibility for customer inquiries with guaranteed execution of identity verification steps before accessing the account information. The development team is evaluating how to structure the agent's instruction pattern to meet both requirements. Which statement correctly describes hybrid reasoning in Agentforce Agent Script?",
+    "options": [
+      "Hybrid reasoning uses multiple large language model (LLM) models simultaneously, with one model handling conversational responses and another model executing deterministic business logic through Flow integration.",
+      "Hybrid reasoning requires Canvas View for declarative instructions and Script View for procedural instructions, as each editor provides different capabilities for the respective instruction types.",
+      "Hybrid reasoning combines declarative natural language instructions that allow large language model (LLM) interpretation with procedural instructions using the '->' prefix that enforce guaranteed execution order."
+    ],
+    "correctAnswers": [
+      2
+    ],
+    "explanation": "El razonamiento híbrido en Agent Script permite que un solo agente mezcle dos estilos de instrucción en el mismo script: líneas de lenguaje natural (\"|\") que el LLM interpreta de manera flexible para partes conversacionales y líneas deterministas (\"->\") que se ejecutan como código en un orden garantizado, ideal para pasos obligatorios como la verificación de identidad antes del acceso a la cuenta. No requiere dos LLM separados, y Canvas View / Script View son solo editores sincronizados para el mismo agente, no una división entre tipos de instrucciones. [Reportada examen 2026 (banco julio 2026)]"
+  },
+  {
+    "id": 533,
+    "module": "Governance and Observability",
+    "question": "Coral Cloud Resorts' CX lead wants to group similar production sessions into clusters, spot friction points, and see quality scores per intent to prioritize fixes. Which Observability pillar does she need?",
+    "options": [
+      "Agent Optimization.",
+      "Agent Analytics.",
+      "Agentforce Testing Center."
+    ],
+    "correctAnswers": [
+      0
+    ],
+    "explanation": "Agent Optimization es el pilar de análisis profundo: clustering de sesiones similares, moments por intent, quality scores (LLM-as-judge) y drill-down hasta la traza. Analytics da KPIs agregados y Testing Center opera PRE-despliegue, no sobre sesiones de producción. [Generada v3 — fuente: admin.salesforce.com/blog/2025/gain-complete-visibility-into-your-ai-agents-with-agentforce-optimization]"
+  },
+  {
+    "id": 465,
+    "module": "Prompt Engineering",
+    "question": "Which of the following is a core feature of the Einstein Trust Layer that ensures data privacy?",
+    "options": [
+      "Data Anonymization",
+      "Data Encryption",
+      "Role-Based Access Control",
+      "Multi-factor Authentication"
+    ],
+    "correctAnswers": [
+      1
+    ],
+    "explanation": "El cifrado de datos es una característica principal de Einstein Trust Layer que garantiza la privacidad de los datos al convertirlos a un formato seguro que no puede ser leído ni accedido fácilmente por usuarios no autorizados. Esto protege la información confidencial tanto en tránsito como en reposo."
   },
   {
     "id": 858,
-    "module": "Agentforce exam",
+    "module": "Prompt Engineering",
     "question": "When creating a prompt template that includes grounding data, what factor must an administrator consider regarding the selected AI model?",
     "options": [
       "The model's geographic data residency requirements.",
@@ -799,45 +803,45 @@
     "explanation": "Concepto fundacional de LLMs ya razonable y consistente con este banco: si instrucciones + datos de grounding exceden el límite de tokens del modelo, se trunca contexto importante, degradando la calidad de la respuesta. Residencia geográfica de datos (A) es una consideración de cumplimiento, no de viabilidad técnica del grounding. La fecha de corte del entrenamio (B) afecta conocimiento general, no es la preocupación primaria para datos de grounding específicos que se pasan en el momento. [Concepto fundacional de límites de tokens en LLMs, consistente con el banco; no requirió verificación adicional específica.]"
   },
   {
-    "id": 859,
-    "module": "Agentforce exam",
-    "question": "When designing and optimizing custom action configurations for an AI agent, which practice is most effective for improving the agent's ability to recognize when to invoke a specific action?",
+    "question": "Universal Containers (UC) is discussing its AI strategy in an agile Scrum meeting. Which business requirement would lead an Agentforce Specialist to recommend connecting to an external foundational model via Einstein Studio (Model Builder)?",
     "options": [
-      "Provide sample user messages that should trigger the action, giving concrete examples of user intent patterns.",
-      "Use parallel sentence structures and consistent verb choices for human-reader readability.",
-      "List all possible error messages the action might return."
+      "UC wants to fine-tune model temperature.",
+      "UC wants a model fine-tuned using company data.",
+      "UC wants to change the frequency penalty of the model."
     ],
     "correctAnswers": [
-      0
+      1
     ],
-    "explanation": "Consistente con la práctica de ejemplos/few-shot ya establecida en este banco (V2 #41, few-shot para extracción; y el rol central de las Instructions ya verificado repetidamente): dar ejemplos concretos de utterances que deberían disparar la acción ayuda al Reasoning Engine a generalizar patrones de intención. Consistencia de redacción para lectores humanos (B) no es una práctica documentada para mejorar el reconocimiento del agente. Listar mensajes de error (C) ayuda a troubleshooting post-ejecución, no a la selección de la acción. [Consistente con la práctica de ejemplos/instructions ya verificada en este banco; no requirió verificación adicional.]"
+    "module": "Testing, Deployment, and Maintenance",
+    "explanation": "Conectar un modelo externo via Model Builder es apropiado cuando UC quiere usar un modelo fine-tuneado con datos propios de la empresa, que no esta disponible en los modelos estandar de Salesforce. Fine-tunar temperatura o frequency penalty se puede hacer con Model Playground sin necesidad de un modelo externo.",
+    "id": 176
   },
   {
-    "id": 860,
-    "module": "Agentforce exam",
-    "question": "When files are uploaded to an Agentforce Data Library and the library is configured, what happens to make those files usable for AI retrieval?",
+    "id": 401,
+    "module": "AI Agents",
+    "question": "Universal Containers (UC) wants to limit an agent’s access to Knowledge articles while deploying the \"Answer Questions with Knowledge\" action. How should UC achieve this?",
     "options": [
-      "The files are indexed into Data Cloud, making them searchable and accessible for AI queries.",
-      "The files are stored in Salesforce File Storage at a specified location.",
-      "The files are compressed and archived in a system-defined location."
-    ],
-    "correctAnswers": [
-      0
-    ],
-    "explanation": "Duplicado conceptual del mecanismo de Agentforce Data Library ya verificado repetidamente en este banco (V2 #37/#97/#111/#132/#182/#242): el indexado en Data Cloud es lo que hace el contenido buscable y accesible para IA — no es solo almacenamiento de archivos (B) ni archivado/compresión (C), ambos insuficientes para grounding de IA. [Consistente con el mecanismo de Agentforce Data Library ya verificado en este banco; no requirió verificación adicional.]"
-  },
-  {
-    "id": 861,
-    "module": "Agentforce exam",
-    "question": "Which component in an Omni-Channel automation should be used to direct work items to available agents?",
-    "options": [
-      "Assignment element.",
-      "Decision element.",
-      "Route Work element."
+      "Define scope instructions to the agent specifying a list of allowed article titles or IDs.",
+      "Update the Data Library Retriever to filter on a custom field on the Knowledge article.",
+      "Assign Data Categories to Knowledge articles, and define Data Category filters in the Agentforce Data Library."
     ],
     "correctAnswers": [
       2
     ],
-    "explanation": "Duplicado conceptual de Route Work ya verificado en este banco (V2 #13, retail chat routing): es el elemento diseñado específicamente para dirigir work items a agentes disponibles dentro de flows de Omni-Channel, integrándose con el motor de ruteo inteligente (disponibilidad, skills, capacidad). El elemento Assignment (A) solo asigna valores a variables del flow. El elemento Decision (B) evalúa condiciones y ramifica lógica, pero no ejecuta el ruteo en sí. [Consistente con Route Work ya verificado en este banco; no requirió verificación adicional.]"
+    "explanation": "La UC quiere restringir la acción \"Responder preguntas con conocimientos\" a un subconjunto de artículos de conocimientos. Evaluemos las opciones para el acceso del agente de alcance. Opción A: Defina instrucciones de alcance para el agente especificando una lista de títulos o ID de artículos permitidos. Las instrucciones del agente en Agent Builder guían el comportamiento, pero no pueden imponer restricciones de acceso a datos granulares, como una lista específica de títulos de artículos o ID. Este enfoque no es práctico y pasa por alto el modelo de seguridad de Salesforce, haciéndolo incorrecto. Opción B: actualice el recuperador de biblioteca de datos para filtrar en un campo personalizado en el artículo de Knowledge. Si bien los recuperadores de bibliotecas de datos en Data Cloud pueden filtrar datos, esto requiere un desarrollo personalizado (por ejemplo, modificar la lógica de indexación) y supone que los artículos se incorporan con un campo personalizado para el filtrado. Esto es menos sencillo que las funciones nativas de Knowledge y no es una opción estándar, lo que lo hace incorrecto. Opción C: asignar categorías de datos a artículos de conocimiento y definir filtros de categorías de datos en la biblioteca de datos de Agentforce. Salesforce Knowledge utiliza categorías de datos para organizar artículos (por ejemplo, por tema o tipo). En Agentforce, al configurar una biblioteca de datos con Knowledge, puede aplicar filtros de categoría de datos para limitar a qué artículos accede el agente. Para la acción \"Responder preguntas con conocimiento\", esto garantiza que el agente solo recupere artículos dentro de las categorías especificadas, alineándose con el objetivo de UC. Esta es una solución nativa y documentada, lo que la convierte en la respuesta correcta. Por qué la opción C es correcta: usar categorías de datos y filtros en la biblioteca de datos es la forma escalable y recomendada de limitar el acceso a los artículos de Knowledge para las acciones de los agentes, según la documentación de Salesforce."
+  },
+  {
+    "id": 776,
+    "module": "AI Agents",
+    "question": "After an agent selects a topic, what is an important factor the reasoning engine uses to select the specific action?",
+    "options": [
+      "Priority values, which influence but don't guarantee selection.",
+      "The name and instructions of the actions, which provide critical context for matching user intent to the right action.",
+      "The explicit order of actions, which may influence presentation but isn't the primary factor."
+    ],
+    "correctAnswers": [
+      1
+    ],
+    "explanation": "Duplicado conceptual del hecho ya verificado repetidamente en este banco (V2 #70, description/instructions como señal principal de selección; V2 #165/#168/#196, Instructions como componente central): el nombre e instrucciones de la acción son la señal principal en lenguaje natural que usa el Reasoning Engine para decidir qué acción encaja con la intención del usuario. Prioridad (A) influye pero no garantiza, ya establecido en V2 #158/#162. Orden explícito (C) no es el factor primario de selección dentro de un topic. [Consistente con los hechos sobre selección de acciones ya verificados varias veces en este banco; no requirió verificación adicional.]"
   }
 ]

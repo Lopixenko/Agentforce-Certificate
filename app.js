@@ -19,7 +19,19 @@ class QuestionBank {
     try {
       const response = await fetch(`Official-Exams/${number}.json`);
       if (!response.ok) throw new Error('Archivo no encontrado');
-      const data = await response.json();
+      let data = await response.json();
+      
+      const uniqueQuestionsMap = new Map();
+      data.forEach(q => {
+        if (q && q.question) {
+          const key = q.question.trim().toLowerCase();
+          if (!uniqueQuestionsMap.has(key)) {
+            uniqueQuestionsMap.set(key, q);
+          }
+        }
+      });
+      data = Array.from(uniqueQuestionsMap.values());
+      
       return data;
     } catch (error) {
       alert(`No se pudo cargar el examen ${number}. Asegúrate de que el archivo Official-Exams/${number}.json exista.`);
@@ -33,10 +45,9 @@ const agentforce_units_keywords = {
   'Prompt Engineering': ['Prompt Engineering'],
   'AI Agents': ['AI Agents'],
   'Data 360 Fundamentals': ['Data 360 Fundamentals'],
-  'Testing, Deployment, & Maintenance': ['Testing, Deployment, & Maintenance'],
-  'Governance & Observability': ['Governance & Observability'],
-  'Multi-Agent Orchestration': ['Multi-Agent Orchestration'],
-  'Agentforce exam' : ['Agentforce exam']
+  'Testing, Deployment, and Maintenance': ['Testing, Deployment, and Maintenance'],
+  'Governance and Observability': ['Governance and Observability'],
+  'Multi-Agent Orchestration': ['Multi-Agent Orchestration']
 };
 
 function assignUnitToQuestions(questions) {
