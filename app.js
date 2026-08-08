@@ -921,8 +921,11 @@ function showExamResults(title) {
     if (validateAnswer(ans.question, ans.selected)) correct++;
   });
 
-  const total = userAnswers.length;
-  const score = Math.round((correct / total) * 100) || 0;
+  // El aprobado se calcula sobre 60 preguntas como máximo (las preguntas 61+ son "de regalo")
+  const baseTotal = userAnswers.length > 60 ? 60 : userAnswers.length;
+  const total = userAnswers.length; // para mostrar "61/61 correctas"
+  let score = Math.round((correct / baseTotal) * 100) || 0;
+  if (score > 100) score = 100; // Por si saca 61/60
   const passed = score >= 73;
 
   // Persistir resultados
